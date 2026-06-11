@@ -12,9 +12,20 @@
 
 export const NAV_KEY_STORAGE_KEY = "glean.navigator.key";
 
-export const NAVIGATOR_BASE_URL: string =
+const _rawUrl: string =
 	(import.meta.env?.VITE_NAVIGATOR_BASE_URL as string | undefined) ??
 	"https://api.ai.it.ufl.edu/v1";
+
+// Hard-fail at module load if env var points to a non-UF origin — prevents key exfiltration.
+const _allowedOrigin = "https://api.ai.it.ufl.edu";
+const _origin = new URL(_rawUrl).origin; // throws if _rawUrl is not a valid URL
+if (_origin !== _allowedOrigin) {
+	throw new Error(
+		`VITE_NAVIGATOR_BASE_URL origin "${_origin}" is not allowed. Expected "${_allowedOrigin}".`,
+	);
+}
+
+export const NAVIGATOR_BASE_URL: string = _rawUrl;
 
 export class KeyValidationError extends Error {
 	constructor(message: string) {
