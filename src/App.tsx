@@ -1,6 +1,6 @@
-// A1 demo pane — proves the foundation chain end to end. Ugly is fine; A4
-// replaces all UI.
-import { useState, type CSSProperties } from "react";
+// A1+A2 demo pane — proves the foundation + intelligence chains end to end.
+// Ugly is fine; A4 replaces all UI.
+import { useRef, useState, type CSSProperties } from "react";
 import { getOpenMessage, type OpenMessage } from "./office/context";
 import { AuthProvider } from "./auth/AuthProvider";
 import { useAuth } from "./auth/useAuth";
@@ -8,7 +8,12 @@ import { graph } from "./graph/client";
 import { getMessageByInternetId, htmlToText } from "./graph/mail";
 import { store, ConflictError } from "./store/onedrive";
 import { ProfileV1, type Profile } from "./store/schemas";
+import { FeedbackQueueV1, type FeedbackQueue } from "./store/schemas";
 import { ensureCategory } from "./graph/categories";
+import { clearNavKey, getNavKey, setNavKey, NAVIGATOR_BASE_URL } from "./llm/key";
+import { chat, chatStream, NeedsKeyError } from "./llm/navigator";
+import { pickDraftModel, DRAFT_MODEL } from "./llm/models";
+import { runDraft, type DraftDeps, type DraftResult, type FeedbackEntry } from "./draft/pipeline";
 
 const box: CSSProperties = {
   border: "1px solid #ccc",
@@ -155,6 +160,144 @@ function Demo() {
         {categoryResult && <p>{categoryResult}</p>}
       </div>
 
+      <A2DraftDemo account={!!account} msg={msg} />
+
+      {error && <p style={{ color: "#b00020" }}>Error: {error}</p>}
+    </div>
+  );
+}
+
+// --- A2 demo: NaviGator key + real draft pipeline (temporary; A4 replaces) --
+function A2DraftDemo({ account, msg }: { account: boolean; msg: OpenMessage | null }) {
+  const [keyInput, setKeyInput] = useState("");
+  const [keyStatus, setKeyStatus] = useState(getNavKey() ? "key set (this session)" : "");
+  const [modelId, setModelId] = useState<string>(DRAFT_MODEL);
+  const [streaming, setStreaming] = useState("");
+  const [result, setResult] = useState<DraftResult | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+  const startedAt = useRef(0);
+  const [elapsedMs, setElapsedMs] = useState<number | null>(null);
+
+  async function handleSetKey() {
+    setError("");
+    try {
+      const count = await setNavKey(keyInput);
+      setKeyInput(""); // drop the plaintext from React state immediately
+      // Confirm the exact model ids against the live list (plan §3.5).
+      const resp = await fetch(`${NAVIGATOR_BASE_URL}/models`, {
+        headers: { Authorization: `Bearer ${getNavKey() ?? ""}` },
+      });
+      const body = (await resp.json()) as { data?: { id: string }[] };
+      const ids = (body.data ?? []).map((m) => m.id);
+      setModelId(pickDraftModel(ids) ?? DRAFT_MODEL);
+      setKeyStatus(`validated — ${count} models visible`);
+    } catch (e) {
+      setKeyStatus("");
+      setError(e instanceof Error ? e.message : "key validation failed");
+    }
+  }
+
+  function buildDeps(): DraftDeps {
+    return {
+      fetchMessage: (id) => getMessageByInternetId(id),
+      loadProfile: async () => {
+        // Minimal profile until A3 builds the real one from sent mail.
+        const stored = await store.read("profile.json", ProfileV1).catch(() => null);
+        void stored;
+        return {
+          summary: "",
+          bannedPhrases: [],
+          userSignoffs: [],
+          userFullName: Office?.context?.mailbox?.userProfile?.displayName ?? "",
+          exemplarPools: { t1: [], t2: [], t3: [] },
+        };
+      },
+      loadCard: async () => null, // relationships.json lands in A3 -> cold-start path
+      chatStream: (opts) => chatStream({ ...opts, model: modelId }),
+      chat: (opts) => chat({ ...opts, model: modelId, temperature: 0 }),
+      appendFeedback: async (entry: FeedbackEntry) => {
+        const existing = await store.read("feedback-queue.json", FeedbackQueueV1).catch(() => null);
+        const queue: FeedbackQueue = existing?.data ?? { version: 1, entries: [] };
+        queue.entries.push(entry);
+        await store.write("feedback-queue.json", FeedbackQueueV1, queue, existing?.etag);
+      },
+    };
+  }
+
+  async function handleDraft() {
+    setError("");
+    setStreaming("");
+    setResult(null);
+    setElapsedMs(null);
+    setBusy(true);
+    startedAt.current = performance.now();
+    try {
+      if (!msg) throw new Error("No open message");
+      const out = await runDraft({ message: msg }, buildDeps(), (delta) =>
+        setStreaming((s) => s + delta),
+      );
+      setElapsedMs(Math.round(performance.now() - startedAt.current));
+      setResult(out);
+    } catch (e) {
+      if (e instanceof NeedsKeyError) setError("Set your NaviGator key first.");
+      else setError(e instanceof Error ? e.message : "draft failed");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <div style={box}>
+      <strong>A2 — NaviGator key + draft pipeline</strong>
+      <p>
+        <input
+          type="password"
+          placeholder="NaviGator API key (sessionStorage only)"
+          value={keyInput}
+          onChange={(e) => setKeyInput(e.target.value)}
+          style={{ width: 260 }}
+        />{" "}
+        <button type="button" onClick={handleSetKey} disabled={!keyInput}>
+          Validate &amp; set key
+        </button>{" "}
+        <button type="button" onClick={() => { clearNavKey(); setKeyStatus(""); }}>
+          Clear key
+        </button>
+      </p>
+      {keyStatus && <p>{keyStatus} · draft model: {modelId}</p>}
+      <p>
+        <button type="button" onClick={handleDraft} disabled={!account || !msg || busy}>
+          {busy ? "Drafting…" : "Draft reply for open message"}
+        </button>
+        {elapsedMs !== null && <> · {elapsedMs} ms</>}
+      </p>
+      {streaming && (
+        <>
+          <em>streamed body:</em>
+          <pre style={{ whiteSpace: "pre-wrap", background: "#f6f6f6", padding: 8 }}>{streaming}</pre>
+        </>
+      )}
+      {result && (
+        <>
+          <em>
+            wrapped result (register {result.register}, tiers {result.exemplarTiers.join(",")})
+            {" — verifier "}
+            {result.verifier.passed ? "PASSED" : "FAILED"}
+          </em>
+          <pre style={{ whiteSpace: "pre-wrap", background: "#eef6ee", padding: 8 }}>{result.text}</pre>
+          {!result.verifier.passed && (
+            <>
+              <pre style={{ whiteSpace: "pre-wrap", background: "#fdecea", padding: 8 }}>
+                {result.verifier.reasons.join("\n")}
+              </pre>
+              <button type="button" onClick={() => undefined} title="Explicit override — draft is never auto-sent">
+                Use anyway
+              </button>
+            </>
+          )}
+        </>
+      )}
       {error && <p style={{ color: "#b00020" }}>Error: {error}</p>}
     </div>
   );
