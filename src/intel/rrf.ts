@@ -8,19 +8,22 @@ export const RRF_K = 60;
 export const RRF_TOP_N = 6;
 
 export interface FusedDoc {
-  id: string;
-  score: number;
+	id: string;
+	score: number;
 }
 
-export function rrfFuse(rankings: readonly (readonly string[])[], topN: number = RRF_TOP_N): FusedDoc[] {
-  const scores = new Map<string, number>();
-  for (const ranking of rankings) {
-    ranking.forEach((id, idx) => {
-      scores.set(id, (scores.get(id) ?? 0) + 1 / (RRF_K + idx + 1));
-    });
-  }
-  return [...scores.entries()]
-    .map(([id, score]) => ({ id, score }))
-    .sort((a, b) => b.score - a.score)
-    .slice(0, topN);
+export function rrfFuse(
+	rankings: readonly (readonly string[])[],
+	topN: number = RRF_TOP_N,
+): FusedDoc[] {
+	const scores = new Map<string, number>();
+	for (const ranking of rankings) {
+		ranking.forEach((id, idx) => {
+			scores.set(id, (scores.get(id) ?? 0) + 1 / (RRF_K + idx + 1));
+		});
+	}
+	return [...scores.entries()]
+		.map(([id, score]) => ({ id, score }))
+		.sort((a, b) => b.score - a.score)
+		.slice(0, topN);
 }

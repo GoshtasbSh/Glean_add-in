@@ -15,26 +15,26 @@ const FNV_BASIS = 0x811c9dc5;
 const FNV_PRIME = 0x01000193;
 
 function fnv1a32(bytes: Uint8Array): number {
-  let h = FNV_BASIS;
-  for (const b of bytes) {
-    h ^= b;
-    h = Math.imul(h, FNV_PRIME) >>> 0;
-  }
-  return h >>> 0;
+	let h = FNV_BASIS;
+	for (const b of bytes) {
+		h ^= b;
+		h = Math.imul(h, FNV_PRIME) >>> 0;
+	}
+	return h >>> 0;
 }
 
 const encoder = new TextEncoder();
 
 export function fakeEmbed(text: string, dim = 64): number[] {
-  const vec = new Array<number>(dim).fill(0);
-  const tokens = text.toLowerCase().match(/[a-z0-9']+/g) ?? [];
-  for (const tok of tokens) {
-    const h = fnv1a32(encoder.encode(tok));
-    const idx = h % dim;
-    const sign = ((h >>> 16) & 1) === 0 ? 1 : -1;
-    vec[idx] += sign;
-  }
-  const n = norm(vec);
-  if (n > 0) for (let i = 0; i < dim; i++) vec[i] /= n;
-  return vec;
+	const vec = new Array<number>(dim).fill(0);
+	const tokens = text.toLowerCase().match(/[a-z0-9']+/g) ?? [];
+	for (const tok of tokens) {
+		const h = fnv1a32(encoder.encode(tok));
+		const idx = h % dim;
+		const sign = ((h >>> 16) & 1) === 0 ? 1 : -1;
+		vec[idx] += sign;
+	}
+	const n = norm(vec);
+	if (n > 0) for (let i = 0; i < dim; i++) vec[i] /= n;
+	return vec;
 }

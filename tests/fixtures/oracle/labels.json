@@ -1,380 +1,378 @@
 {
- "params": {
-  "min_sim": 0.66,
-  "embed_prefix": "classification: "
- },
- "fixture_ids": [
-  "formal-00",
-  "formal-01",
-  "formal-02",
-  "formal-03",
-  "formal-04",
-  "formal-05",
-  "formal-06",
-  "formal-07",
-  "formal-08",
-  "formal-09",
-  "formal-10",
-  "formal-11",
-  "formal-12",
-  "formal-13",
-  "formal-14",
-  "formal-15",
-  "formal-16",
-  "formal-17",
-  "formal-18",
-  "research-heavy"
- ],
- "labels": [
-  {
-   "name": "Research",
-   "query_text": "classification: Research\n\nGrants and funding, manuscripts and submissions, peer review you are doing, lab and collaborators, conferences, data and methods.",
-   "sims": [
-    {
-     "id": "research-heavy",
-     "sim": 0.8526687663783827
-    },
-    {
-     "id": "formal-08",
-     "sim": 0.2151657414559676
-    },
-    {
-     "id": "formal-09",
-     "sim": 0.2033475128209444
-    },
-    {
-     "id": "formal-18",
-     "sim": 0.1995930819792704
-    },
-    {
-     "id": "formal-02",
-     "sim": 0.18647697592850526
-    },
-    {
-     "id": "formal-00",
-     "sim": 0.17638342073763938
-    },
-    {
-     "id": "formal-01",
-     "sim": 0.17545153820543183
-    },
-    {
-     "id": "formal-10",
-     "sim": 0.17218920641845573
-    },
-    {
-     "id": "formal-06",
-     "sim": 0.17004606037954073
-    },
-    {
-     "id": "formal-07",
-     "sim": 0.17004606037954073
-    },
-    {
-     "id": "formal-12",
-     "sim": 0.17004606037954073
-    },
-    {
-     "id": "formal-17",
-     "sim": 0.17004606037954073
-    },
-    {
-     "id": "formal-16",
-     "sim": 0.16803361008336118
-    },
-    {
-     "id": "formal-11",
-     "sim": 0.16467739391852368
-    },
-    {
-     "id": "formal-15",
-     "sim": 0.16079397020628872
-    },
-    {
-     "id": "formal-03",
-     "sim": 0.16021376095036585
-    },
-    {
-     "id": "formal-13",
-     "sim": 0.15852725334262255
-    },
-    {
-     "id": "formal-04",
-     "sim": 0.1568231358408553
-    },
-    {
-     "id": "formal-14",
-     "sim": 0.15587555534791234
-    },
-    {
-     "id": "formal-05",
-     "sim": 0.1452482234435317
-    }
-   ],
-   "tagged": [
-    "research-heavy"
-   ]
-  },
-  {
-   "name": "Teaching",
-   "query_text": "classification: Teaching\n\nCourses and lectures, students and advisees, TAs, grading, office hours, curriculum, Canvas / LMS and registrar mail.",
-   "sims": [
-    {
-     "id": "research-heavy",
-     "sim": 0.409995188860196
-    },
-    {
-     "id": "formal-17",
-     "sim": 0.08273792404018693
-    },
-    {
-     "id": "formal-09",
-     "sim": 0.0678453531552758
-    },
-    {
-     "id": "formal-07",
-     "sim": 0.06619033923214955
-    },
-    {
-     "id": "formal-16",
-     "sim": 0.06540699401677287
-    },
-    {
-     "id": "formal-15",
-     "sim": 0.051209155649918923
-    },
-    {
-     "id": "formal-05",
-     "sim": 0.05088401486645685
-    },
-    {
-     "id": "formal-02",
-     "sim": 0.05025189076296059
-    },
-    {
-     "id": "formal-04",
-     "sim": 0.049944536865902014
-    },
-    {
-     "id": "formal-18",
-     "sim": 0.049944536865902014
-    },
-    {
-     "id": "formal-06",
-     "sim": 0.049642754424112166
-    },
-    {
-     "id": "formal-12",
-     "sim": 0.049642754424112166
-    },
-    {
-     "id": "formal-14",
-     "sim": 0.049642754424112166
-    },
-    {
-     "id": "formal-11",
-     "sim": 0.04807544148481572
-    },
-    {
-     "id": "formal-01",
-     "sim": 0.04728075135384592
-    },
-    {
-     "id": "formal-08",
-     "sim": 0.03350126050864039
-    },
-    {
-     "id": "formal-10",
-     "sim": 0.03093441124448728
-    },
-    {
-     "id": "formal-03",
-     "sim": 0.01559078046750081
-    },
-    {
-     "id": "formal-13",
-     "sim": 0.015426662418507228
-    },
-    {
-     "id": "formal-00",
-     "sim": 0.0147122471584125
-    }
-   ],
-   "tagged": []
-  },
-  {
-   "name": "Service",
-   "query_text": "classification: Service\n\nDepartment, college and university committees, faculty governance, professional-society duties, editorial boards, community outreach.",
-   "sims": [
-    {
-     "id": "formal-12",
-     "sim": 0.1829404333161506
-    },
-    {
-     "id": "formal-03",
-     "sim": 0.17236256333167307
-    },
-    {
-     "id": "formal-13",
-     "sim": 0.17054817003221698
-    },
-    {
-     "id": "formal-15",
-     "sim": 0.16984155512168939
-    },
-    {
-     "id": "formal-08",
-     "sim": 0.16666666666666669
-    },
-    {
-     "id": "formal-04",
-     "sim": 0.16564728911226984
-    },
-    {
-     "id": "formal-06",
-     "sim": 0.16464638998453554
-    },
-    {
-     "id": "formal-14",
-     "sim": 0.16464638998453554
-    },
-    {
-     "id": "formal-17",
-     "sim": 0.16464638998453554
-    },
-    {
-     "id": "formal-16",
-     "sim": 0.16269784336399218
-    },
-    {
-     "id": "formal-11",
-     "sim": 0.15944820103582022
-    },
-    {
-     "id": "formal-01",
-     "sim": 0.15681251204679503
-    },
-    {
-     "id": "formal-10",
-     "sim": 0.15389675281277312
-    },
-    {
-     "id": "formal-05",
-     "sim": 0.1500117201234699
-    },
-    {
-     "id": "formal-09",
-     "sim": 0.1500117201234699
-    },
-    {
-     "id": "formal-02",
-     "sim": 0.14814814814814817
-    },
-    {
-     "id": "formal-18",
-     "sim": 0.14724203476646208
-    },
-    {
-     "id": "formal-00",
-     "sim": 0.14638501094228
-    },
-    {
-     "id": "formal-07",
-     "sim": 0.1463523466529205
-    },
-    {
-     "id": "research-heavy",
-     "sim": 0.06475239082381762
-    }
-   ],
-   "tagged": []
-  },
-  {
-   "name": "Personal",
-   "query_text": "classification: Personal\n\nNot work-related (over Fyxer).",
-   "sims": [
-    {
-     "id": "research-heavy",
-     "sim": 0.15575223949534955
-    },
-    {
-     "id": "formal-07",
-     "sim": 0.1466786622122144
-    },
-    {
-     "id": "formal-17",
-     "sim": 0.1466786622122144
-    },
-    {
-     "id": "formal-15",
-     "sim": 0.12104550653376049
-    },
-    {
-     "id": "formal-05",
-     "sim": 0.12027695586485274
-    },
-    {
-     "id": "formal-09",
-     "sim": 0.12027695586485274
-    },
-    {
-     "id": "formal-02",
-     "sim": 0.11878277418329972
-    },
-    {
-     "id": "formal-08",
-     "sim": 0.11878277418329972
-    },
-    {
-     "id": "formal-06",
-     "sim": 0.11734292976977152
-    },
-    {
-     "id": "formal-12",
-     "sim": 0.11734292976977152
-    },
-    {
-     "id": "formal-16",
-     "sim": 0.11595420713048969
-    },
-    {
-     "id": "formal-11",
-     "sim": 0.11363819794542723
-    },
-    {
-     "id": "formal-01",
-     "sim": 0.11175975124542252
-    },
-    {
-     "id": "formal-10",
-     "sim": 0.10968169942141635
-    },
-    {
-     "id": "formal-00",
-     "sim": 0.10432810619146021
-    },
-    {
-     "id": "formal-04",
-     "sim": 0.08854220041514331
-    },
-    {
-     "id": "formal-18",
-     "sim": 0.08854220041514331
-    },
-    {
-     "id": "formal-14",
-     "sim": 0.08800719732732863
-    },
-    {
-     "id": "formal-03",
-     "sim": 0.08291849892341732
-    },
-    {
-     "id": "formal-13",
-     "sim": 0.05469709887444195
-    }
-   ],
-   "tagged": []
-  }
- ]
+	"params": {
+		"min_sim": 0.66,
+		"embed_prefix": "classification: "
+	},
+	"fixture_ids": [
+		"formal-00",
+		"formal-01",
+		"formal-02",
+		"formal-03",
+		"formal-04",
+		"formal-05",
+		"formal-06",
+		"formal-07",
+		"formal-08",
+		"formal-09",
+		"formal-10",
+		"formal-11",
+		"formal-12",
+		"formal-13",
+		"formal-14",
+		"formal-15",
+		"formal-16",
+		"formal-17",
+		"formal-18",
+		"research-heavy"
+	],
+	"labels": [
+		{
+			"name": "Research",
+			"query_text": "classification: Research\n\nGrants and funding, manuscripts and submissions, peer review you are doing, lab and collaborators, conferences, data and methods.",
+			"sims": [
+				{
+					"id": "research-heavy",
+					"sim": 0.8526687663783827
+				},
+				{
+					"id": "formal-08",
+					"sim": 0.2151657414559676
+				},
+				{
+					"id": "formal-09",
+					"sim": 0.2033475128209444
+				},
+				{
+					"id": "formal-18",
+					"sim": 0.1995930819792704
+				},
+				{
+					"id": "formal-02",
+					"sim": 0.18647697592850526
+				},
+				{
+					"id": "formal-00",
+					"sim": 0.17638342073763938
+				},
+				{
+					"id": "formal-01",
+					"sim": 0.17545153820543183
+				},
+				{
+					"id": "formal-10",
+					"sim": 0.17218920641845573
+				},
+				{
+					"id": "formal-06",
+					"sim": 0.17004606037954073
+				},
+				{
+					"id": "formal-07",
+					"sim": 0.17004606037954073
+				},
+				{
+					"id": "formal-12",
+					"sim": 0.17004606037954073
+				},
+				{
+					"id": "formal-17",
+					"sim": 0.17004606037954073
+				},
+				{
+					"id": "formal-16",
+					"sim": 0.16803361008336118
+				},
+				{
+					"id": "formal-11",
+					"sim": 0.16467739391852368
+				},
+				{
+					"id": "formal-15",
+					"sim": 0.16079397020628872
+				},
+				{
+					"id": "formal-03",
+					"sim": 0.16021376095036585
+				},
+				{
+					"id": "formal-13",
+					"sim": 0.15852725334262255
+				},
+				{
+					"id": "formal-04",
+					"sim": 0.1568231358408553
+				},
+				{
+					"id": "formal-14",
+					"sim": 0.15587555534791234
+				},
+				{
+					"id": "formal-05",
+					"sim": 0.1452482234435317
+				}
+			],
+			"tagged": ["research-heavy"]
+		},
+		{
+			"name": "Teaching",
+			"query_text": "classification: Teaching\n\nCourses and lectures, students and advisees, TAs, grading, office hours, curriculum, Canvas / LMS and registrar mail.",
+			"sims": [
+				{
+					"id": "research-heavy",
+					"sim": 0.409995188860196
+				},
+				{
+					"id": "formal-17",
+					"sim": 0.08273792404018693
+				},
+				{
+					"id": "formal-09",
+					"sim": 0.0678453531552758
+				},
+				{
+					"id": "formal-07",
+					"sim": 0.06619033923214955
+				},
+				{
+					"id": "formal-16",
+					"sim": 0.06540699401677287
+				},
+				{
+					"id": "formal-15",
+					"sim": 0.051209155649918923
+				},
+				{
+					"id": "formal-05",
+					"sim": 0.05088401486645685
+				},
+				{
+					"id": "formal-02",
+					"sim": 0.05025189076296059
+				},
+				{
+					"id": "formal-04",
+					"sim": 0.049944536865902014
+				},
+				{
+					"id": "formal-18",
+					"sim": 0.049944536865902014
+				},
+				{
+					"id": "formal-06",
+					"sim": 0.049642754424112166
+				},
+				{
+					"id": "formal-12",
+					"sim": 0.049642754424112166
+				},
+				{
+					"id": "formal-14",
+					"sim": 0.049642754424112166
+				},
+				{
+					"id": "formal-11",
+					"sim": 0.04807544148481572
+				},
+				{
+					"id": "formal-01",
+					"sim": 0.04728075135384592
+				},
+				{
+					"id": "formal-08",
+					"sim": 0.03350126050864039
+				},
+				{
+					"id": "formal-10",
+					"sim": 0.03093441124448728
+				},
+				{
+					"id": "formal-03",
+					"sim": 0.01559078046750081
+				},
+				{
+					"id": "formal-13",
+					"sim": 0.015426662418507228
+				},
+				{
+					"id": "formal-00",
+					"sim": 0.0147122471584125
+				}
+			],
+			"tagged": []
+		},
+		{
+			"name": "Service",
+			"query_text": "classification: Service\n\nDepartment, college and university committees, faculty governance, professional-society duties, editorial boards, community outreach.",
+			"sims": [
+				{
+					"id": "formal-12",
+					"sim": 0.1829404333161506
+				},
+				{
+					"id": "formal-03",
+					"sim": 0.17236256333167307
+				},
+				{
+					"id": "formal-13",
+					"sim": 0.17054817003221698
+				},
+				{
+					"id": "formal-15",
+					"sim": 0.16984155512168939
+				},
+				{
+					"id": "formal-08",
+					"sim": 0.16666666666666669
+				},
+				{
+					"id": "formal-04",
+					"sim": 0.16564728911226984
+				},
+				{
+					"id": "formal-06",
+					"sim": 0.16464638998453554
+				},
+				{
+					"id": "formal-14",
+					"sim": 0.16464638998453554
+				},
+				{
+					"id": "formal-17",
+					"sim": 0.16464638998453554
+				},
+				{
+					"id": "formal-16",
+					"sim": 0.16269784336399218
+				},
+				{
+					"id": "formal-11",
+					"sim": 0.15944820103582022
+				},
+				{
+					"id": "formal-01",
+					"sim": 0.15681251204679503
+				},
+				{
+					"id": "formal-10",
+					"sim": 0.15389675281277312
+				},
+				{
+					"id": "formal-05",
+					"sim": 0.1500117201234699
+				},
+				{
+					"id": "formal-09",
+					"sim": 0.1500117201234699
+				},
+				{
+					"id": "formal-02",
+					"sim": 0.14814814814814817
+				},
+				{
+					"id": "formal-18",
+					"sim": 0.14724203476646208
+				},
+				{
+					"id": "formal-00",
+					"sim": 0.14638501094228
+				},
+				{
+					"id": "formal-07",
+					"sim": 0.1463523466529205
+				},
+				{
+					"id": "research-heavy",
+					"sim": 0.06475239082381762
+				}
+			],
+			"tagged": []
+		},
+		{
+			"name": "Personal",
+			"query_text": "classification: Personal\n\nNot work-related (over Fyxer).",
+			"sims": [
+				{
+					"id": "research-heavy",
+					"sim": 0.15575223949534955
+				},
+				{
+					"id": "formal-07",
+					"sim": 0.1466786622122144
+				},
+				{
+					"id": "formal-17",
+					"sim": 0.1466786622122144
+				},
+				{
+					"id": "formal-15",
+					"sim": 0.12104550653376049
+				},
+				{
+					"id": "formal-05",
+					"sim": 0.12027695586485274
+				},
+				{
+					"id": "formal-09",
+					"sim": 0.12027695586485274
+				},
+				{
+					"id": "formal-02",
+					"sim": 0.11878277418329972
+				},
+				{
+					"id": "formal-08",
+					"sim": 0.11878277418329972
+				},
+				{
+					"id": "formal-06",
+					"sim": 0.11734292976977152
+				},
+				{
+					"id": "formal-12",
+					"sim": 0.11734292976977152
+				},
+				{
+					"id": "formal-16",
+					"sim": 0.11595420713048969
+				},
+				{
+					"id": "formal-11",
+					"sim": 0.11363819794542723
+				},
+				{
+					"id": "formal-01",
+					"sim": 0.11175975124542252
+				},
+				{
+					"id": "formal-10",
+					"sim": 0.10968169942141635
+				},
+				{
+					"id": "formal-00",
+					"sim": 0.10432810619146021
+				},
+				{
+					"id": "formal-04",
+					"sim": 0.08854220041514331
+				},
+				{
+					"id": "formal-18",
+					"sim": 0.08854220041514331
+				},
+				{
+					"id": "formal-14",
+					"sim": 0.08800719732732863
+				},
+				{
+					"id": "formal-03",
+					"sim": 0.08291849892341732
+				},
+				{
+					"id": "formal-13",
+					"sim": 0.05469709887444195
+				}
+			],
+			"tagged": []
+		}
+	]
 }

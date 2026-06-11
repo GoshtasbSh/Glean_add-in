@@ -13,32 +13,36 @@ import { cosine } from "./vectors";
 export const SEED_MIN_SIM = 0.66;
 
 /** seed_matcher.py:62 — same prefix as email embeddings so vectors share a space. */
-export function buildSeedQueryText(name: string, description: string, prefix: string): string {
-  return `${prefix}${name}\n\n${description || ""}`.trim();
+export function buildSeedQueryText(
+	name: string,
+	description: string,
+	prefix: string,
+): string {
+	return `${prefix}${name}\n\n${description || ""}`.trim();
 }
 
 export interface SeedFixture {
-  id: string;
-  vec: readonly number[];
+	id: string;
+	vec: readonly number[];
 }
 
 export interface SeedMatchResult {
-  sims: { id: string; sim: number }[];
-  tagged: string[];
+	sims: { id: string; sim: number }[];
+	tagged: string[];
 }
 
 export function seedMatch(
-  queryVec: readonly number[],
-  fixtures: readonly SeedFixture[],
-  minSim: number = SEED_MIN_SIM,
+	queryVec: readonly number[],
+	fixtures: readonly SeedFixture[],
+	minSim: number = SEED_MIN_SIM,
 ): SeedMatchResult {
-  const sims = fixtures
-    .map((f) => ({ id: f.id, sim: cosine(queryVec, f.vec) }))
-    .sort((a, b) => b.sim - a.sim); // stable, parity with Python sorted()
-  const tagged: string[] = [];
-  for (const row of sims) {
-    if (row.sim < minSim) break; // ordered scan: below the floor, all rest are too
-    tagged.push(row.id);
-  }
-  return { sims, tagged };
+	const sims = fixtures
+		.map((f) => ({ id: f.id, sim: cosine(queryVec, f.vec) }))
+		.sort((a, b) => b.sim - a.sim); // stable, parity with Python sorted()
+	const tagged: string[] = [];
+	for (const row of sims) {
+		if (row.sim < minSim) break; // ordered scan: below the floor, all rest are too
+		tagged.push(row.id);
+	}
+	return { sims, tagged };
 }

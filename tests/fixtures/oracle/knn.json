@@ -1,1329 +1,1279 @@
 {
- "params": {
-  "k": 3,
-  "threshold": 0.66,
-  "min_agreement": 0.66,
-  "margin": 0.06,
-  "min_neighbors": 3,
-  "embed_prefix": "classification: "
- },
- "queries": [
-  {
-   "query_id": "formal-00",
-   "true_label": "formal",
-   "ranking": [
-    "formal-10",
-    "formal-03",
-    "formal-15",
-    "formal-05",
-    "formal-02",
-    "formal-08",
-    "formal-18",
-    "formal-19",
-    "formal-06",
-    "formal-12",
-    "formal-14",
-    "formal-13",
-    "formal-09",
-    "formal-11",
-    "formal-04",
-    "formal-17",
-    "formal-16",
-    "formal-01",
-    "formal-07",
-    "neutral-00",
-    "neutral-10",
-    "brief-17",
-    "brief-14",
-    "brief-13",
-    "neutral-13",
-    "neutral-03",
-    "brief-03",
-    "brief-00",
-    "brief-10",
-    "brief-16",
-    "brief-11",
-    "brief-02",
-    "brief-18",
-    "brief-12",
-    "brief-01",
-    "brief-04",
-    "brief-08",
-    "neutral-01",
-    "brief-07",
-    "neutral-11",
-    "brief-05",
-    "brief-06",
-    "brief-09",
-    "neutral-16",
-    "neutral-06",
-    "neutral-12",
-    "brief-19",
-    "neutral-19",
-    "neutral-14",
-    "neutral-18",
-    "neutral-02",
-    "brief-15",
-    "neutral-08",
-    "neutral-17",
-    "neutral-05",
-    "neutral-04",
-    "neutral-07",
-    "neutral-15",
-    "neutral-09"
-   ],
-   "top_k": [
-    {
-     "id": "formal-10",
-     "label": "formal",
-     "sim": 0.9962460869003003
-    },
-    {
-     "id": "formal-03",
-     "label": "formal",
-     "sim": 0.9739280147667705
-    },
-    {
-     "id": "formal-15",
-     "label": "formal",
-     "sim": 0.9723905313933007
-    }
-   ],
-   "decision": {
-    "label": "formal",
-    "confidence": 0.9962460869003003,
-    "source": "knn"
-   },
-   "full_sims": [
-    {
-     "id": "formal-10",
-     "label": "formal",
-     "sim": 0.9962460869003003
-    },
-    {
-     "id": "formal-03",
-     "label": "formal",
-     "sim": 0.9739280147667705
-    },
-    {
-     "id": "formal-15",
-     "label": "formal",
-     "sim": 0.9723905313933007
-    },
-    {
-     "id": "formal-05",
-     "label": "formal",
-     "sim": 0.9717064276596887
-    },
-    {
-     "id": "formal-02",
-     "label": "formal",
-     "sim": 0.970478405876597
-    },
-    {
-     "id": "formal-08",
-     "label": "formal",
-     "sim": 0.970478405876597
-    },
-    {
-     "id": "formal-18",
-     "label": "formal",
-     "sim": 0.9699312091703453
-    },
-    {
-     "id": "formal-19",
-     "label": "formal",
-     "sim": 0.9699312091703453
-    },
-    {
-     "id": "formal-06",
-     "label": "formal",
-     "sim": 0.9694264914462793
-    },
-    {
-     "id": "formal-12",
-     "label": "formal",
-     "sim": 0.9694264914462793
-    },
-    {
-     "id": "formal-14",
-     "label": "formal",
-     "sim": 0.9694264914462793
-    },
-    {
-     "id": "formal-13",
-     "label": "formal",
-     "sim": 0.9686689945704541
-    },
-    {
-     "id": "formal-09",
-     "label": "formal",
-     "sim": 0.9662165608367527
-    },
-    {
-     "id": "formal-11",
-     "label": "formal",
-     "sim": 0.9647541683386895
-    },
-    {
-     "id": "formal-04",
-     "label": "formal",
-     "sim": 0.9645427024527323
-    },
-    {
-     "id": "formal-17",
-     "label": "formal",
-     "sim": 0.9640705439797252
-    },
-    {
-     "id": "formal-16",
-     "label": "formal",
-     "sim": 0.9632461457254331
-    },
-    {
-     "id": "formal-01",
-     "label": "formal",
-     "sim": 0.9590089428597827
-    },
-    {
-     "id": "formal-07",
-     "label": "formal",
-     "sim": 0.9587145965131713
-    },
-    {
-     "id": "neutral-00",
-     "label": "neutral",
-     "sim": 0.4594399740701873
-    },
-    {
-     "id": "neutral-10",
-     "label": "neutral",
-     "sim": 0.38149852626337305
-    },
-    {
-     "id": "brief-17",
-     "label": "brief",
-     "sim": 0.3319700011034929
-    },
-    {
-     "id": "brief-14",
-     "label": "brief",
-     "sim": 0.32530002431617777
-    },
-    {
-     "id": "brief-13",
-     "label": "brief",
-     "sim": 0.3086066999241839
-    },
-    {
-     "id": "neutral-13",
-     "label": "neutral",
-     "sim": 0.3057883148625754
-    },
-    {
-     "id": "neutral-03",
-     "label": "neutral",
-     "sim": 0.30190368221228
-    },
-    {
-     "id": "brief-03",
-     "label": "brief",
-     "sim": 0.29317636492797466
-    },
-    {
-     "id": "brief-00",
-     "label": "brief",
-     "sim": 0.29277002188456
-    },
-    {
-     "id": "brief-10",
-     "label": "brief",
-     "sim": 0.29277002188456
-    },
-    {
-     "id": "brief-16",
-     "label": "brief",
-     "sim": 0.29277002188456
-    },
-    {
-     "id": "brief-11",
-     "label": "brief",
-     "sim": 0.28611083591999625
-    },
-    {
-     "id": "brief-02",
-     "label": "brief",
-     "sim": 0.2765050206687511
-    },
-    {
-     "id": "brief-18",
-     "label": "brief",
-     "sim": 0.2765050206687511
-    },
-    {
-     "id": "brief-12",
-     "label": "brief",
-     "sim": 0.2760262237369417
-    },
-    {
-     "id": "brief-01",
-     "label": "brief",
-     "sim": 0.2710523708715754
-    },
-    {
-     "id": "brief-04",
-     "label": "brief",
-     "sim": 0.26024001945294223
-    },
-    {
-     "id": "brief-08",
-     "label": "brief",
-     "sim": 0.26024001945294223
-    },
-    {
-     "id": "neutral-01",
-     "label": "neutral",
-     "sim": 0.25877458475338283
-    },
-    {
-     "id": "brief-07",
-     "label": "brief",
-     "sim": 0.25877458475338283
-    },
-    {
-     "id": "neutral-11",
-     "label": "neutral",
-     "sim": 0.24538755828982214
-    },
-    {
-     "id": "brief-05",
-     "label": "brief",
-     "sim": 0.22771001702132446
-    },
-    {
-     "id": "brief-06",
-     "label": "brief",
-     "sim": 0.22771001702132446
-    },
-    {
-     "id": "brief-09",
-     "label": "brief",
-     "sim": 0.22771001702132446
-    },
-    {
-     "id": "neutral-16",
-     "label": "neutral",
-     "sim": 0.22331621049563302
-    },
-    {
-     "id": "neutral-06",
-     "label": "neutral",
-     "sim": 0.2140113683916483
-    },
-    {
-     "id": "neutral-12",
-     "label": "neutral",
-     "sim": 0.2140113683916483
-    },
-    {
-     "id": "brief-19",
-     "label": "brief",
-     "sim": 0.21144501580551556
-    },
-    {
-     "id": "neutral-19",
-     "label": "neutral",
-     "sim": 0.2047065262876636
-    },
-    {
-     "id": "neutral-14",
-     "label": "neutral",
-     "sim": 0.20321383468489054
-    },
-    {
-     "id": "neutral-18",
-     "label": "neutral",
-     "sim": 0.19764554408753923
-    },
-    {
-     "id": "neutral-02",
-     "label": "neutral",
-     "sim": 0.1954016841836789
-    },
-    {
-     "id": "brief-15",
-     "label": "brief",
-     "sim": 0.19518001458970669
-    },
-    {
-     "id": "neutral-08",
-     "label": "neutral",
-     "sim": 0.1886616557199238
-    },
-    {
-     "id": "neutral-17",
-     "label": "neutral",
-     "sim": 0.18547083709941245
-    },
-    {
-     "id": "neutral-05",
-     "label": "neutral",
-     "sim": 0.1800968093463833
-    },
-    {
-     "id": "neutral-04",
-     "label": "neutral",
-     "sim": 0.17974340685458345
-    },
-    {
-     "id": "neutral-07",
-     "label": "neutral",
-     "sim": 0.17445567519772937
-    },
-    {
-     "id": "neutral-15",
-     "label": "neutral",
-     "sim": 0.17061802990709996
-    },
-    {
-     "id": "neutral-09",
-     "label": "neutral",
-     "sim": 0.16452254913212455
-    }
-   ],
-   "query_vector": [
-    -0.06900655593423542,
-    -0.06900655593423542,
-    -0.06900655593423542,
-    -0.06900655593423542,
-    0.20701966780270628,
-    0.0,
-    0.0,
-    -0.06900655593423542,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.06900655593423542,
-    0.0,
-    0.0,
-    0.06900655593423542,
-    -0.13801311186847084,
-    -0.06900655593423542,
-    0.0,
-    0.13801311186847084,
-    0.0,
-    0.13801311186847084,
-    -0.06900655593423542,
-    0.0,
-    0.0,
-    0.06900655593423542,
-    -0.2760262237369417,
-    0.0,
-    0.7590721152765897,
-    0.13801311186847084,
-    0.06900655593423542,
-    0.0,
-    0.0,
-    -0.06900655593423542,
-    0.0,
-    -0.13801311186847084,
-    -0.13801311186847084,
-    0.0,
-    -0.13801311186847084,
-    0.13801311186847084,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.06900655593423542,
-    -0.06900655593423542,
-    0.0,
-    0.0,
-    -0.13801311186847084,
-    0.0,
-    0.0,
-    -0.06900655593423542,
-    0.06900655593423542,
-    0.06900655593423542,
-    -0.13801311186847084,
-    0.13801311186847084,
-    0.06900655593423542,
-    -0.06900655593423542,
-    0.0,
-    0.06900655593423542
-   ]
-  },
-  {
-   "query_id": "neutral-02",
-   "true_label": "neutral",
-   "ranking": [
-    "neutral-12",
-    "neutral-04",
-    "neutral-14",
-    "neutral-08",
-    "neutral-18",
-    "neutral-06",
-    "neutral-16",
-    "neutral-19",
-    "neutral-07",
-    "neutral-17",
-    "neutral-09",
-    "neutral-03",
-    "neutral-11",
-    "neutral-05",
-    "neutral-15",
-    "neutral-13",
-    "neutral-01",
-    "neutral-10",
-    "neutral-00",
-    "brief-11",
-    "brief-08",
-    "brief-00",
-    "brief-14",
-    "formal-07",
-    "formal-04",
-    "formal-17",
-    "brief-07",
-    "formal-02",
-    "brief-01",
-    "brief-02",
-    "brief-04",
-    "brief-17",
-    "formal-12",
-    "formal-14",
-    "formal-08",
-    "formal-18",
-    "brief-03",
-    "brief-13",
-    "formal-03",
-    "brief-12",
-    "formal-13",
-    "formal-11",
-    "formal-01",
-    "formal-09",
-    "brief-09",
-    "brief-10",
-    "brief-18",
-    "formal-19",
-    "formal-06",
-    "formal-16",
-    "formal-15",
-    "formal-05",
-    "formal-00",
-    "brief-05",
-    "brief-06",
-    "formal-10",
-    "brief-19",
-    "brief-15",
-    "brief-16"
-   ],
-   "top_k": [
-    {
-     "id": "neutral-12",
-     "label": "neutral",
-     "sim": 0.9818181818181819
-    },
-    {
-     "id": "neutral-04",
-     "label": "neutral",
-     "sim": 0.9365910512079417
-    },
-    {
-     "id": "neutral-14",
-     "label": "neutral",
-     "sim": 0.9322824258825959
-    }
-   ],
-   "decision": {
-    "label": "neutral",
-    "confidence": 0.9818181818181819,
-    "source": "knn"
-   }
-  },
-  {
-   "query_id": "brief-04",
-   "true_label": "brief",
-   "ranking": [
-    "brief-14",
-    "brief-03",
-    "brief-13",
-    "brief-01",
-    "brief-11",
-    "brief-00",
-    "brief-02",
-    "brief-05",
-    "brief-06",
-    "brief-08",
-    "brief-09",
-    "brief-10",
-    "brief-15",
-    "brief-16",
-    "brief-18",
-    "brief-19",
-    "brief-07",
-    "brief-12",
-    "brief-17",
-    "neutral-01",
-    "formal-01",
-    "neutral-11",
-    "neutral-03",
-    "neutral-13",
-    "formal-11",
-    "neutral-16",
-    "formal-04",
-    "formal-14",
-    "formal-03",
-    "formal-16",
-    "formal-13",
-    "neutral-14",
-    "formal-08",
-    "formal-06",
-    "neutral-04",
-    "neutral-06",
-    "formal-15",
-    "formal-05",
-    "formal-09",
-    "formal-02",
-    "neutral-08",
-    "formal-18",
-    "formal-19",
-    "formal-12",
-    "neutral-00",
-    "formal-00",
-    "neutral-05",
-    "neutral-15",
-    "formal-10",
-    "formal-07",
-    "neutral-02",
-    "neutral-10",
-    "neutral-12",
-    "neutral-19",
-    "neutral-09",
-    "neutral-18",
-    "formal-17",
-    "neutral-07",
-    "neutral-17"
-   ],
-   "top_k": [
-    {
-     "id": "brief-14",
-     "label": "brief",
-     "sim": 0.9444444444444446
-    },
-    {
-     "id": "brief-03",
-     "label": "brief",
-     "sim": 0.8959786703810411
-    },
-    {
-     "id": "brief-13",
-     "label": "brief",
-     "sim": 0.8959786703810411
-    }
-   ],
-   "decision": {
-    "label": "brief",
-    "confidence": 0.9444444444444446,
-    "source": "knn"
-   }
-  },
-  {
-   "query_id": "formal-07",
-   "true_label": "formal",
-   "ranking": [
-    "formal-17",
-    "formal-04",
-    "formal-16",
-    "formal-06",
-    "formal-12",
-    "formal-14",
-    "formal-18",
-    "formal-19",
-    "formal-02",
-    "formal-08",
-    "formal-05",
-    "formal-15",
-    "formal-09",
-    "formal-11",
-    "formal-03",
-    "formal-00",
-    "formal-01",
-    "formal-10",
-    "formal-13",
-    "neutral-00",
-    "neutral-10",
-    "brief-17",
-    "neutral-13",
-    "neutral-03",
-    "neutral-01",
-    "brief-14",
-    "neutral-11",
-    "neutral-16",
-    "neutral-07",
-    "neutral-17",
-    "brief-03",
-    "brief-13",
-    "brief-16",
-    "brief-11",
-    "neutral-06",
-    "neutral-12",
-    "neutral-19",
-    "brief-08",
-    "brief-18",
-    "brief-07",
-    "neutral-14",
-    "brief-01",
-    "neutral-18",
-    "neutral-02",
-    "neutral-04",
-    "brief-02",
-    "neutral-08",
-    "brief-12",
-    "neutral-05",
-    "brief-00",
-    "brief-04",
-    "brief-06",
-    "brief-10",
-    "neutral-15",
-    "neutral-09",
-    "brief-05",
-    "brief-09",
-    "brief-19",
-    "brief-15"
-   ],
-   "top_k": [
-    {
-     "id": "formal-17",
-     "label": "formal",
-     "sim": 0.9939759036144579
-    },
-    {
-     "id": "formal-04",
-     "label": "formal",
-     "sim": 0.9757754965005869
-    },
-    {
-     "id": "formal-16",
-     "label": "formal",
-     "sim": 0.9703068552463484
-    }
-   ],
-   "decision": {
-    "label": "formal",
-    "confidence": 0.9939759036144579,
-    "source": "knn"
-   }
-  },
-  {
-   "query_id": "neutral-09",
-   "true_label": "neutral",
-   "ranking": [
-    "neutral-19",
-    "neutral-04",
-    "neutral-14",
-    "neutral-08",
-    "neutral-18",
-    "neutral-02",
-    "neutral-06",
-    "neutral-12",
-    "neutral-16",
-    "neutral-05",
-    "neutral-15",
-    "neutral-07",
-    "neutral-17",
-    "neutral-03",
-    "neutral-11",
-    "neutral-13",
-    "neutral-01",
-    "neutral-10",
-    "neutral-00",
-    "brief-11",
-    "brief-08",
-    "brief-00",
-    "brief-09",
-    "brief-14",
-    "brief-07",
-    "brief-01",
-    "formal-09",
-    "brief-04",
-    "brief-19",
-    "brief-17",
-    "formal-07",
-    "formal-04",
-    "brief-03",
-    "brief-13",
-    "formal-17",
-    "formal-19",
-    "brief-05",
-    "brief-10",
-    "brief-18",
-    "formal-14",
-    "formal-08",
-    "formal-18",
-    "formal-03",
-    "formal-13",
-    "formal-11",
-    "formal-01",
-    "brief-02",
-    "brief-06",
-    "formal-02",
-    "formal-06",
-    "formal-12",
-    "formal-16",
-    "formal-15",
-    "formal-05",
-    "brief-12",
-    "formal-00",
-    "formal-10",
-    "brief-15",
-    "brief-16"
-   ],
-   "top_k": [
-    {
-     "id": "neutral-19",
-     "label": "neutral",
-     "sim": 0.9822994862575031
-    },
-    {
-     "id": "neutral-04",
-     "label": "neutral",
-     "sim": 0.9200129084349359
-    },
-    {
-     "id": "neutral-14",
-     "label": "neutral",
-     "sim": 0.9157805479913727
-    }
-   ],
-   "decision": {
-    "label": "neutral",
-    "confidence": 0.9822994862575031,
-    "source": "knn"
-   }
-  },
-  {
-   "query_id": "brief-11",
-   "true_label": "brief",
-   "ranking": [
-    "brief-01",
-    "brief-04",
-    "brief-03",
-    "brief-13",
-    "brief-00",
-    "brief-02",
-    "brief-05",
-    "brief-06",
-    "brief-08",
-    "brief-09",
-    "brief-10",
-    "brief-14",
-    "brief-16",
-    "brief-18",
-    "brief-19",
-    "brief-07",
-    "brief-12",
-    "brief-17",
-    "brief-15",
-    "neutral-01",
-    "neutral-11",
-    "formal-01",
-    "formal-11",
-    "neutral-03",
-    "neutral-16",
-    "neutral-13",
-    "neutral-08",
-    "neutral-00",
-    "neutral-05",
-    "neutral-15",
-    "formal-08",
-    "neutral-02",
-    "neutral-06",
-    "neutral-10",
-    "neutral-12",
-    "neutral-19",
-    "formal-03",
-    "formal-16",
-    "neutral-09",
-    "formal-13",
-    "formal-15",
-    "neutral-18",
-    "formal-05",
-    "formal-09",
-    "formal-02",
-    "neutral-14",
-    "formal-04",
-    "formal-18",
-    "formal-19",
-    "formal-06",
-    "formal-07",
-    "formal-12",
-    "formal-14",
-    "neutral-04",
-    "neutral-07",
-    "formal-17",
-    "formal-00",
-    "formal-10",
-    "neutral-17"
-   ],
-   "top_k": [
-    {
-     "id": "brief-01",
-     "label": "brief",
-     "sim": 0.9523809523809524
-    },
-    {
-     "id": "brief-04",
-     "label": "brief",
-     "sim": 0.8743856497851876
-    },
-    {
-     "id": "brief-03",
-     "label": "brief",
-     "sim": 0.8295150620062532
-    }
-   ],
-   "decision": {
-    "label": "brief",
-    "confidence": 0.9523809523809524,
-    "source": "knn"
-   }
-  },
-  {
-   "query_id": "formal-14",
-   "true_label": "formal",
-   "ranking": [
-    "formal-04",
-    "formal-16",
-    "formal-06",
-    "formal-03",
-    "formal-12",
-    "formal-18",
-    "formal-19",
-    "formal-02",
-    "formal-08",
-    "formal-15",
-    "formal-05",
-    "formal-13",
-    "formal-07",
-    "formal-17",
-    "formal-09",
-    "formal-00",
-    "formal-10",
-    "formal-11",
-    "formal-01",
-    "neutral-00",
-    "brief-14",
-    "neutral-10",
-    "neutral-13",
-    "brief-17",
-    "neutral-03",
-    "brief-13",
-    "brief-03",
-    "brief-16",
-    "brief-04",
-    "brief-18",
-    "neutral-01",
-    "brief-11",
-    "neutral-16",
-    "neutral-14",
-    "neutral-11",
-    "brief-02",
-    "brief-08",
-    "brief-12",
-    "brief-01",
-    "neutral-06",
-    "brief-00",
-    "brief-06",
-    "brief-10",
-    "neutral-12",
-    "brief-07",
-    "neutral-04",
-    "neutral-19",
-    "neutral-18",
-    "neutral-02",
-    "neutral-08",
-    "brief-05",
-    "brief-09",
-    "brief-19",
-    "neutral-17",
-    "neutral-05",
-    "neutral-07",
-    "neutral-15",
-    "neutral-09",
-    "brief-15"
-   ],
-   "top_k": [
-    {
-     "id": "formal-04",
-     "label": "formal",
-     "sim": 0.9939576486092936
-    },
-    {
-     "id": "formal-16",
-     "label": "formal",
-     "sim": 0.9822124608321932
-    },
-    {
-     "id": "formal-06",
-     "label": "formal",
-     "sim": 0.9819277108433736
-    }
-   ],
-   "decision": {
-    "label": "formal",
-    "confidence": 0.9939576486092936,
-    "source": "knn"
-   }
-  },
-  {
-   "query_id": "neutral-16",
-   "true_label": "neutral",
-   "ranking": [
-    "neutral-06",
-    "neutral-04",
-    "neutral-14",
-    "neutral-08",
-    "neutral-18",
-    "neutral-02",
-    "neutral-12",
-    "neutral-19",
-    "neutral-07",
-    "neutral-17",
-    "neutral-09",
-    "neutral-11",
-    "neutral-05",
-    "neutral-15",
-    "neutral-13",
-    "neutral-01",
-    "neutral-03",
-    "neutral-10",
-    "neutral-00",
-    "brief-11",
-    "brief-08",
-    "brief-14",
-    "formal-04",
-    "formal-07",
-    "brief-04",
-    "formal-17",
-    "formal-14",
-    "formal-16",
-    "brief-01",
-    "formal-06",
-    "brief-17",
-    "brief-00",
-    "brief-06",
-    "brief-18",
-    "formal-08",
-    "formal-18",
-    "formal-11",
-    "formal-13",
-    "brief-03",
-    "brief-13",
-    "brief-07",
-    "formal-01",
-    "formal-09",
-    "formal-03",
-    "formal-02",
-    "formal-19",
-    "formal-12",
-    "formal-15",
-    "formal-05",
-    "formal-00",
-    "brief-02",
-    "brief-05",
-    "brief-09",
-    "brief-10",
-    "brief-16",
-    "brief-19",
-    "formal-10",
-    "brief-12",
-    "brief-15"
-   ],
-   "top_k": [
-    {
-     "id": "neutral-06",
-     "label": "neutral",
-     "sim": 0.9818181818181819
-    },
-    {
-     "id": "neutral-04",
-     "label": "neutral",
-     "sim": 0.9533158914080836
-    },
-    {
-     "id": "neutral-14",
-     "label": "neutral",
-     "sim": 0.9495469152507922
-    }
-   ],
-   "decision": {
-    "label": "neutral",
-    "confidence": 0.9818181818181819,
-    "source": "knn"
-   }
-  },
-  {
-   "query_id": "brief-18",
-   "true_label": "brief",
-   "ranking": [
-    "brief-08",
-    "brief-06",
-    "brief-16",
-    "brief-19",
-    "brief-03",
-    "brief-13",
-    "brief-02",
-    "brief-04",
-    "brief-05",
-    "brief-09",
-    "brief-14",
-    "brief-15",
-    "brief-07",
-    "brief-12",
-    "brief-11",
-    "brief-17",
-    "brief-00",
-    "brief-10",
-    "brief-01",
-    "formal-08",
-    "formal-18",
-    "formal-01",
-    "formal-16",
-    "formal-11",
-    "formal-06",
-    "formal-03",
-    "formal-13",
-    "formal-15",
-    "formal-09",
-    "formal-02",
-    "formal-04",
-    "formal-19",
-    "formal-12",
-    "formal-14",
-    "formal-05",
-    "neutral-01",
-    "formal-07",
-    "neutral-16",
-    "formal-00",
-    "neutral-08",
-    "neutral-18",
-    "formal-17",
-    "formal-10",
-    "neutral-11",
-    "neutral-03",
-    "neutral-13",
-    "neutral-06",
-    "neutral-15",
-    "neutral-02",
-    "neutral-12",
-    "neutral-19",
-    "neutral-09",
-    "neutral-00",
-    "neutral-14",
-    "neutral-04",
-    "neutral-05",
-    "neutral-10",
-    "neutral-07",
-    "neutral-17"
-   ],
-   "top_k": [
-    {
-     "id": "brief-08",
-     "label": "brief",
-     "sim": 0.9444444444444446
-    },
-    {
-     "id": "brief-06",
-     "label": "brief",
-     "sim": 0.8888888888888891
-    },
-    {
-     "id": "brief-16",
-     "label": "brief",
-     "sim": 0.8888888888888891
-    }
-   ],
-   "decision": {
-    "label": "brief",
-    "confidence": 0.9444444444444446,
-    "source": "knn"
-   }
-  },
-  {
-   "query_id": "brief-00",
-   "true_label": "brief",
-   "ranking": [
-    "brief-10",
-    "brief-03",
-    "brief-13",
-    "brief-02",
-    "brief-04",
-    "brief-05",
-    "brief-08",
-    "brief-09",
-    "brief-14",
-    "brief-15",
-    "brief-07",
-    "brief-12",
-    "brief-01",
-    "brief-11",
-    "brief-17",
-    "brief-06",
-    "brief-16",
-    "brief-18",
-    "brief-19",
-    "neutral-01",
-    "neutral-00",
-    "neutral-11",
-    "neutral-10",
-    "formal-01",
-    "neutral-03",
-    "neutral-13",
-    "formal-11",
-    "formal-03",
-    "formal-00",
-    "neutral-05",
-    "neutral-15",
-    "formal-10",
-    "formal-13",
-    "neutral-02",
-    "neutral-06",
-    "neutral-12",
-    "neutral-16",
-    "neutral-19",
-    "formal-15",
-    "formal-05",
-    "formal-09",
-    "neutral-09",
-    "formal-02",
-    "formal-08",
-    "neutral-08",
-    "neutral-18",
-    "formal-04",
-    "formal-18",
-    "formal-19",
-    "formal-06",
-    "formal-12",
-    "formal-14",
-    "neutral-14",
-    "formal-16",
-    "neutral-04",
-    "formal-07",
-    "formal-17",
-    "neutral-07",
-    "neutral-17"
-   ],
-   "top_k": [
-    {
-     "id": "brief-10",
-     "label": "brief",
-     "sim": 0.9444444444444446
-    },
-    {
-     "id": "brief-03",
-     "label": "brief",
-     "sim": 0.843274042711568
-    },
-    {
-     "id": "brief-13",
-     "label": "brief",
-     "sim": 0.843274042711568
-    }
-   ],
-   "decision": {
-    "label": "brief",
-    "confidence": 0.9444444444444446,
-    "source": "knn"
-   }
-  },
-  {
-   "query_id": "offtopic-synthetic",
-   "true_label": "(none)",
-   "ranking": [
-    "brief-00",
-    "brief-10",
-    "neutral-11",
-    "neutral-02",
-    "neutral-10",
-    "neutral-19",
-    "brief-17",
-    "neutral-09",
-    "neutral-08",
-    "neutral-18",
-    "neutral-00",
-    "neutral-01",
-    "neutral-13",
-    "neutral-07",
-    "brief-02",
-    "brief-06",
-    "brief-08",
-    "brief-09",
-    "brief-14",
-    "brief-16",
-    "formal-11",
-    "brief-03",
-    "brief-13",
-    "brief-01",
-    "brief-11",
-    "neutral-05",
-    "neutral-15",
-    "neutral-06",
-    "neutral-12",
-    "neutral-16",
-    "formal-09",
-    "formal-02",
-    "formal-08",
-    "formal-18",
-    "formal-19",
-    "formal-07",
-    "neutral-14",
-    "neutral-03",
-    "neutral-04",
-    "formal-01",
-    "neutral-17",
-    "formal-10",
-    "formal-13",
-    "formal-00",
-    "formal-15",
-    "formal-05",
-    "formal-04",
-    "formal-06",
-    "formal-12",
-    "formal-14",
-    "formal-17",
-    "formal-16",
-    "formal-03",
-    "brief-07",
-    "brief-12",
-    "brief-04",
-    "brief-05",
-    "brief-15",
-    "brief-18",
-    "brief-19"
-   ],
-   "top_k": [
-    {
-     "id": "brief-00",
-     "label": "brief",
-     "sim": 0.23570226039551587
-    },
-    {
-     "id": "brief-10",
-     "label": "brief",
-     "sim": 0.23570226039551587
-    },
-    {
-     "id": "neutral-11",
-     "label": "neutral",
-     "sim": 0.21166687833365083
-    }
-   ],
-   "decision": null
-  }
- ]
+	"params": {
+		"k": 3,
+		"threshold": 0.66,
+		"min_agreement": 0.66,
+		"margin": 0.06,
+		"min_neighbors": 3,
+		"embed_prefix": "classification: "
+	},
+	"queries": [
+		{
+			"query_id": "formal-00",
+			"true_label": "formal",
+			"ranking": [
+				"formal-10",
+				"formal-03",
+				"formal-15",
+				"formal-05",
+				"formal-02",
+				"formal-08",
+				"formal-18",
+				"formal-19",
+				"formal-06",
+				"formal-12",
+				"formal-14",
+				"formal-13",
+				"formal-09",
+				"formal-11",
+				"formal-04",
+				"formal-17",
+				"formal-16",
+				"formal-01",
+				"formal-07",
+				"neutral-00",
+				"neutral-10",
+				"brief-17",
+				"brief-14",
+				"brief-13",
+				"neutral-13",
+				"neutral-03",
+				"brief-03",
+				"brief-00",
+				"brief-10",
+				"brief-16",
+				"brief-11",
+				"brief-02",
+				"brief-18",
+				"brief-12",
+				"brief-01",
+				"brief-04",
+				"brief-08",
+				"neutral-01",
+				"brief-07",
+				"neutral-11",
+				"brief-05",
+				"brief-06",
+				"brief-09",
+				"neutral-16",
+				"neutral-06",
+				"neutral-12",
+				"brief-19",
+				"neutral-19",
+				"neutral-14",
+				"neutral-18",
+				"neutral-02",
+				"brief-15",
+				"neutral-08",
+				"neutral-17",
+				"neutral-05",
+				"neutral-04",
+				"neutral-07",
+				"neutral-15",
+				"neutral-09"
+			],
+			"top_k": [
+				{
+					"id": "formal-10",
+					"label": "formal",
+					"sim": 0.9962460869003003
+				},
+				{
+					"id": "formal-03",
+					"label": "formal",
+					"sim": 0.9739280147667705
+				},
+				{
+					"id": "formal-15",
+					"label": "formal",
+					"sim": 0.9723905313933007
+				}
+			],
+			"decision": {
+				"label": "formal",
+				"confidence": 0.9962460869003003,
+				"source": "knn"
+			},
+			"full_sims": [
+				{
+					"id": "formal-10",
+					"label": "formal",
+					"sim": 0.9962460869003003
+				},
+				{
+					"id": "formal-03",
+					"label": "formal",
+					"sim": 0.9739280147667705
+				},
+				{
+					"id": "formal-15",
+					"label": "formal",
+					"sim": 0.9723905313933007
+				},
+				{
+					"id": "formal-05",
+					"label": "formal",
+					"sim": 0.9717064276596887
+				},
+				{
+					"id": "formal-02",
+					"label": "formal",
+					"sim": 0.970478405876597
+				},
+				{
+					"id": "formal-08",
+					"label": "formal",
+					"sim": 0.970478405876597
+				},
+				{
+					"id": "formal-18",
+					"label": "formal",
+					"sim": 0.9699312091703453
+				},
+				{
+					"id": "formal-19",
+					"label": "formal",
+					"sim": 0.9699312091703453
+				},
+				{
+					"id": "formal-06",
+					"label": "formal",
+					"sim": 0.9694264914462793
+				},
+				{
+					"id": "formal-12",
+					"label": "formal",
+					"sim": 0.9694264914462793
+				},
+				{
+					"id": "formal-14",
+					"label": "formal",
+					"sim": 0.9694264914462793
+				},
+				{
+					"id": "formal-13",
+					"label": "formal",
+					"sim": 0.9686689945704541
+				},
+				{
+					"id": "formal-09",
+					"label": "formal",
+					"sim": 0.9662165608367527
+				},
+				{
+					"id": "formal-11",
+					"label": "formal",
+					"sim": 0.9647541683386895
+				},
+				{
+					"id": "formal-04",
+					"label": "formal",
+					"sim": 0.9645427024527323
+				},
+				{
+					"id": "formal-17",
+					"label": "formal",
+					"sim": 0.9640705439797252
+				},
+				{
+					"id": "formal-16",
+					"label": "formal",
+					"sim": 0.9632461457254331
+				},
+				{
+					"id": "formal-01",
+					"label": "formal",
+					"sim": 0.9590089428597827
+				},
+				{
+					"id": "formal-07",
+					"label": "formal",
+					"sim": 0.9587145965131713
+				},
+				{
+					"id": "neutral-00",
+					"label": "neutral",
+					"sim": 0.4594399740701873
+				},
+				{
+					"id": "neutral-10",
+					"label": "neutral",
+					"sim": 0.38149852626337305
+				},
+				{
+					"id": "brief-17",
+					"label": "brief",
+					"sim": 0.3319700011034929
+				},
+				{
+					"id": "brief-14",
+					"label": "brief",
+					"sim": 0.32530002431617777
+				},
+				{
+					"id": "brief-13",
+					"label": "brief",
+					"sim": 0.3086066999241839
+				},
+				{
+					"id": "neutral-13",
+					"label": "neutral",
+					"sim": 0.3057883148625754
+				},
+				{
+					"id": "neutral-03",
+					"label": "neutral",
+					"sim": 0.30190368221228
+				},
+				{
+					"id": "brief-03",
+					"label": "brief",
+					"sim": 0.29317636492797466
+				},
+				{
+					"id": "brief-00",
+					"label": "brief",
+					"sim": 0.29277002188456
+				},
+				{
+					"id": "brief-10",
+					"label": "brief",
+					"sim": 0.29277002188456
+				},
+				{
+					"id": "brief-16",
+					"label": "brief",
+					"sim": 0.29277002188456
+				},
+				{
+					"id": "brief-11",
+					"label": "brief",
+					"sim": 0.28611083591999625
+				},
+				{
+					"id": "brief-02",
+					"label": "brief",
+					"sim": 0.2765050206687511
+				},
+				{
+					"id": "brief-18",
+					"label": "brief",
+					"sim": 0.2765050206687511
+				},
+				{
+					"id": "brief-12",
+					"label": "brief",
+					"sim": 0.2760262237369417
+				},
+				{
+					"id": "brief-01",
+					"label": "brief",
+					"sim": 0.2710523708715754
+				},
+				{
+					"id": "brief-04",
+					"label": "brief",
+					"sim": 0.26024001945294223
+				},
+				{
+					"id": "brief-08",
+					"label": "brief",
+					"sim": 0.26024001945294223
+				},
+				{
+					"id": "neutral-01",
+					"label": "neutral",
+					"sim": 0.25877458475338283
+				},
+				{
+					"id": "brief-07",
+					"label": "brief",
+					"sim": 0.25877458475338283
+				},
+				{
+					"id": "neutral-11",
+					"label": "neutral",
+					"sim": 0.24538755828982214
+				},
+				{
+					"id": "brief-05",
+					"label": "brief",
+					"sim": 0.22771001702132446
+				},
+				{
+					"id": "brief-06",
+					"label": "brief",
+					"sim": 0.22771001702132446
+				},
+				{
+					"id": "brief-09",
+					"label": "brief",
+					"sim": 0.22771001702132446
+				},
+				{
+					"id": "neutral-16",
+					"label": "neutral",
+					"sim": 0.22331621049563302
+				},
+				{
+					"id": "neutral-06",
+					"label": "neutral",
+					"sim": 0.2140113683916483
+				},
+				{
+					"id": "neutral-12",
+					"label": "neutral",
+					"sim": 0.2140113683916483
+				},
+				{
+					"id": "brief-19",
+					"label": "brief",
+					"sim": 0.21144501580551556
+				},
+				{
+					"id": "neutral-19",
+					"label": "neutral",
+					"sim": 0.2047065262876636
+				},
+				{
+					"id": "neutral-14",
+					"label": "neutral",
+					"sim": 0.20321383468489054
+				},
+				{
+					"id": "neutral-18",
+					"label": "neutral",
+					"sim": 0.19764554408753923
+				},
+				{
+					"id": "neutral-02",
+					"label": "neutral",
+					"sim": 0.1954016841836789
+				},
+				{
+					"id": "brief-15",
+					"label": "brief",
+					"sim": 0.19518001458970669
+				},
+				{
+					"id": "neutral-08",
+					"label": "neutral",
+					"sim": 0.1886616557199238
+				},
+				{
+					"id": "neutral-17",
+					"label": "neutral",
+					"sim": 0.18547083709941245
+				},
+				{
+					"id": "neutral-05",
+					"label": "neutral",
+					"sim": 0.1800968093463833
+				},
+				{
+					"id": "neutral-04",
+					"label": "neutral",
+					"sim": 0.17974340685458345
+				},
+				{
+					"id": "neutral-07",
+					"label": "neutral",
+					"sim": 0.17445567519772937
+				},
+				{
+					"id": "neutral-15",
+					"label": "neutral",
+					"sim": 0.17061802990709996
+				},
+				{
+					"id": "neutral-09",
+					"label": "neutral",
+					"sim": 0.16452254913212455
+				}
+			],
+			"query_vector": [
+				-0.06900655593423542, -0.06900655593423542, -0.06900655593423542,
+				-0.06900655593423542, 0.20701966780270628, 0.0, 0.0,
+				-0.06900655593423542, 0.0, 0.0, 0.0, 0.0, 0.06900655593423542, 0.0, 0.0,
+				0.06900655593423542, -0.13801311186847084, -0.06900655593423542, 0.0,
+				0.13801311186847084, 0.0, 0.13801311186847084, -0.06900655593423542,
+				0.0, 0.0, 0.06900655593423542, -0.2760262237369417, 0.0,
+				0.7590721152765897, 0.13801311186847084, 0.06900655593423542, 0.0, 0.0,
+				-0.06900655593423542, 0.0, -0.13801311186847084, -0.13801311186847084,
+				0.0, -0.13801311186847084, 0.13801311186847084, 0.0, 0.0, 0.0, 0.0, 0.0,
+				0.0, 0.0, 0.0, 0.06900655593423542, -0.06900655593423542, 0.0, 0.0,
+				-0.13801311186847084, 0.0, 0.0, -0.06900655593423542,
+				0.06900655593423542, 0.06900655593423542, -0.13801311186847084,
+				0.13801311186847084, 0.06900655593423542, -0.06900655593423542, 0.0,
+				0.06900655593423542
+			]
+		},
+		{
+			"query_id": "neutral-02",
+			"true_label": "neutral",
+			"ranking": [
+				"neutral-12",
+				"neutral-04",
+				"neutral-14",
+				"neutral-08",
+				"neutral-18",
+				"neutral-06",
+				"neutral-16",
+				"neutral-19",
+				"neutral-07",
+				"neutral-17",
+				"neutral-09",
+				"neutral-03",
+				"neutral-11",
+				"neutral-05",
+				"neutral-15",
+				"neutral-13",
+				"neutral-01",
+				"neutral-10",
+				"neutral-00",
+				"brief-11",
+				"brief-08",
+				"brief-00",
+				"brief-14",
+				"formal-07",
+				"formal-04",
+				"formal-17",
+				"brief-07",
+				"formal-02",
+				"brief-01",
+				"brief-02",
+				"brief-04",
+				"brief-17",
+				"formal-12",
+				"formal-14",
+				"formal-08",
+				"formal-18",
+				"brief-03",
+				"brief-13",
+				"formal-03",
+				"brief-12",
+				"formal-13",
+				"formal-11",
+				"formal-01",
+				"formal-09",
+				"brief-09",
+				"brief-10",
+				"brief-18",
+				"formal-19",
+				"formal-06",
+				"formal-16",
+				"formal-15",
+				"formal-05",
+				"formal-00",
+				"brief-05",
+				"brief-06",
+				"formal-10",
+				"brief-19",
+				"brief-15",
+				"brief-16"
+			],
+			"top_k": [
+				{
+					"id": "neutral-12",
+					"label": "neutral",
+					"sim": 0.9818181818181819
+				},
+				{
+					"id": "neutral-04",
+					"label": "neutral",
+					"sim": 0.9365910512079417
+				},
+				{
+					"id": "neutral-14",
+					"label": "neutral",
+					"sim": 0.9322824258825959
+				}
+			],
+			"decision": {
+				"label": "neutral",
+				"confidence": 0.9818181818181819,
+				"source": "knn"
+			}
+		},
+		{
+			"query_id": "brief-04",
+			"true_label": "brief",
+			"ranking": [
+				"brief-14",
+				"brief-03",
+				"brief-13",
+				"brief-01",
+				"brief-11",
+				"brief-00",
+				"brief-02",
+				"brief-05",
+				"brief-06",
+				"brief-08",
+				"brief-09",
+				"brief-10",
+				"brief-15",
+				"brief-16",
+				"brief-18",
+				"brief-19",
+				"brief-07",
+				"brief-12",
+				"brief-17",
+				"neutral-01",
+				"formal-01",
+				"neutral-11",
+				"neutral-03",
+				"neutral-13",
+				"formal-11",
+				"neutral-16",
+				"formal-04",
+				"formal-14",
+				"formal-03",
+				"formal-16",
+				"formal-13",
+				"neutral-14",
+				"formal-08",
+				"formal-06",
+				"neutral-04",
+				"neutral-06",
+				"formal-15",
+				"formal-05",
+				"formal-09",
+				"formal-02",
+				"neutral-08",
+				"formal-18",
+				"formal-19",
+				"formal-12",
+				"neutral-00",
+				"formal-00",
+				"neutral-05",
+				"neutral-15",
+				"formal-10",
+				"formal-07",
+				"neutral-02",
+				"neutral-10",
+				"neutral-12",
+				"neutral-19",
+				"neutral-09",
+				"neutral-18",
+				"formal-17",
+				"neutral-07",
+				"neutral-17"
+			],
+			"top_k": [
+				{
+					"id": "brief-14",
+					"label": "brief",
+					"sim": 0.9444444444444446
+				},
+				{
+					"id": "brief-03",
+					"label": "brief",
+					"sim": 0.8959786703810411
+				},
+				{
+					"id": "brief-13",
+					"label": "brief",
+					"sim": 0.8959786703810411
+				}
+			],
+			"decision": {
+				"label": "brief",
+				"confidence": 0.9444444444444446,
+				"source": "knn"
+			}
+		},
+		{
+			"query_id": "formal-07",
+			"true_label": "formal",
+			"ranking": [
+				"formal-17",
+				"formal-04",
+				"formal-16",
+				"formal-06",
+				"formal-12",
+				"formal-14",
+				"formal-18",
+				"formal-19",
+				"formal-02",
+				"formal-08",
+				"formal-05",
+				"formal-15",
+				"formal-09",
+				"formal-11",
+				"formal-03",
+				"formal-00",
+				"formal-01",
+				"formal-10",
+				"formal-13",
+				"neutral-00",
+				"neutral-10",
+				"brief-17",
+				"neutral-13",
+				"neutral-03",
+				"neutral-01",
+				"brief-14",
+				"neutral-11",
+				"neutral-16",
+				"neutral-07",
+				"neutral-17",
+				"brief-03",
+				"brief-13",
+				"brief-16",
+				"brief-11",
+				"neutral-06",
+				"neutral-12",
+				"neutral-19",
+				"brief-08",
+				"brief-18",
+				"brief-07",
+				"neutral-14",
+				"brief-01",
+				"neutral-18",
+				"neutral-02",
+				"neutral-04",
+				"brief-02",
+				"neutral-08",
+				"brief-12",
+				"neutral-05",
+				"brief-00",
+				"brief-04",
+				"brief-06",
+				"brief-10",
+				"neutral-15",
+				"neutral-09",
+				"brief-05",
+				"brief-09",
+				"brief-19",
+				"brief-15"
+			],
+			"top_k": [
+				{
+					"id": "formal-17",
+					"label": "formal",
+					"sim": 0.9939759036144579
+				},
+				{
+					"id": "formal-04",
+					"label": "formal",
+					"sim": 0.9757754965005869
+				},
+				{
+					"id": "formal-16",
+					"label": "formal",
+					"sim": 0.9703068552463484
+				}
+			],
+			"decision": {
+				"label": "formal",
+				"confidence": 0.9939759036144579,
+				"source": "knn"
+			}
+		},
+		{
+			"query_id": "neutral-09",
+			"true_label": "neutral",
+			"ranking": [
+				"neutral-19",
+				"neutral-04",
+				"neutral-14",
+				"neutral-08",
+				"neutral-18",
+				"neutral-02",
+				"neutral-06",
+				"neutral-12",
+				"neutral-16",
+				"neutral-05",
+				"neutral-15",
+				"neutral-07",
+				"neutral-17",
+				"neutral-03",
+				"neutral-11",
+				"neutral-13",
+				"neutral-01",
+				"neutral-10",
+				"neutral-00",
+				"brief-11",
+				"brief-08",
+				"brief-00",
+				"brief-09",
+				"brief-14",
+				"brief-07",
+				"brief-01",
+				"formal-09",
+				"brief-04",
+				"brief-19",
+				"brief-17",
+				"formal-07",
+				"formal-04",
+				"brief-03",
+				"brief-13",
+				"formal-17",
+				"formal-19",
+				"brief-05",
+				"brief-10",
+				"brief-18",
+				"formal-14",
+				"formal-08",
+				"formal-18",
+				"formal-03",
+				"formal-13",
+				"formal-11",
+				"formal-01",
+				"brief-02",
+				"brief-06",
+				"formal-02",
+				"formal-06",
+				"formal-12",
+				"formal-16",
+				"formal-15",
+				"formal-05",
+				"brief-12",
+				"formal-00",
+				"formal-10",
+				"brief-15",
+				"brief-16"
+			],
+			"top_k": [
+				{
+					"id": "neutral-19",
+					"label": "neutral",
+					"sim": 0.9822994862575031
+				},
+				{
+					"id": "neutral-04",
+					"label": "neutral",
+					"sim": 0.9200129084349359
+				},
+				{
+					"id": "neutral-14",
+					"label": "neutral",
+					"sim": 0.9157805479913727
+				}
+			],
+			"decision": {
+				"label": "neutral",
+				"confidence": 0.9822994862575031,
+				"source": "knn"
+			}
+		},
+		{
+			"query_id": "brief-11",
+			"true_label": "brief",
+			"ranking": [
+				"brief-01",
+				"brief-04",
+				"brief-03",
+				"brief-13",
+				"brief-00",
+				"brief-02",
+				"brief-05",
+				"brief-06",
+				"brief-08",
+				"brief-09",
+				"brief-10",
+				"brief-14",
+				"brief-16",
+				"brief-18",
+				"brief-19",
+				"brief-07",
+				"brief-12",
+				"brief-17",
+				"brief-15",
+				"neutral-01",
+				"neutral-11",
+				"formal-01",
+				"formal-11",
+				"neutral-03",
+				"neutral-16",
+				"neutral-13",
+				"neutral-08",
+				"neutral-00",
+				"neutral-05",
+				"neutral-15",
+				"formal-08",
+				"neutral-02",
+				"neutral-06",
+				"neutral-10",
+				"neutral-12",
+				"neutral-19",
+				"formal-03",
+				"formal-16",
+				"neutral-09",
+				"formal-13",
+				"formal-15",
+				"neutral-18",
+				"formal-05",
+				"formal-09",
+				"formal-02",
+				"neutral-14",
+				"formal-04",
+				"formal-18",
+				"formal-19",
+				"formal-06",
+				"formal-07",
+				"formal-12",
+				"formal-14",
+				"neutral-04",
+				"neutral-07",
+				"formal-17",
+				"formal-00",
+				"formal-10",
+				"neutral-17"
+			],
+			"top_k": [
+				{
+					"id": "brief-01",
+					"label": "brief",
+					"sim": 0.9523809523809524
+				},
+				{
+					"id": "brief-04",
+					"label": "brief",
+					"sim": 0.8743856497851876
+				},
+				{
+					"id": "brief-03",
+					"label": "brief",
+					"sim": 0.8295150620062532
+				}
+			],
+			"decision": {
+				"label": "brief",
+				"confidence": 0.9523809523809524,
+				"source": "knn"
+			}
+		},
+		{
+			"query_id": "formal-14",
+			"true_label": "formal",
+			"ranking": [
+				"formal-04",
+				"formal-16",
+				"formal-06",
+				"formal-03",
+				"formal-12",
+				"formal-18",
+				"formal-19",
+				"formal-02",
+				"formal-08",
+				"formal-15",
+				"formal-05",
+				"formal-13",
+				"formal-07",
+				"formal-17",
+				"formal-09",
+				"formal-00",
+				"formal-10",
+				"formal-11",
+				"formal-01",
+				"neutral-00",
+				"brief-14",
+				"neutral-10",
+				"neutral-13",
+				"brief-17",
+				"neutral-03",
+				"brief-13",
+				"brief-03",
+				"brief-16",
+				"brief-04",
+				"brief-18",
+				"neutral-01",
+				"brief-11",
+				"neutral-16",
+				"neutral-14",
+				"neutral-11",
+				"brief-02",
+				"brief-08",
+				"brief-12",
+				"brief-01",
+				"neutral-06",
+				"brief-00",
+				"brief-06",
+				"brief-10",
+				"neutral-12",
+				"brief-07",
+				"neutral-04",
+				"neutral-19",
+				"neutral-18",
+				"neutral-02",
+				"neutral-08",
+				"brief-05",
+				"brief-09",
+				"brief-19",
+				"neutral-17",
+				"neutral-05",
+				"neutral-07",
+				"neutral-15",
+				"neutral-09",
+				"brief-15"
+			],
+			"top_k": [
+				{
+					"id": "formal-04",
+					"label": "formal",
+					"sim": 0.9939576486092936
+				},
+				{
+					"id": "formal-16",
+					"label": "formal",
+					"sim": 0.9822124608321932
+				},
+				{
+					"id": "formal-06",
+					"label": "formal",
+					"sim": 0.9819277108433736
+				}
+			],
+			"decision": {
+				"label": "formal",
+				"confidence": 0.9939576486092936,
+				"source": "knn"
+			}
+		},
+		{
+			"query_id": "neutral-16",
+			"true_label": "neutral",
+			"ranking": [
+				"neutral-06",
+				"neutral-04",
+				"neutral-14",
+				"neutral-08",
+				"neutral-18",
+				"neutral-02",
+				"neutral-12",
+				"neutral-19",
+				"neutral-07",
+				"neutral-17",
+				"neutral-09",
+				"neutral-11",
+				"neutral-05",
+				"neutral-15",
+				"neutral-13",
+				"neutral-01",
+				"neutral-03",
+				"neutral-10",
+				"neutral-00",
+				"brief-11",
+				"brief-08",
+				"brief-14",
+				"formal-04",
+				"formal-07",
+				"brief-04",
+				"formal-17",
+				"formal-14",
+				"formal-16",
+				"brief-01",
+				"formal-06",
+				"brief-17",
+				"brief-00",
+				"brief-06",
+				"brief-18",
+				"formal-08",
+				"formal-18",
+				"formal-11",
+				"formal-13",
+				"brief-03",
+				"brief-13",
+				"brief-07",
+				"formal-01",
+				"formal-09",
+				"formal-03",
+				"formal-02",
+				"formal-19",
+				"formal-12",
+				"formal-15",
+				"formal-05",
+				"formal-00",
+				"brief-02",
+				"brief-05",
+				"brief-09",
+				"brief-10",
+				"brief-16",
+				"brief-19",
+				"formal-10",
+				"brief-12",
+				"brief-15"
+			],
+			"top_k": [
+				{
+					"id": "neutral-06",
+					"label": "neutral",
+					"sim": 0.9818181818181819
+				},
+				{
+					"id": "neutral-04",
+					"label": "neutral",
+					"sim": 0.9533158914080836
+				},
+				{
+					"id": "neutral-14",
+					"label": "neutral",
+					"sim": 0.9495469152507922
+				}
+			],
+			"decision": {
+				"label": "neutral",
+				"confidence": 0.9818181818181819,
+				"source": "knn"
+			}
+		},
+		{
+			"query_id": "brief-18",
+			"true_label": "brief",
+			"ranking": [
+				"brief-08",
+				"brief-06",
+				"brief-16",
+				"brief-19",
+				"brief-03",
+				"brief-13",
+				"brief-02",
+				"brief-04",
+				"brief-05",
+				"brief-09",
+				"brief-14",
+				"brief-15",
+				"brief-07",
+				"brief-12",
+				"brief-11",
+				"brief-17",
+				"brief-00",
+				"brief-10",
+				"brief-01",
+				"formal-08",
+				"formal-18",
+				"formal-01",
+				"formal-16",
+				"formal-11",
+				"formal-06",
+				"formal-03",
+				"formal-13",
+				"formal-15",
+				"formal-09",
+				"formal-02",
+				"formal-04",
+				"formal-19",
+				"formal-12",
+				"formal-14",
+				"formal-05",
+				"neutral-01",
+				"formal-07",
+				"neutral-16",
+				"formal-00",
+				"neutral-08",
+				"neutral-18",
+				"formal-17",
+				"formal-10",
+				"neutral-11",
+				"neutral-03",
+				"neutral-13",
+				"neutral-06",
+				"neutral-15",
+				"neutral-02",
+				"neutral-12",
+				"neutral-19",
+				"neutral-09",
+				"neutral-00",
+				"neutral-14",
+				"neutral-04",
+				"neutral-05",
+				"neutral-10",
+				"neutral-07",
+				"neutral-17"
+			],
+			"top_k": [
+				{
+					"id": "brief-08",
+					"label": "brief",
+					"sim": 0.9444444444444446
+				},
+				{
+					"id": "brief-06",
+					"label": "brief",
+					"sim": 0.8888888888888891
+				},
+				{
+					"id": "brief-16",
+					"label": "brief",
+					"sim": 0.8888888888888891
+				}
+			],
+			"decision": {
+				"label": "brief",
+				"confidence": 0.9444444444444446,
+				"source": "knn"
+			}
+		},
+		{
+			"query_id": "brief-00",
+			"true_label": "brief",
+			"ranking": [
+				"brief-10",
+				"brief-03",
+				"brief-13",
+				"brief-02",
+				"brief-04",
+				"brief-05",
+				"brief-08",
+				"brief-09",
+				"brief-14",
+				"brief-15",
+				"brief-07",
+				"brief-12",
+				"brief-01",
+				"brief-11",
+				"brief-17",
+				"brief-06",
+				"brief-16",
+				"brief-18",
+				"brief-19",
+				"neutral-01",
+				"neutral-00",
+				"neutral-11",
+				"neutral-10",
+				"formal-01",
+				"neutral-03",
+				"neutral-13",
+				"formal-11",
+				"formal-03",
+				"formal-00",
+				"neutral-05",
+				"neutral-15",
+				"formal-10",
+				"formal-13",
+				"neutral-02",
+				"neutral-06",
+				"neutral-12",
+				"neutral-16",
+				"neutral-19",
+				"formal-15",
+				"formal-05",
+				"formal-09",
+				"neutral-09",
+				"formal-02",
+				"formal-08",
+				"neutral-08",
+				"neutral-18",
+				"formal-04",
+				"formal-18",
+				"formal-19",
+				"formal-06",
+				"formal-12",
+				"formal-14",
+				"neutral-14",
+				"formal-16",
+				"neutral-04",
+				"formal-07",
+				"formal-17",
+				"neutral-07",
+				"neutral-17"
+			],
+			"top_k": [
+				{
+					"id": "brief-10",
+					"label": "brief",
+					"sim": 0.9444444444444446
+				},
+				{
+					"id": "brief-03",
+					"label": "brief",
+					"sim": 0.843274042711568
+				},
+				{
+					"id": "brief-13",
+					"label": "brief",
+					"sim": 0.843274042711568
+				}
+			],
+			"decision": {
+				"label": "brief",
+				"confidence": 0.9444444444444446,
+				"source": "knn"
+			}
+		},
+		{
+			"query_id": "offtopic-synthetic",
+			"true_label": "(none)",
+			"ranking": [
+				"brief-00",
+				"brief-10",
+				"neutral-11",
+				"neutral-02",
+				"neutral-10",
+				"neutral-19",
+				"brief-17",
+				"neutral-09",
+				"neutral-08",
+				"neutral-18",
+				"neutral-00",
+				"neutral-01",
+				"neutral-13",
+				"neutral-07",
+				"brief-02",
+				"brief-06",
+				"brief-08",
+				"brief-09",
+				"brief-14",
+				"brief-16",
+				"formal-11",
+				"brief-03",
+				"brief-13",
+				"brief-01",
+				"brief-11",
+				"neutral-05",
+				"neutral-15",
+				"neutral-06",
+				"neutral-12",
+				"neutral-16",
+				"formal-09",
+				"formal-02",
+				"formal-08",
+				"formal-18",
+				"formal-19",
+				"formal-07",
+				"neutral-14",
+				"neutral-03",
+				"neutral-04",
+				"formal-01",
+				"neutral-17",
+				"formal-10",
+				"formal-13",
+				"formal-00",
+				"formal-15",
+				"formal-05",
+				"formal-04",
+				"formal-06",
+				"formal-12",
+				"formal-14",
+				"formal-17",
+				"formal-16",
+				"formal-03",
+				"brief-07",
+				"brief-12",
+				"brief-04",
+				"brief-05",
+				"brief-15",
+				"brief-18",
+				"brief-19"
+			],
+			"top_k": [
+				{
+					"id": "brief-00",
+					"label": "brief",
+					"sim": 0.23570226039551587
+				},
+				{
+					"id": "brief-10",
+					"label": "brief",
+					"sim": 0.23570226039551587
+				},
+				{
+					"id": "neutral-11",
+					"label": "neutral",
+					"sim": 0.21166687833365083
+				}
+			],
+			"decision": null
+		}
+	]
 }

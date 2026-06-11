@@ -1,76 +1,76 @@
 {
- "recipients": {
-  "alex.kim@ufl.edu": {
-   "mean": 0.375,
-   "n": 11,
-   "level": "neutral"
-  },
-  "dean.roberts@ufl.edu": {
-   "mean": 0.7965714285714286,
-   "n": 7,
-   "level": "formal"
-  },
-  "dr.vonmeding@ufl.edu": {
-   "mean": 0.7963076923076924,
-   "n": 13,
-   "level": "formal"
-  },
-  "james.liu@ufl.edu": {
-   "mean": 0.4494444444444444,
-   "n": 9,
-   "level": "neutral"
-  },
-  "maria.santos@ufl.edu": {
-   "mean": 0.375,
-   "n": 9,
-   "level": "neutral"
-  },
-  "sarah.mitchell@ufl.edu": {
-   "mean": 0.45009090909090915,
-   "n": 11,
-   "level": "neutral"
-  }
- },
- "edge_cases": [
-  {
-   "mean": null,
-   "n": 0,
-   "level": "formal"
-  },
-  {
-   "mean": 0.9,
-   "n": 2,
-   "level": "formal"
-  },
-  {
-   "mean": 0.66,
-   "n": 10,
-   "level": "formal"
-  },
-  {
-   "mean": 0.659999,
-   "n": 10,
-   "level": "neutral"
-  },
-  {
-   "mean": 0.33,
-   "n": 10,
-   "level": "casual"
-  },
-  {
-   "mean": 0.330001,
-   "n": 10,
-   "level": "neutral"
-  },
-  {
-   "mean": 0.5,
-   "n": 5,
-   "level": "neutral"
-  }
- ],
- "level_notes": {
-  "formal": "formal \u2014 use a polite greeting and full sign-off",
-  "neutral": "neutral \u2014 match the exemplars",
-  "casual": "casual \u2014 short, first-name, minimal sign-off"
- }
+	"recipients": {
+		"alex.kim@ufl.edu": {
+			"mean": 0.375,
+			"n": 11,
+			"level": "neutral"
+		},
+		"dean.roberts@ufl.edu": {
+			"mean": 0.7965714285714286,
+			"n": 7,
+			"level": "formal"
+		},
+		"dr.vonmeding@ufl.edu": {
+			"mean": 0.7963076923076924,
+			"n": 13,
+			"level": "formal"
+		},
+		"james.liu@ufl.edu": {
+			"mean": 0.4494444444444444,
+			"n": 9,
+			"level": "neutral"
+		},
+		"maria.santos@ufl.edu": {
+			"mean": 0.375,
+			"n": 9,
+			"level": "neutral"
+		},
+		"sarah.mitchell@ufl.edu": {
+			"mean": 0.45009090909090915,
+			"n": 11,
+			"level": "neutral"
+		}
+	},
+	"edge_cases": [
+		{
+			"mean": null,
+			"n": 0,
+			"level": "formal"
+		},
+		{
+			"mean": 0.9,
+			"n": 2,
+			"level": "formal"
+		},
+		{
+			"mean": 0.66,
+			"n": 10,
+			"level": "formal"
+		},
+		{
+			"mean": 0.659999,
+			"n": 10,
+			"level": "neutral"
+		},
+		{
+			"mean": 0.33,
+			"n": 10,
+			"level": "casual"
+		},
+		{
+			"mean": 0.330001,
+			"n": 10,
+			"level": "neutral"
+		},
+		{
+			"mean": 0.5,
+			"n": 5,
+			"level": "neutral"
+		}
+	],
+	"level_notes": {
+		"formal": "formal \u2014 use a polite greeting and full sign-off",
+		"neutral": "neutral \u2014 match the exemplars",
+		"casual": "casual \u2014 short, first-name, minimal sign-off"
+	}
 }
