@@ -127,6 +127,18 @@ describe("onedrive store", () => {
     await expect(store.ensureFolder("projects")).resolves.toBeUndefined();
   });
 
+  it("rejects unsafe paths before any Graph call (traversal guard)", async () => {
+    const graphFn = vi.fn() as unknown as GraphFn;
+    const store = createStore(graphFn);
+    await expect(store.read("../settings.json", ProfileV1)).rejects.toThrow(/unsafe/i);
+    await expect(
+      store.write("/absolute.json", ProfileV1, PROFILE_SKELETON)
+    ).rejects.toThrow(/unsafe/i);
+    await expect(store.del("a/../../b.json")).rejects.toThrow(/unsafe/i);
+    await expect(store.list("../../root")).rejects.toThrow(/unsafe/i);
+    expect(graphFn).not.toHaveBeenCalled();
+  });
+
   it("del issues a DELETE for the path", async () => {
     const graphFn = vi.fn(async () => undefined) as unknown as GraphFn;
     const store = createStore(graphFn);

@@ -2,10 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- CSP: connect-src locked to Graph, Entra, and NaviGator only. Office.js CDN is the sole SRI exception (OVERVIEW §6). -->
+    <!-- CSP: connect-src locked to Graph, Entra, NaviGator, plus *-my.sharepoint.com —
+         Graph file-content GETs 302 to the user's OWN OneDrive download domain
+         (same custody boundary the architecture mandates; tighten to the exact
+         UF tenant host after live verification). Office.js CDN is the sole SRI
+         exception (OVERVIEW §6). -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; connect-src 'self' https://graph.microsoft.com https://login.microsoftonline.com https://api.ai.it.ufl.edu; script-src 'self' https://appsforoffice.microsoft.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:;"
+      content="default-src 'self'; connect-src 'self' https://graph.microsoft.com https://login.microsoftonline.com https://api.ai.it.ufl.edu https://*-my.sharepoint.com; script-src 'self' https://appsforoffice.microsoft.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; font-src 'self';"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Local Glean</title>

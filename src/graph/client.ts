@@ -38,7 +38,9 @@ const realSleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 async function errorCode(res: Response): Promise<string> {
   try {
     const body = (await res.json()) as { error?: { code?: string } };
-    return body.error?.code ?? "";
+    // Cap length: non-conforming endpoints (SharePoint download redirects)
+    // can return oversized strings under `code`.
+    return (body.error?.code ?? "").slice(0, 64);
   } catch {
     return "";
   }
@@ -53,6 +55,8 @@ export function createGraphClient(deps: ClientDeps): { graph: GraphFn } {
     let retries = 0;
     let refreshed = false;
 
+    // Loop is bounded: every branch either returns, throws, or increments
+    // `retries` toward MAX_RETRIES (the 401 branch runs at most once).
     for (;;) {
       const headers: Record<string, string> = {
         Authorization: `Bearer ${token}`,
@@ -64,12 +68,26 @@ export function createGraphClient(deps: ClientDeps): { graph: GraphFn } {
         init.body = JSON.stringify(opts.body);
       }
 
-      const res = await fetchFn(`${GRAPH_BASE}${path}`, init);
+      let res: Response;
+      try {
+        res = await fetchFn(`${GRAPH_BASE}${path}`, init);
+      } catch (networkErr) {
+        // DNS/offline/TLS failures are as transient as a 503 — retry them.
+        if (retries >= MAX_RETRIES) throw networkErr;
+        retries += 1;
+        await sleep(1000 * 2 ** (retries - 1));
+        continue;
+      }
 
       if (res.status === 429 || res.status === 503) {
         if (retries >= MAX_RETRIES) throw new GraphError(res.status, await errorCode(res));
-        const retryAfter = res.headers.get("Retry-After");
-        const delayMs = retryAfter !== null ? Number(retryAfter) * 1000 : 1000 * 2 ** retries;
+        const retryAfter = Number(res.headers.get("Retry-After"));
+        // Retry-After may be 0, negative, or an HTTP-date (NaN) — fall back
+        // to exponential backoff for anything that isn't a positive number.
+        const delayMs =
+          Number.isFinite(retryAfter) && retryAfter > 0
+            ? retryAfter * 1000
+            : 1000 * 2 ** retries;
         retries += 1;
         await sleep(delayMs);
         continue;

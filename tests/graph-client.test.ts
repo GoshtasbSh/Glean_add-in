@@ -139,6 +139,74 @@ describe("graph client", () => {
     }
   });
 
+  it("falls back to exponential backoff when Retry-After is 0 or an HTTP-date", async () => {
+    const sleeps: number[] = [];
+    const fetchFn = vi
+      .fn()
+      .mockResolvedValueOnce(jsonResponse(429, {}, { "Retry-After": "0" }))
+      .mockResolvedValueOnce(
+        jsonResponse(429, {}, { "Retry-After": "Wed, 21 Oct 2026 07:28:00 GMT" })
+      )
+      .mockResolvedValueOnce(jsonResponse(200, { ok: true }));
+    const client = createGraphClient({
+      getToken: async () => "tok",
+      fetchFn,
+      sleep: async (ms) => {
+        sleeps.push(ms);
+      },
+    });
+    await client.graph("GET", "/me");
+    expect(sleeps).toEqual([1000, 2000]); // never 0, never NaN
+  });
+
+  it("retries network-level fetch failures with backoff", async () => {
+    const sleeps: number[] = [];
+    const fetchFn = vi
+      .fn()
+      .mockRejectedValueOnce(new TypeError("Failed to fetch"))
+      .mockRejectedValueOnce(new TypeError("Failed to fetch"))
+      .mockResolvedValueOnce(jsonResponse(200, { ok: true }));
+    const client = createGraphClient({
+      getToken: async () => "tok",
+      fetchFn,
+      sleep: async (ms) => {
+        sleeps.push(ms);
+      },
+    });
+    const out = await client.graph<{ ok: boolean }>("GET", "/me");
+    expect(out.ok).toBe(true);
+    expect(fetchFn).toHaveBeenCalledTimes(3);
+    expect(sleeps.every((ms) => ms > 0)).toBe(true);
+  });
+
+  it("throws the network error once retries are exhausted", async () => {
+    const fetchFn = vi.fn().mockRejectedValue(new TypeError("Failed to fetch"));
+    const client = createGraphClient({
+      getToken: async () => "tok",
+      fetchFn,
+      sleep: instantSleep,
+    });
+    await expect(client.graph("GET", "/me")).rejects.toThrow(TypeError);
+    expect(fetchFn).toHaveBeenCalledTimes(4); // initial + 3 retries
+  });
+
+  it("caps the GraphError code at 64 characters", async () => {
+    const fetchFn = vi
+      .fn()
+      .mockResolvedValue(jsonResponse(400, { error: { code: "x".repeat(200) } }));
+    const client = createGraphClient({
+      getToken: async () => "tok",
+      fetchFn,
+      sleep: instantSleep,
+    });
+    try {
+      await client.graph("GET", "/me");
+      expect.unreachable("should have thrown");
+    } catch (e) {
+      expect((e as GraphError).code.length).toBeLessThanOrEqual(64);
+    }
+  });
+
   it("returns the raw Response when opts.raw is set", async () => {
     const fetchFn = vi.fn().mockResolvedValue(new Response("binary", { status: 200 }));
     const client = createGraphClient({

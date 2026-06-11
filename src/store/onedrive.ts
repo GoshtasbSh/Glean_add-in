@@ -28,9 +28,18 @@ export interface Store {
   del(path: string): Promise<void>;
 }
 
+// Later sessions build paths from project slugs/event ids — never let a
+// crafted segment escape the approot scope.
+function assertSafePath(path: string): void {
+  if (path.includes("..") || path.startsWith("/")) {
+    throw new Error(`Unsafe store path: ${path}`);
+  }
+}
+
 export function createStore(graphFn: GraphFn = defaultGraph): Store {
   return {
     async read(path, schema) {
+      assertSafePath(path);
       let meta: { eTag: string };
       try {
         meta = await graphFn<{ eTag: string }>("GET", `${APPROOT}:/${path}`);
@@ -38,12 +47,16 @@ export function createStore(graphFn: GraphFn = defaultGraph): Store {
         if (e instanceof GraphError && e.status === 404) return null;
         throw e;
       }
+      // Known TOCTOU: another client may write between the metadata and
+      // content GETs, leaving a stale etag with fresh data. Harmless — the
+      // next write with that etag 412s into ConflictError (accepted, plan §3.7).
       const res = await graphFn<Response>("GET", `${APPROOT}:/${path}:/content`, { raw: true });
       const data = schema.parse(await res.json());
       return { data, etag: meta.eTag };
     },
 
     async write(path, schema, data, etag) {
+      assertSafePath(path);
       schema.parse(data); // validate before anything leaves the client
       try {
         const item = await graphFn<{ eTag: string }>("PUT", `${APPROOT}:/${path}:/content`, {
@@ -58,6 +71,7 @@ export function createStore(graphFn: GraphFn = defaultGraph): Store {
     },
 
     async list(folder) {
+      assertSafePath(folder);
       const res = await graphFn<{ value: { name: string }[] }>(
         "GET",
         `${APPROOT}:/${folder}:/children`
@@ -66,6 +80,7 @@ export function createStore(graphFn: GraphFn = defaultGraph): Store {
     },
 
     async ensureFolder(path) {
+      assertSafePath(path);
       try {
         await graphFn("POST", `${APPROOT}/children`, {
           body: { name: path, folder: {}, "@microsoft.graph.conflictBehavior": "fail" },
@@ -77,6 +92,7 @@ export function createStore(graphFn: GraphFn = defaultGraph): Store {
     },
 
     async del(path) {
+      assertSafePath(path);
       await graphFn("DELETE", `${APPROOT}:/${path}`);
     },
   };

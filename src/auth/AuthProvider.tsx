@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useCallback, useMemo, useState, type ReactNode } from "react";
 import type { AccountInfo } from "@azure/msal-browser";
 import { auth } from "./msal";
 import { AuthContext, type AuthContextValue } from "./useAuth";
@@ -6,17 +6,19 @@ import { AuthContext, type AuthContextValue } from "./useAuth";
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [account, setAccount] = useState<AccountInfo | null>(auth.getAccount());
 
-  const value: AuthContextValue = {
-    account,
-    async signIn() {
-      setAccount(await auth.signIn());
-    },
-    async signOut() {
-      await auth.signOut();
-      setAccount(null);
-    },
-    getToken: () => auth.getToken(),
-  };
+  const signIn = useCallback(async () => {
+    setAccount(await auth.signIn());
+  }, []);
+  const signOut = useCallback(async () => {
+    await auth.signOut();
+    setAccount(null);
+  }, []);
+  const getToken = useCallback(() => auth.getToken(), []);
+
+  const value: AuthContextValue = useMemo(
+    () => ({ account, signIn, signOut, getToken }),
+    [account, signIn, signOut, getToken]
+  );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

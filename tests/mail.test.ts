@@ -47,6 +47,10 @@ describe("htmlToText", () => {
     expect(htmlToText("<div>a</div>\n\n  <div>b</div>")).toBe("a b");
   });
 
+  it("collapses non-breaking spaces (&nbsp;)", () => {
+    expect(htmlToText("<p>hello&nbsp;world</p>")).toBe("hello world");
+  });
+
   it("returns empty string for empty input", () => {
     expect(htmlToText("")).toBe("");
   });

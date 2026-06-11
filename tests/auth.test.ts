@@ -12,18 +12,22 @@ const h = vi.hoisted(() => {
     mockSetActiveAccount: vi.fn(),
     mockGetActiveAccount: vi.fn(),
     mockClearCache: vi.fn(async () => {}),
+    mockLogoutPopup: vi.fn(async () => {}),
     lastConfig: undefined as Record<string, unknown> | undefined,
+    constructCount: 0,
     FakeInteractionRequiredAuthError,
   };
 });
 
 const {
+  mockInitialize,
   mockLoginPopup,
   mockAcquireTokenSilent,
   mockAcquireTokenPopup,
   mockSetActiveAccount,
   mockGetActiveAccount,
   mockClearCache,
+  mockLogoutPopup,
   FakeInteractionRequiredAuthError,
 } = h;
 
@@ -31,6 +35,7 @@ vi.mock("@azure/msal-browser", () => ({
   PublicClientApplication: class {
     constructor(config: Record<string, unknown>) {
       h.lastConfig = config;
+      h.constructCount += 1;
     }
     initialize = h.mockInitialize;
     loginPopup = h.mockLoginPopup;
@@ -39,6 +44,7 @@ vi.mock("@azure/msal-browser", () => ({
     setActiveAccount = h.mockSetActiveAccount;
     getActiveAccount = h.mockGetActiveAccount;
     clearCache = h.mockClearCache;
+    logoutPopup = h.mockLogoutPopup;
   },
   InteractionRequiredAuthError: h.FakeInteractionRequiredAuthError,
   BrowserCacheLocation: { MemoryStorage: "memoryStorage" },
@@ -49,6 +55,9 @@ const FAKE_ACCOUNT = { username: "gator@ufl.edu", name: "Albert Gator" };
 beforeEach(() => {
   vi.clearAllMocks();
   h.lastConfig = undefined;
+  h.constructCount = 0;
+  mockInitialize.mockImplementation(async () => {});
+  mockLogoutPopup.mockImplementation(async () => {});
   vi.stubEnv("VITE_ENTRA_CLIENT_ID", "test-client-id");
   vi.stubEnv("VITE_ENTRA_TENANT_ID", "organizations");
 });
@@ -136,8 +145,25 @@ describe("createAuth", () => {
     mockGetActiveAccount.mockReturnValue(FAKE_ACCOUNT);
     mockAcquireTokenSilent.mockRejectedValue(new Error("network_down"));
     await auth.signIn();
-    await expect(auth.getToken()).rejects.toThrow();
+    await expect(auth.getToken()).rejects.toThrow("Token acquisition failed");
     expect(mockAcquireTokenPopup).not.toHaveBeenCalled();
+  });
+
+  it("concurrent calls share one initialized instance (no init race)", async () => {
+    const order: string[] = [];
+    mockInitialize.mockImplementation(async () => {
+      await new Promise((r) => setTimeout(r, 10));
+      order.push("init");
+    });
+    mockLoginPopup.mockImplementation(async () => {
+      order.push("login");
+      return { account: FAKE_ACCOUNT };
+    });
+    const auth = createAuth();
+    await Promise.all([auth.signIn(), auth.signIn()]);
+    expect(h.constructCount).toBe(1);
+    // initialize must complete before ANY use of the instance
+    expect(order).toEqual(["init", "login", "login"]);
   });
 
   it("getToken throws when not signed in", async () => {
@@ -146,11 +172,22 @@ describe("createAuth", () => {
     await expect(auth.getToken()).rejects.toThrow(/sign/i);
   });
 
-  it("signOut clears the cache and active account", async () => {
+  it("signOut ends the Entra session via logoutPopup and clears local state", async () => {
     const auth = createAuth();
     mockLoginPopup.mockResolvedValue({ account: FAKE_ACCOUNT });
     await auth.signIn();
     await auth.signOut();
+    expect(mockLogoutPopup).toHaveBeenCalled();
+    expect(mockClearCache).toHaveBeenCalled();
+    expect(mockSetActiveAccount).toHaveBeenLastCalledWith(null);
+  });
+
+  it("signOut still clears local state when the logout popup is dismissed", async () => {
+    const auth = createAuth();
+    mockLoginPopup.mockResolvedValue({ account: FAKE_ACCOUNT });
+    mockLogoutPopup.mockRejectedValue(new Error("user_cancelled"));
+    await auth.signIn();
+    await auth.signOut(); // must not throw
     expect(mockClearCache).toHaveBeenCalled();
     expect(mockSetActiveAccount).toHaveBeenLastCalledWith(null);
   });
