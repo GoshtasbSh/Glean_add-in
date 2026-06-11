@@ -16,7 +16,7 @@ oracle to match TS.
 | `corpus.json` | 60 synthetic sent emails (20 formal / 20 neutral / 20 brief), `random.seed(42)` recipient choice | — |
 | `features.json` | per-email 9-dim stylometric vector (`style_feature_vector`) + `formality_score` | exact to 1e-9 per dimension |
 | `knn.json` | 11 queries: full similarity ranking + top-k + decision (`{label, confidence}` or `null`) | ranking order exact; sims 1e-9; decisions exact |
-| `clusters.json` | StandardScaler mean/scale, chosen K (`select_k`), assignments, centroids (scaled + original space), silhouette | scaler/centroids/silhouette 1e-9; assignments exact; fresh fit: same K, silhouette ≥ oracle − 0.02 |
+| `clusters.json` | StandardScaler mean/scale, chosen K (`select_k`), assignments, centroids (scaled + original space), silhouette (sklearn) + silhouette_direct (true-euclidean) | scaler/centroids 1e-9; assignments exact; silhouette_direct 1e-9, sklearn silhouette 1e-7 band (see deviations); fresh fit: same K, silhouette ≥ oracle − 0.02 |
 | `register.json` | per-recipient formality mean/n/level + boundary edge cases + `level_note` strings | exact |
 | `labels.json` | seed-matcher: 4 topic labels × 20 fixtures, sims + tagged list (floor 0.66) | sims 1e-9; tagged exact |
 | `sanitize.json` | `sanitize_for_llm` input→output pairs (12 cases + truncation) | output strings exact |
@@ -49,6 +49,16 @@ Email texts are embedded with the prefix `"classification: "` prepended
   (knn.py:77-97, seed_matcher.py:96-99) with the same constants
   (k=3, threshold=0.66, min_agreement=0.66, margin=0.06, min_neighbors=3;
   seed min_sim=0.66). Cosine similarity = pgvector's `1 - cosine_distance`.
+- Silhouette: sklearn computes pairwise distances via the
+  `||x||² + ||y||² − 2x·y` expansion through BLAS, which carries up to ~4e-8
+  cancellation error on near-identical points (measured: max |D_sklearn −
+  D_direct| = 4.2e-8 on this corpus) and is not bit-reproducible outside
+  numpy. The oracle therefore records BOTH `silhouette` (sklearn) and
+  `silhouette_direct` (pure-Python true-euclidean, same formula). TS parity:
+  1e-9 against `silhouette_direct`, 1e-7 band against sklearn's value.
+- Python 3.12 `sum()` uses Neumaier compensated summation; the TS port
+  mirrors it (`neumaierSum` in src/intel/vectors.ts) — naive accumulation
+  flips ranking order on near-tie similarities.
 - k-means fit randomness: TS cannot reproduce sklearn's RNG. Parity is split:
   (a) prediction with oracle centroids must match `assignments` exactly;
   (b) a fresh TS fit on the oracle data must choose the same K and reach
