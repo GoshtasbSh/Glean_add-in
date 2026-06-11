@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- CSP: connect-src locked to Graph, Entra, and NaviGator only. Office.js CDN is the sole SRI exception (OVERVIEW §6). -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; connect-src 'self' https://graph.microsoft.com https://login.microsoftonline.com https://api.ai.it.ufl.edu; script-src 'self' https://appsforoffice.microsoft.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:;"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Local Glean</title>
+    <!-- Office.js: SRI exception — Microsoft rolls this CDN continuously (OVERVIEW §6) -->
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
