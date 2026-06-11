@@ -36,6 +36,11 @@ describe("bm25", () => {
     expect(bm25Scores("", DOCS.map((d) => d.text))).toEqual([0, 0, 0, 0]);
     expect(bm25Rank("x", [])).toEqual([]);
   });
+
+  it("all-empty documents score 0, never NaN (avgdl=0 guard)", () => {
+    const scores = bm25Scores("posterior", ["", "  ", "<>!"]);
+    expect(scores).toEqual([0, 0, 0]);
+  });
 });
 
 describe("rrf", () => {

@@ -24,10 +24,12 @@ export class KeyValidationError extends Error {
 
 /**
  * Validate the key against the live /v1/models endpoint, then store it.
- * Returns the number of models visible to this key (shown in the UI as
- * confirmation). Throws KeyValidationError without storing on any failure.
+ * Returns the visible model ids (count shown in the UI; ids let the caller
+ * confirm exact model strings WITHOUT making another authorized fetch —
+ * this module must stay the only place that builds an Authorization header
+ * from the key). Throws KeyValidationError without storing on any failure.
  */
-export async function setNavKey(key: string): Promise<number> {
+export async function setNavKey(key: string): Promise<{ count: number; modelIds: string[] }> {
   let resp: Response;
   try {
     resp = await fetch(`${NAVIGATOR_BASE_URL}/models`, {
@@ -42,15 +44,17 @@ export async function setNavKey(key: string): Promise<number> {
       `NaviGator rejected the key (HTTP ${resp.status}). Check the key and try again.`,
     );
   }
-  let count: number;
+  let modelIds: string[];
   try {
-    const body = (await resp.json()) as { data?: unknown[] };
-    count = Array.isArray(body.data) ? body.data.length : 0;
+    const body = (await resp.json()) as { data?: { id?: unknown }[] };
+    modelIds = Array.isArray(body.data)
+      ? body.data.map((m) => String(m.id ?? "")).filter((id) => id.length > 0)
+      : [];
   } catch {
     throw new KeyValidationError("NaviGator returned an unexpected response.");
   }
   sessionStorage.setItem(NAV_KEY_STORAGE_KEY, key);
-  return count;
+  return { count: modelIds.length, modelIds };
 }
 
 export function getNavKey(): string | null {

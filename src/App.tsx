@@ -10,7 +10,7 @@ import { store, ConflictError } from "./store/onedrive";
 import { ProfileV1, type Profile } from "./store/schemas";
 import { FeedbackQueueV1, type FeedbackQueue } from "./store/schemas";
 import { ensureCategory } from "./graph/categories";
-import { clearNavKey, getNavKey, setNavKey, NAVIGATOR_BASE_URL } from "./llm/key";
+import { clearNavKey, getNavKey, setNavKey } from "./llm/key";
 import { chat, chatStream, NeedsKeyError } from "./llm/navigator";
 import { pickDraftModel, DRAFT_MODEL } from "./llm/models";
 import { runDraft, type DraftDeps, type DraftResult, type FeedbackEntry } from "./draft/pipeline";
@@ -182,15 +182,11 @@ function A2DraftDemo({ account, msg }: { account: boolean; msg: OpenMessage | nu
   async function handleSetKey() {
     setError("");
     try {
-      const count = await setNavKey(keyInput);
+      // setNavKey is the ONLY place an Authorization header is built from the
+      // key; it returns the live model ids so we never re-fetch with it here.
+      const { count, modelIds } = await setNavKey(keyInput);
       setKeyInput(""); // drop the plaintext from React state immediately
-      // Confirm the exact model ids against the live list (plan §3.5).
-      const resp = await fetch(`${NAVIGATOR_BASE_URL}/models`, {
-        headers: { Authorization: `Bearer ${getNavKey() ?? ""}` },
-      });
-      const body = (await resp.json()) as { data?: { id: string }[] };
-      const ids = (body.data ?? []).map((m) => m.id);
-      setModelId(pickDraftModel(ids) ?? DRAFT_MODEL);
+      setModelId(pickDraftModel(modelIds) ?? DRAFT_MODEL);
       setKeyStatus(`validated — ${count} models visible`);
     } catch (e) {
       setKeyStatus("");

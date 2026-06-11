@@ -114,8 +114,9 @@ export function predictRegister(card: RelationshipCard | null): RegisterLevel {
   let total = 0;
   let weighted = 0;
   for (const [level, count] of Object.entries(hist)) {
+    if (!(level in weights)) continue; // unknown legacy keys must not dilute fail-formal
     total += count;
-    weighted += (weights[level] ?? 0.5) * count;
+    weighted += weights[level] * count;
   }
   if (total === 0) return "formal";
   return formalityLevel(weighted / total, total, MIN_N);
@@ -223,12 +224,18 @@ export async function runDraft(
   const retrievedChunks = retrieveChunks(`${safeSubject} ${safeBody}`, projectCtx);
 
   // --- prompts -------------------------------------------------------------
-  const recipientName = card?.displayName ?? req.message.senderName ?? "";
+  // Profile/card fields are user-owned OneDrive data, but A3 will fold
+  // EXTERNAL content into them (sender display names, mined summaries), and
+  // senderName comes straight from the From header — sanitize them all.
+  const recipientName = sanitizeForLlm(card?.displayName ?? req.message.senderName ?? "", 200);
+  const safeVoiceSummary = sanitizeForLlm(profile?.summary ?? "", 4000);
   const drafterMessages: ChatMessages = buildDrafterMessages({
-    voiceSummary: profile?.summary ?? "",
-    bannedPhrases: profile?.bannedPhrases ?? [],
+    voiceSummary: safeVoiceSummary,
+    bannedPhrases: (profile?.bannedPhrases ?? []).map((p) => sanitizeForLlm(p, 200)),
     registerNote: levelNote(register),
-    voiceSynthesis: profile?.voiceSynthesis,
+    voiceSynthesis: profile?.voiceSynthesis
+      ? sanitizeForLlm(profile.voiceSynthesis, 500)
+      : undefined,
     recipientName,
     exemplars,
     threadContext,
@@ -256,18 +263,24 @@ export async function runDraft(
     reasons.push(`banned phrase: "${phrase}"`);
   }
   const sourceThread = [threadContext, safeBody].filter(Boolean).join("\n---\n");
+  // The draft is our own LLM's output but may echo structural tokens or
+  // injected instructions from the email — scrub before the verifier prompt.
   const verifierMessages = buildVerifierMessages({
-    draftBody: body,
+    draftBody: sanitizeForLlm(body, SANITIZE_MAX),
     sourceThread,
-    voiceSummary: profile?.summary ?? "",
+    voiceSummary: safeVoiceSummary,
     expectedRegister: register,
     recipientName,
   });
+  const nDeterministicIssues = reasons.length;
   const llmVerdict = parseVerifierResponse(
     await deps.chat({ ...verifierMessages, abort: deps.abort }),
   );
   reasons.push(...llmVerdict.reasons);
-  const passed = llmVerdict.passed && reasons.length === llmVerdict.reasons.length;
+  // Pass = LLM verdict passed (no high issues, all commitments supported —
+  // medium issues surface as reasons without blocking, legacy semantics) AND
+  // no deterministic check fired.
+  const passed = llmVerdict.passed && nDeterministicIssues === 0;
 
   // --- deterministic wrap (design doc §1-MICRO) ----------------------------
   const threadPosition: ThreadPosition = history.length > 0 ? "mid" : "start";

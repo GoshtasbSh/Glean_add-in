@@ -102,13 +102,23 @@ describe("knnDecide gates (knn.py:77-97 semantics)", () => {
     ];
     expect(knnDecide(rows, opts)).toBeNull();
   });
-  it("majority tie broken by closest neighbour (max over (count, bestSim))", () => {
+  it("1-1 split vote fails the agreement gate (share 0.5 < 0.66)", () => {
     const rows = [
       { label: "b", sim: 0.95 },
       { label: "a", sim: 0.7 },
     ];
-    const d = knnDecide(rows, { ...opts, minNeighbors: 2, margin: 0.06 });
-    // 1-1 tie on count, b has higher best sim, margin 0.25 >= 0.06, share 0.5 < 0.66 -> null
-    expect(d).toBeNull();
+    expect(knnDecide(rows, { ...opts, minNeighbors: 2, margin: 0.06 })).toBeNull();
+  });
+
+  it("count tie is broken by the closest neighbour and the winner is observable", () => {
+    // 1-1 count tie, b wins on bestSim; relaxed agreement makes the
+    // tie-break OBSERVABLE in the returned label (not masked by the share gate).
+    const rows = [
+      { label: "a", sim: 0.7 },
+      { label: "b", sim: 0.95 },
+    ];
+    const d = knnDecide(rows, { ...opts, minNeighbors: 2, minAgreement: 0.5, margin: 0.1 });
+    expect(d?.label).toBe("b");
+    expect(d?.confidence).toBe(0.95);
   });
 });

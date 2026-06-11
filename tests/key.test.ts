@@ -28,8 +28,9 @@ afterEach(() => {
 describe("setNavKey", () => {
   it("validates via GET /v1/models and stores the key in sessionStorage only", async () => {
     mockModels(200, ["llama-3.3-70b-instruct", "nomic-embed-text"]);
-    const count = await setNavKey(SECRET);
+    const { count, modelIds } = await setNavKey(SECRET);
     expect(count).toBe(2);
+    expect(modelIds).toEqual(["llama-3.3-70b-instruct", "nomic-embed-text"]);
     expect(sessionStorage.getItem(NAV_KEY_STORAGE_KEY)).toBe(SECRET);
     expect(localStorage.length).toBe(0); // never persisted beyond the session
     const call = (fetch as ReturnType<typeof vi.fn>).mock.calls[0];

@@ -21,6 +21,7 @@ export function bm25Scores(query: string, docs: readonly string[]): number[] {
   const n = docs.length;
   if (n === 0 || qTerms.length === 0) return docs.map(() => 0);
   const avgdl = docTokens.reduce((a, t) => a + t.length, 0) / n;
+  if (avgdl === 0) return docs.map(() => 0); // all docs empty -> NaN denominators
 
   const df = new Map<string, number>();
   for (const term of new Set(qTerms)) {

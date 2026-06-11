@@ -111,7 +111,9 @@ export function silhouetteScore(X: readonly (readonly number[])[], labels: reado
       for (const j of members) s += Math.sqrt(sqDist(X[i], X[j]));
       b = Math.min(b, s / members.length);
     }
-    total += (b - a) / Math.max(a, b);
+    // Coincident points: a = b = 0 -> sklearn's nan_to_num convention is 0.
+    const maxAB = Math.max(a, b);
+    total += maxAB === 0 ? 0 : (b - a) / maxAB;
   }
   return total / n;
 }
@@ -186,17 +188,23 @@ function lloyd(
       for (let d = 0; d < dim; d++) sums[labels[i]][d] += X[i][d];
     }
     // Empty cluster: re-seed it on the point farthest from its centroid.
+    // `stolen` prevents two empty clusters stealing the SAME point in one
+    // pass, which would zero a count again and divide a centroid by 0.
+    const stolen = new Set<number>();
     for (let c = 0; c < k; c++) {
       if (counts[c] === 0) {
-        let far = 0;
+        let far = -1;
         let farD = -1;
         for (let i = 0; i < X.length; i++) {
+          if (stolen.has(i) || counts[labels[i]] <= 1) continue;
           const d = sqDist(X[i], centroids[labels[i]]);
           if (d > farD) {
             farD = d;
             far = i;
           }
         }
+        if (far === -1) break; // degenerate: no donor cluster has >1 member
+        stolen.add(far);
         sums[c] = [...X[far]];
         counts[c] = 1;
         const old = labels[far];
@@ -205,6 +213,9 @@ function lloyd(
         labels[far] = c;
       }
     }
+    // A cluster can stay empty only in the degenerate break above; guard the
+    // division so a restart never emits NaN/Infinity centroids.
+    for (let c = 0; c < k; c++) if (counts[c] === 0) counts[c] = 1;
     centroids = sums.map((s, c) => s.map((v) => v / counts[c]));
     const next = kmeansPredict(X, centroids);
     let changed = false;

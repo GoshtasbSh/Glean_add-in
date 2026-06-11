@@ -57,7 +57,9 @@ export function selectExemplars(pools: ExemplarPools): TieredExemplar[] {
       out.push({ tier, body: ex.body });
     }
   }
-  if (out.length < MIN_EXEMPLARS && !seen.has(T4_NEUTRAL_FORMAL)) {
+  // Unconditional top-up: even if a pool already contained the T4 text, a
+  // sparse ladder still gets the neutral default appended once.
+  if (out.length < MIN_EXEMPLARS) {
     out.push({ tier: "T4", body: T4_NEUTRAL_FORMAL });
   }
   return out;

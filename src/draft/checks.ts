@@ -25,8 +25,11 @@ export function findBannedPhrases(text: string, banned: readonly string[]): stri
 
 // Same anchored patterns the feature extractor uses (extractor.py:107-111).
 const GREETING_RE = /^\s*(Good morning|Good afternoon|Hello|Dear|Hi|Hey)\b/i;
+// Matches a sign-off line followed by a signature OR a bare trailing
+// "Best regards," at the very end (splitClaims trims the body, so the
+// newline+name may be gone — that variant must still be caught).
 const SIGNOFF_RE =
-  /\b(Best regards|Warm regards|Kind regards|Best|Thank you|Thanks|Cheers|Regards|Sincerely)\s*,\s*\n/i;
+  /\b(Best regards|Warm regards|Kind regards|Best|Thank you|Thanks|Cheers|Regards|Sincerely)\s*,\s*(\n|$)/i;
 
 /**
  * Design doc §1-MICRO: the verifier "additionally rejects bodies that contain

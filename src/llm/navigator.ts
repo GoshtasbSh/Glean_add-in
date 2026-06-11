@@ -191,7 +191,10 @@ export async function embed(texts: readonly string[], opts: EmbedOpts = {}): Pro
     const body = (await resp.json()) as EmbedResponse;
     const rows = [...(body.data ?? [])].sort((a, b) => a.index - b.index);
     if (rows.length !== batch.length) {
-      throw new NavigatorHttpError(resp.status, 1);
+      // Protocol mismatch on a 200 response — not an HTTP failure.
+      throw new Error(
+        `NaviGator embeddings returned ${rows.length} vectors for a batch of ${batch.length}.`,
+      );
     }
     for (const row of rows) out.push(row.embedding);
   }

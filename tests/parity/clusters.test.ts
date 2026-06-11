@@ -76,7 +76,9 @@ describe("silhouette given oracle assignments", () => {
 
 describe("fresh fit (quality band, documented exception)", () => {
   it("selectK chooses the oracle K and the fit reaches silhouette >= oracle - 0.02", () => {
-    if (oracle.silhouette === null) throw new Error("oracle has no silhouette");
+    // Floor uses silhouette_direct: it is the value the TS silhouetteScore
+    // is defined against (the sklearn value carries ~4e-8 BLAS noise).
+    if (oracle.silhouette_direct === null) throw new Error("oracle has no silhouette_direct");
     const X = transformStandard(raw, { mean: oracle.scaler_mean, scale: oracle.scaler_scale });
     const k = selectK(X, {
       kMax: oracle.params.k_max,
@@ -89,7 +91,7 @@ describe("fresh fit (quality band, documented exception)", () => {
 
     const fit = kmeansFit(X, k, { nInit: 10, seed: 0 });
     const sil = silhouetteScore(X, fit.labels);
-    expect(sil).toBeGreaterThanOrEqual(oracle.silhouette - 0.02);
+    expect(sil).toBeGreaterThanOrEqual(oracle.silhouette_direct - 0.02);
   });
 
   it("selectK degrades to 1 on sparse data (n < 2*minClusterSize)", () => {
@@ -97,7 +99,19 @@ describe("fresh fit (quality band, documented exception)", () => {
     expect(selectK(X, { minClusterSize: 15, seed: 0 })).toBe(1);
   });
 
-  it("centroids in original space match oracle when grouping by oracle assignments", () => {
+  it("kmeansFit on identical points never emits NaN/Infinity centroids (double-steal guard)", () => {
+    const identical = Array.from({ length: 6 }, () => [1, 2, 3]);
+    const fit = kmeansFit(identical, 3, { nInit: 3, seed: 0 });
+    for (const c of fit.centroids) {
+      for (const v of c) expect(Number.isFinite(v)).toBe(true);
+    }
+    expect(fit.labels).toHaveLength(6);
+  });
+
+  // ORACLE SANITY only (no TS kmeans code under test here): confirms
+  // centroids_original really is the group mean of the raw corpus, so the
+  // fixture itself can't drift. TS fit quality is covered by the test above.
+  it("oracle sanity: centroids_original is the group mean of the raw corpus", () => {
     for (let c = 0; c < oracle.chosen_k; c++) {
       const members = raw.filter((_, i) => oracleLabels[i] === c);
       const dim = members[0].length;
