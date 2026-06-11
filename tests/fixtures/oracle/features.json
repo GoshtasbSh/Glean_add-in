@@ -1,0 +1,975 @@
+{
+ "feature_names": [
+  "formality",
+  "log_word_count",
+  "avg_sentence_len",
+  "contraction_rate",
+  "question_rate",
+  "exclamation_rate",
+  "has_greeting",
+  "has_signoff",
+  "symbol_rate"
+ ],
+ "emails": [
+  {
+   "id": "formal-00",
+   "text": "Dear Dr Von Meding,\n\nI hope to provide an update regarding the posterior plots for the Cedar Key model. I have reviewed the materials in detail and believe the current direction is sound. The analysis suggests that we should proceed with the revised approach, although several considerations remain outstanding. I would appreciate the opportunity to discuss this further at your convenience during week 1.\n\nPlease let me know whether the proposed timeline is acceptable, and whether any additional documentation would be helpful for the review process.\n\nBest regards,\nGoshtasb",
+   "vector": [
+    0.802,
+    4.454347296253507,
+    14.166666666666666,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.802
+  },
+  {
+   "id": "neutral-00",
+   "text": "Hi Sarah,\n\nQuick update on the posterior plots for the Cedar Key model. I've gone through it and things look pretty reasonable so far. There are a couple of points we should talk about in week 1, mostly around scope and timing.\n\nLet me know when you're free and we can set something up.\n\nThanks,\nGoshtasb",
+   "vector": [
+    0.461,
+    4.007333185232471,
+    10.8,
+    0.037037037037037035,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.461
+  },
+  {
+   "id": "brief-00",
+   "text": "Hey Alex,\n\nposterior plots v1 is done! Take a look when you can.\n\nThanks,\nG",
+   "vector": [
+    0.375,
+    2.5649493574615367,
+    4.0,
+    0.0,
+    0.0,
+    0.3333333333333333,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.375
+  },
+  {
+   "id": "formal-01",
+   "text": "Dear Dr Von Meding,\n\nI hope to provide an update regarding the lab meeting agenda for next week. I have reviewed the materials in detail and believe the current direction is sound. The analysis suggests that we should proceed with the revised approach, although several considerations remain outstanding. I would appreciate the opportunity to discuss this further at your convenience during week 2.\n\nPlease let me know whether the proposed timeline is acceptable, and whether any additional documentation would be helpful for the review process.\n\nBest regards,\nGoshtasb",
+   "vector": [
+    0.8,
+    4.442651256490317,
+    14.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.8
+  },
+  {
+   "id": "neutral-01",
+   "text": "Hi Sarah,\n\nQuick update on the lab meeting agenda for next week. I've gone through it and things look pretty reasonable so far. There are a couple of points we should talk about in week 2, mostly around scope and timing.\n\nLet me know when you're free and we can set something up.\n\nThanks,\nGoshtasb",
+   "vector": [
+    0.457,
+    3.9889840465642745,
+    10.6,
+    0.03773584905660377,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.457
+  },
+  {
+   "id": "brief-01",
+   "text": "Hey Alex,\n\nlab meeting agenda v2 is done! Take a look when you can.\n\nThanks,\nG",
+   "vector": [
+    0.375,
+    2.6390573296152584,
+    4.333333333333333,
+    0.0,
+    0.0,
+    0.3333333333333333,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.375
+  },
+  {
+   "id": "formal-02",
+   "text": "Dear Dr Von Meding,\n\nI hope to provide an update regarding the grant budget revision. I have reviewed the materials in detail and believe the current direction is sound. The analysis suggests that we should proceed with the revised approach, although several considerations remain outstanding. I would appreciate the opportunity to discuss this further at your convenience during week 3.\n\nPlease let me know whether the proposed timeline is acceptable, and whether any additional documentation would be helpful for the review process.\n\nBest regards,\nGoshtasb",
+   "vector": [
+    0.794,
+    4.406719247264253,
+    13.5,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.794
+  },
+  {
+   "id": "neutral-02",
+   "text": "Hi Sarah,\n\nQuick update on the grant budget revision. I've gone through it and things look pretty reasonable so far. There are a couple of points we should talk about in week 3, mostly around scope and timing.\n\nLet me know when you're free and we can set something up.\n\nThanks,\nGoshtasb",
+   "vector": [
+    0.445,
+    3.9318256327243257,
+    10.0,
+    0.04,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.445
+  },
+  {
+   "id": "brief-02",
+   "text": "Hey Alex,\n\ngrant budget v3 is done! Take a look when you can.\n\nThanks,\nG",
+   "vector": [
+    0.375,
+    2.5649493574615367,
+    4.0,
+    0.0,
+    0.0,
+    0.3333333333333333,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.375
+  },
+  {
+   "id": "formal-03",
+   "text": "Dear Dr Von Meding,\n\nI hope to provide an update regarding the manuscript draft for the journal submission. I have reviewed the materials in detail and believe the current direction is sound. The analysis suggests that we should proceed with the revised approach, although several considerations remain outstanding. I would appreciate the opportunity to discuss this further at your convenience during week 4.\n\nPlease let me know whether the proposed timeline is acceptable, and whether any additional documentation would be helpful for the review process.\n\nBest regards,\nGoshtasb",
+   "vector": [
+    0.8,
+    4.442651256490317,
+    14.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.8
+  },
+  {
+   "id": "neutral-03",
+   "text": "Hi Sarah,\n\nQuick update on the manuscript draft for the journal submission. I've gone through it and things look pretty reasonable so far. There are a couple of points we should talk about in week 4, mostly around scope and timing.\n\nLet me know when you're free and we can set something up.\n\nThanks,\nGoshtasb",
+   "vector": [
+    0.457,
+    3.9889840465642745,
+    10.6,
+    0.03773584905660377,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.457
+  },
+  {
+   "id": "brief-03",
+   "text": "Hey Alex,\n\nmanuscript draft v4 is done! Take a look when you can.\n\nThanks,\nG",
+   "vector": [
+    0.375,
+    2.5649493574615367,
+    4.0,
+    0.0,
+    0.0,
+    0.3333333333333333,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.375
+  },
+  {
+   "id": "formal-04",
+   "text": "Dear Dr Von Meding,\n\nI hope to provide an update regarding the student advising schedule. I have reviewed the materials in detail and believe the current direction is sound. The analysis suggests that we should proceed with the revised approach, although several considerations remain outstanding. I would appreciate the opportunity to discuss this further at your convenience during week 5.\n\nPlease let me know whether the proposed timeline is acceptable, and whether any additional documentation would be helpful for the review process.\n\nBest regards,\nGoshtasb",
+   "vector": [
+    0.794,
+    4.406719247264253,
+    13.5,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.794
+  },
+  {
+   "id": "neutral-04",
+   "text": "Hi Sarah,\n\nQuick update on the student advising schedule. I've gone through it and things look pretty reasonable so far. There are a couple of points we should talk about in week 5, mostly around scope and timing.\n\nLet me know when you're free and we can set something up.\n\nThanks,\nGoshtasb",
+   "vector": [
+    0.445,
+    3.9318256327243257,
+    10.0,
+    0.04,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.445
+  },
+  {
+   "id": "brief-04",
+   "text": "Hey Alex,\n\nadvising schedule v5 is done! Take a look when you can.\n\nThanks,\nG",
+   "vector": [
+    0.375,
+    2.5649493574615367,
+    4.0,
+    0.0,
+    0.0,
+    0.3333333333333333,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.375
+  },
+  {
+   "id": "formal-05",
+   "text": "Dear Dr Von Meding,\n\nI hope to provide an update regarding the conference travel arrangements. I have reviewed the materials in detail and believe the current direction is sound. The analysis suggests that we should proceed with the revised approach, although several considerations remain outstanding. I would appreciate the opportunity to discuss this further at your convenience during week 6.\n\nPlease let me know whether the proposed timeline is acceptable, and whether any additional documentation would be helpful for the review process.\n\nBest regards,\nGoshtasb",
+   "vector": [
+    0.794,
+    4.406719247264253,
+    13.5,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.794
+  },
+  {
+   "id": "neutral-05",
+   "text": "Hi Sarah,\n\nQuick update on the conference travel arrangements. I've gone through it and things look pretty reasonable so far. There are a couple of points we should talk about in week 6, mostly around scope and timing.\n\nLet me know when you're free and we can set something up.\n\nThanks,\nGoshtasb",
+   "vector": [
+    0.445,
+    3.9318256327243257,
+    10.0,
+    0.04,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.445
+  },
+  {
+   "id": "brief-05",
+   "text": "Hey Alex,\n\nconference travel v6 is done! Take a look when you can.\n\nThanks,\nG",
+   "vector": [
+    0.375,
+    2.5649493574615367,
+    4.0,
+    0.0,
+    0.0,
+    0.3333333333333333,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.375
+  },
+  {
+   "id": "formal-06",
+   "text": "Dear Dr Von Meding,\n\nI hope to provide an update regarding the dataset cleaning pipeline. I have reviewed the materials in detail and believe the current direction is sound. The analysis suggests that we should proceed with the revised approach, although several considerations remain outstanding. I would appreciate the opportunity to discuss this further at your convenience during week 7.\n\nPlease let me know whether the proposed timeline is acceptable, and whether any additional documentation would be helpful for the review process.\n\nBest regards,\nGoshtasb",
+   "vector": [
+    0.794,
+    4.406719247264253,
+    13.5,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.794
+  },
+  {
+   "id": "neutral-06",
+   "text": "Hi Sarah,\n\nQuick update on the dataset cleaning pipeline. I've gone through it and things look pretty reasonable so far. There are a couple of points we should talk about in week 7, mostly around scope and timing.\n\nLet me know when you're free and we can set something up.\n\nThanks,\nGoshtasb",
+   "vector": [
+    0.445,
+    3.9318256327243257,
+    10.0,
+    0.04,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.445
+  },
+  {
+   "id": "brief-06",
+   "text": "Hey Alex,\n\ndataset pipeline v7 is done! Take a look when you can.\n\nThanks,\nG",
+   "vector": [
+    0.375,
+    2.5649493574615367,
+    4.0,
+    0.0,
+    0.0,
+    0.3333333333333333,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.375
+  },
+  {
+   "id": "formal-07",
+   "text": "Dear Dr Von Meding,\n\nI hope to provide an update regarding the committee report on curriculum changes. I have reviewed the materials in detail and believe the current direction is sound. The analysis suggests that we should proceed with the revised approach, although several considerations remain outstanding. I would appreciate the opportunity to discuss this further at your convenience during week 8.\n\nPlease let me know whether the proposed timeline is acceptable, and whether any additional documentation would be helpful for the review process.\n\nBest regards,\nGoshtasb",
+   "vector": [
+    0.798,
+    4.430816798843313,
+    13.833333333333334,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.798
+  },
+  {
+   "id": "neutral-07",
+   "text": "Hi Sarah,\n\nQuick update on the committee report on curriculum changes. I've gone through it and things look pretty reasonable so far. There are a couple of points we should talk about in week 8, mostly around scope and timing.\n\nLet me know when you're free and we can set something up.\n\nThanks,\nGoshtasb",
+   "vector": [
+    0.453,
+    3.970291913552122,
+    10.4,
+    0.038461538461538464,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.453
+  },
+  {
+   "id": "brief-07",
+   "text": "Hey Alex,\n\ncommittee report v8 is done! Take a look when you can.\n\nThanks,\nG",
+   "vector": [
+    0.375,
+    2.5649493574615367,
+    4.0,
+    0.0,
+    0.0,
+    0.3333333333333333,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.375
+  },
+  {
+   "id": "formal-08",
+   "text": "Dear Dr Von Meding,\n\nI hope to provide an update regarding the peer review deadline. I have reviewed the materials in detail and believe the current direction is sound. The analysis suggests that we should proceed with the revised approach, although several considerations remain outstanding. I would appreciate the opportunity to discuss this further at your convenience during week 9.\n\nPlease let me know whether the proposed timeline is acceptable, and whether any additional documentation would be helpful for the review process.\n\nBest regards,\nGoshtasb",
+   "vector": [
+    0.794,
+    4.406719247264253,
+    13.5,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.794
+  },
+  {
+   "id": "neutral-08",
+   "text": "Hi Sarah,\n\nQuick update on the peer review deadline. I've gone through it and things look pretty reasonable so far. There are a couple of points we should talk about in week 9, mostly around scope and timing.\n\nLet me know when you're free and we can set something up.\n\nThanks,\nGoshtasb",
+   "vector": [
+    0.445,
+    3.9318256327243257,
+    10.0,
+    0.04,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.445
+  },
+  {
+   "id": "brief-08",
+   "text": "Hey Alex,\n\npeer review v9 is done! Take a look when you can.\n\nThanks,\nG",
+   "vector": [
+    0.375,
+    2.5649493574615367,
+    4.0,
+    0.0,
+    0.0,
+    0.3333333333333333,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.375
+  },
+  {
+   "id": "formal-09",
+   "text": "Dear Dr Von Meding,\n\nI hope to provide an update regarding the teaching evaluations summary. I have reviewed the materials in detail and believe the current direction is sound. The analysis suggests that we should proceed with the revised approach, although several considerations remain outstanding. I would appreciate the opportunity to discuss this further at your convenience during week 10.\n\nPlease let me know whether the proposed timeline is acceptable, and whether any additional documentation would be helpful for the review process.\n\nBest regards,\nGoshtasb",
+   "vector": [
+    0.794,
+    4.406719247264253,
+    13.5,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.794
+  },
+  {
+   "id": "neutral-09",
+   "text": "Hi Sarah,\n\nQuick update on the teaching evaluations summary. I've gone through it and things look pretty reasonable so far. There are a couple of points we should talk about in week 10, mostly around scope and timing.\n\nLet me know when you're free and we can set something up.\n\nThanks,\nGoshtasb",
+   "vector": [
+    0.445,
+    3.9318256327243257,
+    10.0,
+    0.04,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.445
+  },
+  {
+   "id": "brief-09",
+   "text": "Hey Alex,\n\nteaching evaluations v10 is done! Take a look when you can.\n\nThanks,\nG",
+   "vector": [
+    0.375,
+    2.5649493574615367,
+    4.0,
+    0.0,
+    0.0,
+    0.3333333333333333,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.375
+  },
+  {
+   "id": "formal-10",
+   "text": "Dear Dr Von Meding,\n\nI hope to provide an update regarding the posterior plots for the Cedar Key model. I have reviewed the materials in detail and believe the current direction is sound. The analysis suggests that we should proceed with the revised approach, although several considerations remain outstanding. I would appreciate the opportunity to discuss this further at your convenience during week 11.\n\nPlease let me know whether the proposed timeline is acceptable, and whether any additional documentation would be helpful for the review process.\n\nBest regards,\nGoshtasb",
+   "vector": [
+    0.802,
+    4.454347296253507,
+    14.166666666666666,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.802
+  },
+  {
+   "id": "neutral-10",
+   "text": "Hi Sarah,\n\nQuick update on the posterior plots for the Cedar Key model. I've gone through it and things look pretty reasonable so far. There are a couple of points we should talk about in week 11, mostly around scope and timing.\n\nLet me know when you're free and we can set something up.\n\nThanks,\nGoshtasb",
+   "vector": [
+    0.461,
+    4.007333185232471,
+    10.8,
+    0.037037037037037035,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.461
+  },
+  {
+   "id": "brief-10",
+   "text": "Hey Alex,\n\nposterior plots v11 is done! Take a look when you can.\n\nThanks,\nG",
+   "vector": [
+    0.375,
+    2.5649493574615367,
+    4.0,
+    0.0,
+    0.0,
+    0.3333333333333333,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.375
+  },
+  {
+   "id": "formal-11",
+   "text": "Dear Dr Von Meding,\n\nI hope to provide an update regarding the lab meeting agenda for next week. I have reviewed the materials in detail and believe the current direction is sound. The analysis suggests that we should proceed with the revised approach, although several considerations remain outstanding. I would appreciate the opportunity to discuss this further at your convenience during week 12.\n\nPlease let me know whether the proposed timeline is acceptable, and whether any additional documentation would be helpful for the review process.\n\nBest regards,\nGoshtasb",
+   "vector": [
+    0.8,
+    4.442651256490317,
+    14.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.8
+  },
+  {
+   "id": "neutral-11",
+   "text": "Hi Sarah,\n\nQuick update on the lab meeting agenda for next week. I've gone through it and things look pretty reasonable so far. There are a couple of points we should talk about in week 12, mostly around scope and timing.\n\nLet me know when you're free and we can set something up.\n\nThanks,\nGoshtasb",
+   "vector": [
+    0.457,
+    3.9889840465642745,
+    10.6,
+    0.03773584905660377,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.457
+  },
+  {
+   "id": "brief-11",
+   "text": "Hey Alex,\n\nlab meeting agenda v12 is done! Take a look when you can.\n\nThanks,\nG",
+   "vector": [
+    0.375,
+    2.6390573296152584,
+    4.333333333333333,
+    0.0,
+    0.0,
+    0.3333333333333333,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.375
+  },
+  {
+   "id": "formal-12",
+   "text": "Dear Dr Von Meding,\n\nI hope to provide an update regarding the grant budget revision. I have reviewed the materials in detail and believe the current direction is sound. The analysis suggests that we should proceed with the revised approach, although several considerations remain outstanding. I would appreciate the opportunity to discuss this further at your convenience during week 13.\n\nPlease let me know whether the proposed timeline is acceptable, and whether any additional documentation would be helpful for the review process.\n\nBest regards,\nGoshtasb",
+   "vector": [
+    0.794,
+    4.406719247264253,
+    13.5,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.794
+  },
+  {
+   "id": "neutral-12",
+   "text": "Hi Sarah,\n\nQuick update on the grant budget revision. I've gone through it and things look pretty reasonable so far. There are a couple of points we should talk about in week 13, mostly around scope and timing.\n\nLet me know when you're free and we can set something up.\n\nThanks,\nGoshtasb",
+   "vector": [
+    0.445,
+    3.9318256327243257,
+    10.0,
+    0.04,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.445
+  },
+  {
+   "id": "brief-12",
+   "text": "Hey Alex,\n\ngrant budget v13 is done! Take a look when you can.\n\nThanks,\nG",
+   "vector": [
+    0.375,
+    2.5649493574615367,
+    4.0,
+    0.0,
+    0.0,
+    0.3333333333333333,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.375
+  },
+  {
+   "id": "formal-13",
+   "text": "Dear Dr Von Meding,\n\nI hope to provide an update regarding the manuscript draft for the journal submission. I have reviewed the materials in detail and believe the current direction is sound. The analysis suggests that we should proceed with the revised approach, although several considerations remain outstanding. I would appreciate the opportunity to discuss this further at your convenience during week 14.\n\nPlease let me know whether the proposed timeline is acceptable, and whether any additional documentation would be helpful for the review process.\n\nBest regards,\nGoshtasb",
+   "vector": [
+    0.8,
+    4.442651256490317,
+    14.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.8
+  },
+  {
+   "id": "neutral-13",
+   "text": "Hi Sarah,\n\nQuick update on the manuscript draft for the journal submission. I've gone through it and things look pretty reasonable so far. There are a couple of points we should talk about in week 14, mostly around scope and timing.\n\nLet me know when you're free and we can set something up.\n\nThanks,\nGoshtasb",
+   "vector": [
+    0.457,
+    3.9889840465642745,
+    10.6,
+    0.03773584905660377,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.457
+  },
+  {
+   "id": "brief-13",
+   "text": "Hey Alex,\n\nmanuscript draft v14 is done! Take a look when you can.\n\nThanks,\nG",
+   "vector": [
+    0.375,
+    2.5649493574615367,
+    4.0,
+    0.0,
+    0.0,
+    0.3333333333333333,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.375
+  },
+  {
+   "id": "formal-14",
+   "text": "Dear Dr Von Meding,\n\nI hope to provide an update regarding the student advising schedule. I have reviewed the materials in detail and believe the current direction is sound. The analysis suggests that we should proceed with the revised approach, although several considerations remain outstanding. I would appreciate the opportunity to discuss this further at your convenience during week 15.\n\nPlease let me know whether the proposed timeline is acceptable, and whether any additional documentation would be helpful for the review process.\n\nBest regards,\nGoshtasb",
+   "vector": [
+    0.794,
+    4.406719247264253,
+    13.5,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.794
+  },
+  {
+   "id": "neutral-14",
+   "text": "Hi Sarah,\n\nQuick update on the student advising schedule. I've gone through it and things look pretty reasonable so far. There are a couple of points we should talk about in week 15, mostly around scope and timing.\n\nLet me know when you're free and we can set something up.\n\nThanks,\nGoshtasb",
+   "vector": [
+    0.445,
+    3.9318256327243257,
+    10.0,
+    0.04,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.445
+  },
+  {
+   "id": "brief-14",
+   "text": "Hey Alex,\n\nadvising schedule v15 is done! Take a look when you can.\n\nThanks,\nG",
+   "vector": [
+    0.375,
+    2.5649493574615367,
+    4.0,
+    0.0,
+    0.0,
+    0.3333333333333333,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.375
+  },
+  {
+   "id": "formal-15",
+   "text": "Dear Dr Von Meding,\n\nI hope to provide an update regarding the conference travel arrangements. I have reviewed the materials in detail and believe the current direction is sound. The analysis suggests that we should proceed with the revised approach, although several considerations remain outstanding. I would appreciate the opportunity to discuss this further at your convenience during week 16.\n\nPlease let me know whether the proposed timeline is acceptable, and whether any additional documentation would be helpful for the review process.\n\nBest regards,\nGoshtasb",
+   "vector": [
+    0.794,
+    4.406719247264253,
+    13.5,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.794
+  },
+  {
+   "id": "neutral-15",
+   "text": "Hi Sarah,\n\nQuick update on the conference travel arrangements. I've gone through it and things look pretty reasonable so far. There are a couple of points we should talk about in week 16, mostly around scope and timing.\n\nLet me know when you're free and we can set something up.\n\nThanks,\nGoshtasb",
+   "vector": [
+    0.445,
+    3.9318256327243257,
+    10.0,
+    0.04,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.445
+  },
+  {
+   "id": "brief-15",
+   "text": "Hey Alex,\n\nconference travel v16 is done! Take a look when you can.\n\nThanks,\nG",
+   "vector": [
+    0.375,
+    2.5649493574615367,
+    4.0,
+    0.0,
+    0.0,
+    0.3333333333333333,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.375
+  },
+  {
+   "id": "formal-16",
+   "text": "Dear Dr Von Meding,\n\nI hope to provide an update regarding the dataset cleaning pipeline. I have reviewed the materials in detail and believe the current direction is sound. The analysis suggests that we should proceed with the revised approach, although several considerations remain outstanding. I would appreciate the opportunity to discuss this further at your convenience during week 17.\n\nPlease let me know whether the proposed timeline is acceptable, and whether any additional documentation would be helpful for the review process.\n\nBest regards,\nGoshtasb",
+   "vector": [
+    0.794,
+    4.406719247264253,
+    13.5,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.794
+  },
+  {
+   "id": "neutral-16",
+   "text": "Hi Sarah,\n\nQuick update on the dataset cleaning pipeline. I've gone through it and things look pretty reasonable so far. There are a couple of points we should talk about in week 17, mostly around scope and timing.\n\nLet me know when you're free and we can set something up.\n\nThanks,\nGoshtasb",
+   "vector": [
+    0.445,
+    3.9318256327243257,
+    10.0,
+    0.04,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.445
+  },
+  {
+   "id": "brief-16",
+   "text": "Hey Alex,\n\ndataset pipeline v17 is done! Take a look when you can.\n\nThanks,\nG",
+   "vector": [
+    0.375,
+    2.5649493574615367,
+    4.0,
+    0.0,
+    0.0,
+    0.3333333333333333,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.375
+  },
+  {
+   "id": "formal-17",
+   "text": "Dear Dr Von Meding,\n\nI hope to provide an update regarding the committee report on curriculum changes. I have reviewed the materials in detail and believe the current direction is sound. The analysis suggests that we should proceed with the revised approach, although several considerations remain outstanding. I would appreciate the opportunity to discuss this further at your convenience during week 18.\n\nPlease let me know whether the proposed timeline is acceptable, and whether any additional documentation would be helpful for the review process.\n\nBest regards,\nGoshtasb",
+   "vector": [
+    0.798,
+    4.430816798843313,
+    13.833333333333334,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.798
+  },
+  {
+   "id": "neutral-17",
+   "text": "Hi Sarah,\n\nQuick update on the committee report on curriculum changes. I've gone through it and things look pretty reasonable so far. There are a couple of points we should talk about in week 18, mostly around scope and timing.\n\nLet me know when you're free and we can set something up.\n\nThanks,\nGoshtasb",
+   "vector": [
+    0.453,
+    3.970291913552122,
+    10.4,
+    0.038461538461538464,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.453
+  },
+  {
+   "id": "brief-17",
+   "text": "Hey Alex,\n\ncommittee report v18 is done! Take a look when you can.\n\nThanks,\nG",
+   "vector": [
+    0.375,
+    2.5649493574615367,
+    4.0,
+    0.0,
+    0.0,
+    0.3333333333333333,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.375
+  },
+  {
+   "id": "formal-18",
+   "text": "Dear Dr Von Meding,\n\nI hope to provide an update regarding the peer review deadline. I have reviewed the materials in detail and believe the current direction is sound. The analysis suggests that we should proceed with the revised approach, although several considerations remain outstanding. I would appreciate the opportunity to discuss this further at your convenience during week 19.\n\nPlease let me know whether the proposed timeline is acceptable, and whether any additional documentation would be helpful for the review process.\n\nBest regards,\nGoshtasb",
+   "vector": [
+    0.794,
+    4.406719247264253,
+    13.5,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.794
+  },
+  {
+   "id": "neutral-18",
+   "text": "Hi Sarah,\n\nQuick update on the peer review deadline. I've gone through it and things look pretty reasonable so far. There are a couple of points we should talk about in week 19, mostly around scope and timing.\n\nLet me know when you're free and we can set something up.\n\nThanks,\nGoshtasb",
+   "vector": [
+    0.445,
+    3.9318256327243257,
+    10.0,
+    0.04,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.445
+  },
+  {
+   "id": "brief-18",
+   "text": "Hey Alex,\n\npeer review v19 is done! Take a look when you can.\n\nThanks,\nG",
+   "vector": [
+    0.375,
+    2.5649493574615367,
+    4.0,
+    0.0,
+    0.0,
+    0.3333333333333333,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.375
+  },
+  {
+   "id": "formal-19",
+   "text": "Dear Dr Von Meding,\n\nI hope to provide an update regarding the teaching evaluations summary. I have reviewed the materials in detail and believe the current direction is sound. The analysis suggests that we should proceed with the revised approach, although several considerations remain outstanding. I would appreciate the opportunity to discuss this further at your convenience during week 20.\n\nPlease let me know whether the proposed timeline is acceptable, and whether any additional documentation would be helpful for the review process.\n\nBest regards,\nGoshtasb",
+   "vector": [
+    0.794,
+    4.406719247264253,
+    13.5,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.794
+  },
+  {
+   "id": "neutral-19",
+   "text": "Hi Sarah,\n\nQuick update on the teaching evaluations summary. I've gone through it and things look pretty reasonable so far. There are a couple of points we should talk about in week 20, mostly around scope and timing.\n\nLet me know when you're free and we can set something up.\n\nThanks,\nGoshtasb",
+   "vector": [
+    0.445,
+    3.9318256327243257,
+    10.0,
+    0.04,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.445
+  },
+  {
+   "id": "brief-19",
+   "text": "Hey Alex,\n\nteaching evaluations v20 is done! Take a look when you can.\n\nThanks,\nG",
+   "vector": [
+    0.375,
+    2.5649493574615367,
+    4.0,
+    0.0,
+    0.0,
+    0.3333333333333333,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "formality": 0.375
+  }
+ ]
+}
