@@ -2,17 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- CSP (FREE build): connect-src is locked to UF NaviGator ONLY. The free
-         build contacts no Microsoft Graph / login / SharePoint host at all — the
-         Graph/MSAL code is DEV-gated and code-split out of this bundle (App.tsx).
-         The POST-UFIT upgrade build re-adds, to connect-src, exactly:
-           https://graph.microsoft.com https://login.microsoftonline.com https://*-my.sharepoint.com
-         Office.js CDN is the sole SRI exception (OVERVIEW §6). base-uri/form-action
-         added per security review. -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; connect-src 'self' https://api.ai.it.ufl.edu; script-src 'self' https://appsforoffice.microsoft.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none';"
-    />
+    <!-- NOTE: deliberately NO restrictive meta CSP. A `default-src 'self'` CSP
+         prevents the Office.js runtime from initializing inside Outlook
+         (Office.onReady never fires → the pane shows the standalone fallback).
+         Custody is enforced in CODE instead: the app only ever fetches UF
+         NaviGator via the single accessor (src/llm/navigator.ts), the Graph/MSAL
+         code is code-split out of the free bundle (App.tsx), and no email content
+         is persisted (no localStorage/IndexedDB — in-memory only).
+         See docs/ufit/THREAT_MODEL.md §2. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Local Glean</title>
     <!-- Office.js: SRI exception — Microsoft rolls this CDN continuously (OVERVIEW §6) -->
