@@ -1,70 +1,128 @@
 /**
- * LabelBar — label/categorize the OPEN email. Fully FREE (Office.js Outlook
- * categories: no Microsoft Graph, no token, no UFIT). Bulk/auto inbox labeling
- * is the Graph-gated upgrade; this is the per-open-message free path.
+ * LabelBar — AUTO-labels the open email. Fully FREE (Office.js categories + a
+ * NaviGator classify call; no Microsoft Graph, no UFIT). When you open a
+ * message it classifies it (To respond / Waiting / Meetings / FYI) and applies
+ * the Outlook category automatically; the chips are the one-click override.
+ * Bulk/background labeling of the whole inbox is the Graph-gated upgrade.
  */
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { htmlToText } from "../graph/mail";
+import { classifyLabel, type LabelDef, LABEL_DEFS } from "../intel/classifyLabel";
+import { getNavKey } from "../llm/key";
+import { DRAFT_MODEL } from "../llm/models";
+import { chat } from "../llm/navigator";
 import { labelOpenItem } from "../office/categories";
 import type { OpenMessage } from "../office/context";
-
-const LABELS: { name: string; short: string; color: string }[] = [
-	{ name: "Glean/To respond", short: "To respond", color: "preset0" },
-	{ name: "Glean/FYI", short: "FYI", color: "preset3" },
-	{ name: "Glean/Waiting", short: "Waiting", color: "preset6" },
-	{ name: "Glean/Meetings", short: "Meetings", color: "preset5" },
-];
+import { getOpenMessageBody } from "../office/mailItem";
 
 interface LabelBarProps {
 	message: OpenMessage | null;
 }
 
 export function LabelBar({ message }: LabelBarProps) {
-	const [busy, setBusy] = useState<string | null>(null);
-	const [status, setStatus] = useState<{ text: string; ok: boolean } | null>(
-		null,
-	);
+	// LabelBar is keyed on the open message (DraftPanel), so it remounts per
+	// email — fresh state, no in-effect resets needed. "Auto-labeling…" shows
+	// immediately via lazy initial state when we'll auto-classify.
+	const willAuto = !!message && getNavKey() !== null;
+	const [applied, setApplied] = useState<string | null>(null);
+	const [auto, setAuto] = useState(false);
+	const [busy, setBusy] = useState<string | null>(willAuto ? "auto" : null);
+	const [error, setError] = useState(false);
 
-	if (!message) return null;
+	// Auto-classify + auto-apply the moment an email opens. Needs the NaviGator
+	// key; silently does nothing without it (the chips still work as a manual
+	// fallback). All setState runs AFTER an await (never synchronously here).
+	useEffect(() => {
+		if (!willAuto) return;
+		let live = true;
+		(async () => {
+			try {
+				const html = await getOpenMessageBody();
+				const label = await classifyLabel(
+					{ subject: message?.subject ?? "", body: htmlToText(html) },
+					(o) => chat({ model: DRAFT_MODEL, system: o.system, user: o.user }),
+				);
+				if (!live) return;
+				if (!label) {
+					setBusy(null);
+					return;
+				}
+				await labelOpenItem(label.name, label.color);
+				if (live) {
+					setApplied(label.short);
+					setAuto(true);
+				}
+			} catch {
+				if (live) setError(true);
+			} finally {
+				if (live) setBusy(null);
+			}
+		})();
+		return () => {
+			live = false;
+		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [message?.internetMessageId]);
 
-	async function apply(label: (typeof LABELS)[number]) {
-		setBusy(label.name);
-		setStatus(null);
+	async function applyManual(l: LabelDef) {
+		setBusy(l.short);
+		setError(false);
 		try {
-			await labelOpenItem(label.name, label.color);
-			setStatus({ text: `Labeled “${label.short}”`, ok: true });
+			await labelOpenItem(l.name, l.color);
+			setApplied(l.short);
+			setAuto(false);
 		} catch {
-			setStatus({ text: "Couldn’t apply the label — try again.", ok: false });
+			setError(true);
 		} finally {
 			setBusy(null);
 		}
 	}
 
+	if (!message) return null;
+
+	const note =
+		busy === "auto"
+			? "Auto-labeling…"
+			: applied
+				? auto
+					? `Auto-labeled “${applied}” — change below if wrong`
+					: `Labeled “${applied}”`
+				: "Auto-labels when you open an email · or pick one";
+
 	return (
 		<div className="card" style={{ marginTop: 12 }}>
-			<span className="micro-label">Label this email</span>
-			<div className="tweak-row" style={{ marginTop: 8 }}>
-				{LABELS.map((l) => (
-					<button
-						key={l.name}
-						type="button"
-						className="tweak-pill"
-						disabled={busy !== null}
-						onClick={() => apply(l)}
-					>
-						{busy === l.name ? "…" : l.short}
-					</button>
-				))}
+			<span className="micro-label">Label</span>
+			<p style={{ fontSize: 11, color: "var(--ink-3)", margin: "6px 0 0" }}>
+				{note}
+			</p>
+			<div className="tweak-row" style={{ marginTop: 6 }}>
+				{LABEL_DEFS.map((l) => {
+					const isApplied = applied === l.short;
+					return (
+						<button
+							key={l.name}
+							type="button"
+							className="tweak-pill"
+							style={
+								isApplied
+									? { borderColor: "var(--green)", color: "var(--green)" }
+									: undefined
+							}
+							aria-pressed={isApplied}
+							disabled={busy !== null}
+							onClick={() => applyManual(l)}
+						>
+							{busy === l.short ? "…" : isApplied ? `✓ ${l.short}` : l.short}
+						</button>
+					);
+				})}
 			</div>
-			{status && (
+			{error && (
 				<p
-					style={{
-						fontSize: 11,
-						marginTop: 6,
-						color: status.ok ? "var(--green)" : "var(--amber)",
-					}}
-					role="status"
+					style={{ fontSize: 11, color: "var(--amber)", marginTop: 6 }}
+					role="alert"
 				>
-					{status.text}
+					Couldn’t label — try again.
 				</p>
 			)}
 		</div>
