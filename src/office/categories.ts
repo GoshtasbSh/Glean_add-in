@@ -37,6 +37,23 @@ export function listMasterCategories(): Promise<NativeCategory[]> {
 	});
 }
 
+/**
+ * Map a "preset0" config string to the runtime CategoryColor value. The enum
+ * members are capitalized (Preset0..Preset24); passing the lowercase string is
+ * rejected by Outlook, so resolve to the real enum member (falling back to the
+ * capitalized string when the enum object isn't present, e.g. in tests).
+ */
+function resolveColor(color: string): Office.MailboxEnums.CategoryColor {
+	const key = color.charAt(0).toUpperCase() + color.slice(1); // preset0 -> Preset0
+	const colors =
+		typeof Office !== "undefined"
+			? (Office.MailboxEnums?.CategoryColor as unknown as
+					| Record<string, Office.MailboxEnums.CategoryColor>
+					| undefined)
+			: undefined;
+	return (colors?.[key] ?? key) as Office.MailboxEnums.CategoryColor;
+}
+
 /** Add the category to the mailbox master list if it isn't already there. */
 export async function ensureMasterCategory(
 	name: string,
@@ -47,12 +64,7 @@ export async function ensureMasterCategory(
 		return;
 	await voidPromise((cb) =>
 		Office.context.mailbox.masterCategories.addAsync(
-			[
-				{
-					displayName: name,
-					color: color as unknown as Office.MailboxEnums.CategoryColor,
-				},
-			],
+			[{ displayName: name, color: resolveColor(color) }],
 			cb,
 		),
 	);

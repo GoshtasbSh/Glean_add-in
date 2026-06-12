@@ -43,8 +43,9 @@ describe("office categories (native, no Graph)", () => {
 		const { masterAdd } = stubOffice([]);
 		await ensureMasterCategory("Glean/To respond", "preset0");
 		expect(masterAdd).toHaveBeenCalledTimes(1);
+		// Resolved to the capitalized enum member name (Outlook rejects "preset0").
 		expect(masterAdd.mock.calls[0][0]).toEqual([
-			{ displayName: "Glean/To respond", color: "preset0" },
+			{ displayName: "Glean/To respond", color: "Preset0" },
 		]);
 	});
 
