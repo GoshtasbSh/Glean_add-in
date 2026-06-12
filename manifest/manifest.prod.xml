@@ -4,7 +4,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
   xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
-  xsi:type="MessageReadApp">
+  xsi:type="MailApp">
 
   <!-- PRODUCTION manifest (FREE build). New GUID so dev + prod can be sideloaded
        side by side. SourceLocation points at the GitHub Pages PROJECT site for
