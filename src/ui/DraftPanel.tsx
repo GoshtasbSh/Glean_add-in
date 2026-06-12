@@ -16,6 +16,7 @@ import { voiceClusterNames } from "../store/voiceSession";
 import { ContextCard } from "./ContextCard";
 import { DraftView } from "./DraftView";
 import { InsertButton } from "./InsertButton";
+import { LabelBar } from "./LabelBar";
 import { StyleChips } from "./StyleChips";
 import { TweakBar } from "./TweakBar";
 import { VerifierBanner } from "./VerifierBanner";
@@ -98,6 +99,9 @@ export function DraftPanel({ message }: DraftPanelProps) {
 				asks={[]}
 				projectName={null}
 			/>
+
+			{/* 1b. Label this email (free — Office.js categories, no Graph) */}
+			<LabelBar message={message} />
 
 			{/* 2. Style chips (stub chips in free mode; real clusters need Graph) */}
 			<div className="card" style={{ marginTop: 12 }}>
