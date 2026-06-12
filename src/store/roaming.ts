@@ -10,23 +10,35 @@ import type { DraftProfile } from "../draft/pipeline";
 
 const PROFILE_KEY = "glean.profile.v1";
 
+// roamingSettings is only present inside Office; guard so the module is safe in
+// plain browsers / tests (no bare `Office` ReferenceError).
+function rs(): Office.RoamingSettings | null {
+	return typeof Office !== "undefined" && Office.context?.roamingSettings
+		? Office.context.roamingSettings
+		: null;
+}
+
 export function roamingGet<T>(key: string): T | null {
-	const v = Office.context.roamingSettings.get(key);
+	const s = rs();
+	if (!s) return null;
+	const v = s.get(key);
 	return v === undefined || v === null ? null : (v as T);
 }
 
 export function roamingSet(key: string, value: unknown): void {
-	Office.context.roamingSettings.set(key, value);
+	rs()?.set(key, value);
 }
 
 export function roamingRemove(key: string): void {
-	Office.context.roamingSettings.remove(key);
+	rs()?.remove(key);
 }
 
 /** Persist the in-memory roaming settings to the mailbox. */
 export function roamingSave(): Promise<void> {
+	const s = rs();
+	if (!s) return Promise.resolve();
 	return new Promise((resolve, reject) => {
-		Office.context.roamingSettings.saveAsync((res) => {
+		s.saveAsync((res) => {
 			if (res.status === Office.AsyncResultStatus.Succeeded) resolve();
 			else reject(new Error("Failed to save roaming settings"));
 		});

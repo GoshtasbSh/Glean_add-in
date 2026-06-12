@@ -12,9 +12,13 @@ export default defineConfig(async ({ command }) => {
   const server = isServe
     ? { port: 3000, https: await getHttpsServerOptions() }
     : undefined;
+  // Short commit SHA of the deployed build (CI sets GITHUB_SHA), shown in the
+  // pane so users can confirm which build is loaded (Outlook caches add-ins).
+  const buildId = (process.env.GITHUB_SHA ?? "local").slice(0, 7);
   return {
     plugins: [react()],
     base: "./",
+    define: { __APP_BUILD__: JSON.stringify(buildId) },
     server,
     build: {
       outDir: "dist",

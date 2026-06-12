@@ -1,15 +1,16 @@
 /**
  * TrainVoice — FREE voice training (NO Microsoft Graph, NO UFIT). The user
  * uploads their own sent emails (.eml); they are parsed in-browser, run through
- * A3's fitVoice on UF NaviGator, and the resulting voice profile is held in the
- * session voice store so the Draft tab writes in the user's style. The files
- * never leave the browser and nothing is persisted to any server.
+ * A3's fitVoice on UF NaviGator, and the resulting voice is used by the Draft
+ * tab. A COMPACT copy is saved to the user's OWN mailbox (roaming settings) so
+ * the voice survives Outlook restarts — train once, not every session. The .eml
+ * files never leave the browser; nothing is stored on any developer server.
  *
  * This is the free counterpart to the Graph "auto-refit from your whole sent
  * history" (which stays gated). It closes the gap where voice was wrongly shown
  * as needing UFIT.
  */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { parseEml } from "../intel/eml";
 import { createFreeFitDeps } from "../intel/freeFitDeps";
 import { fitVoice, type FitProgress } from "../intel/onboarding";
@@ -17,6 +18,8 @@ import { getNavKey } from "../llm/key";
 import { NeedsKeyError } from "../llm/navigator";
 import {
   getVoiceStore,
+  isVoiceTrained,
+  persistVoiceToMailbox,
   resetVoiceStore,
   voiceClusterNames,
 } from "../store/voiceSession";
@@ -31,6 +34,20 @@ export function TrainVoice({ onTrained }: TrainVoiceProps) {
   const [prog, setProg] = useState<FitProgress | null>(null);
   const [done, setDone] = useState<{ emails: number; clusters: string[] } | null>(null);
   const [error, setError] = useState("");
+  const [remembered, setRemembered] = useState(false);
+
+  // Reflect a voice trained in an earlier session (persisted in the mailbox).
+  useEffect(() => {
+    let live = true;
+    isVoiceTrained()
+      .then((t) => {
+        if (live) setRemembered(t);
+      })
+      .catch(() => undefined);
+    return () => {
+      live = false;
+    };
+  }, []);
 
   const userFullName =
     typeof Office !== "undefined"
@@ -57,7 +74,10 @@ export function TrainVoice({ onTrained }: TrainVoiceProps) {
       resetVoiceStore();
       const deps = createFreeFitDeps({ messages, store: getVoiceStore(), userFullName });
       await fitVoice(deps, (p) => setProg(p));
+      // Remember the voice in the user's mailbox so they don't re-upload next time.
+      await persistVoiceToMailbox().catch(() => undefined);
       setDone({ emails: messages.length, clusters: await voiceClusterNames() });
+      setRemembered(true);
       onTrained?.();
     } catch (e) {
       if (e instanceof NeedsKeyError) setError("Connect your NaviGator key (above) first.");
@@ -103,6 +123,12 @@ export function TrainVoice({ onTrained }: TrainVoiceProps) {
             <p style={{ fontSize: 11, color: "var(--green)" }} role="status">
               ✓ Trained on {done.emails} email(s).
               {done.clusters.length > 0 && <> Styles: {done.clusters.join(", ")}.</>}
+            </p>
+          )}
+          {remembered && !done && !busy && (
+            <p style={{ fontSize: 11, color: "var(--green)" }} role="status">
+              ✓ Your voice is remembered (saved in your mailbox) — drafts already sound like you.
+              Upload more anytime to refine it.
             </p>
           )}
           {error && (

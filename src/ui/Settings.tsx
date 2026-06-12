@@ -167,7 +167,7 @@ export function Settings({ onKeyCleared }: SettingsProps) {
 					>
 						<span className="setting-name">Local Glean for Outlook</span>
 						<span style={{ fontSize: 11, color: "var(--ink-3)" }}>
-							Zero-custody · NaviGator-only AI · FERPA-safe
+							v1.0.0 · build {__APP_BUILD__} · NaviGator-only · FERPA-safe
 						</span>
 					</div>
 					<div className="setting-row" style={{ cursor: "default" }}>

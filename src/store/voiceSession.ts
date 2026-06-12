@@ -14,8 +14,28 @@ import { toDraftProfile } from "../draft/profileAdapter";
 import type { DraftProfile } from "../draft/pipeline";
 import type { RelationshipCard } from "../draft/wrap";
 import { hashAddress } from "../intel/relationships";
+import { loadFreeProfile, saveFreeProfile } from "./roaming";
 
 let store: MemStore = createMemStore();
+
+/**
+ * Persist a COMPACT copy of the just-trained voice to the user's OWN mailbox
+ * (roaming settings) so it survives Outlook restarts — train once, not every
+ * session. Roaming settings are for small data, so the full exemplar corpus is
+ * dropped (the voice summary + synthesis carry the style); the rich per-person
+ * corpus is the OneDrive/Graph upgrade. Best-effort; no-op if nothing trained.
+ */
+export async function persistVoiceToMailbox(): Promise<void> {
+	const stored = await store.read("profile.json", ProfileV1).catch(() => null);
+	if (!stored) return;
+	const base = toDraftProfile(stored.data, "", null);
+	const compact: DraftProfile = {
+		...base,
+		exemplarPools: undefined,
+		styleName: stored.data.style_clusters[0]?.name,
+	};
+	await saveFreeProfile(compact);
+}
 
 /** The in-memory store fitVoice writes profile.json + relationships.json into. */
 export function getVoiceStore(): MemStore {
@@ -28,7 +48,10 @@ export function resetVoiceStore(): void {
 }
 
 export async function isVoiceTrained(): Promise<boolean> {
-  return (await store.read("profile.json", ProfileV1).catch(() => null)) !== null;
+  if ((await store.read("profile.json", ProfileV1).catch(() => null)) !== null)
+    return true;
+  // A voice persisted to the mailbox in an earlier session also counts.
+  return (await loadFreeProfile()) !== null;
 }
 
 /** The per-recipient relationship card from the session-trained relationships. */
@@ -42,13 +65,19 @@ export async function loadVoiceCard(email: string): Promise<RelationshipCard | n
 /** The trained voice mapped to a DraftProfile for the given recipient, or null. */
 export async function loadVoiceProfile(email: string): Promise<DraftProfile | null> {
   const stored = await store.read("profile.json", ProfileV1).catch(() => null);
-  if (!stored) return null;
-  const card = await loadVoiceCard(email);
-  return toDraftProfile(stored.data, await hashAddress(email), card);
+  if (stored) {
+    const card = await loadVoiceCard(email);
+    return toDraftProfile(stored.data, await hashAddress(email), card);
+  }
+  // Fresh session: fall back to the compact voice persisted in the mailbox.
+  return loadFreeProfile();
 }
 
 /** Names of the fitted style clusters (for chips / "trained" feedback). */
 export async function voiceClusterNames(): Promise<string[]> {
   const stored = await store.read("profile.json", ProfileV1).catch(() => null);
-  return stored ? stored.data.style_clusters.map((c) => c.name) : [];
+  if (stored) return stored.data.style_clusters.map((c) => c.name);
+  // Persisted (compact) voice keeps a single style name.
+  const free = await loadFreeProfile();
+  return free?.styleName ? [free.styleName] : [];
 }
