@@ -9,9 +9,10 @@
  *   context register = null (no relationship card)
  *   "Remember for person" = disabled (needs OneDrive)
  */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDraftStream } from "../hooks/useDraftStream";
 import type { OpenMessage } from "../office/context";
+import { voiceClusterNames } from "../store/voiceSession";
 import { ContextCard } from "./ContextCard";
 import { DraftView } from "./DraftView";
 import { InsertButton } from "./InsertButton";
@@ -33,7 +34,23 @@ interface DraftPanelProps {
 
 export function DraftPanel({ message }: DraftPanelProps) {
 	const [selectedChip, setSelectedChip] = useState("voice");
+	const [chips, setChips] = useState(DEFAULT_CHIPS);
+	const [learnedCount, setLearnedCount] = useState(0);
 	const stream = useDraftStream(message);
+
+	// Reflect the session-trained voice (free .eml upload): show real cluster
+	// names as chips. Re-runs when the Draft tab re-mounts (after training).
+	useEffect(() => {
+		let live = true;
+		voiceClusterNames().then((names) => {
+			if (!live || names.length === 0) return;
+			setChips([{ id: "voice", label: "My voice" }, ...names.map((n) => ({ id: n, label: n }))]);
+			setLearnedCount(names.length);
+		});
+		return () => {
+			live = false;
+		};
+	}, []);
 
 	const streaming = stream.status === "streaming";
 	const hasDraft =
@@ -81,11 +98,11 @@ export function DraftPanel({ message }: DraftPanelProps) {
 			{/* 2. Style chips (stub chips in free mode; real clusters need Graph) */}
 			<div className="card" style={{ marginTop: 12 }}>
 				<StyleChips
-					chips={DEFAULT_CHIPS}
+					chips={chips}
 					defaultChipId="voice"
 					selectedChipId={selectedChip}
 					recipientName={message.senderName || "this person"}
-					learnedCount={0}
+					learnedCount={learnedCount}
 					graphAvailable={false}
 					onSelect={setSelectedChip}
 					onRemember={() => {

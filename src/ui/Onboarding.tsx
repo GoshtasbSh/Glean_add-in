@@ -2,9 +2,9 @@
  * Onboarding — first-run flow in FREE mode (no Graph required).
  * Steps: consent screen → NaviGator key → done.
  *
- * Voice-fit onboarding (fitVoice from A3) is shown as a locked step — it needs Graph
- * (Mail.Read to scan sent history). The user can proceed without it; Glean drafts using
- * generic style until UFIT approval unlocks voice learning.
+ * Voice training is FREE — the user trains it in Settings by uploading their own .eml files
+ * (parseEml → fitVoice, no Graph). Only AUTO-learning from the whole sent-mail history needs
+ * Graph (Mail.Read), which is gated. Until trained, Glean drafts in a neutral professional voice.
  */
 import { useState } from "react";
 import { KeyScreen } from "./KeyScreen";
@@ -73,8 +73,9 @@ export function Onboarding({ onComplete }: OnboardingProps) {
 						<path d="M7 11V7a5 5 0 0 1 10 0v4" />
 					</svg>
 					<span style={{ fontSize: 11, color: "var(--ink-3)" }}>
-						<strong style={{ color: "var(--ink-2)" }}>Voice learning</strong>{" "}
-						(scans your sent mail) needs Microsoft 365 · pending UFIT approval
+						<strong style={{ color: "var(--ink-2)" }}>Train your voice free</strong>{" "}
+						in Settings — upload a few sent emails. (Auto-learning from your whole
+						history needs Microsoft 365 · pending UFIT.)
 					</span>
 				</div>
 			</div>

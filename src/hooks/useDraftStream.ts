@@ -4,6 +4,7 @@
  */
 import { useCallback, useRef, useState } from "react";
 import { createFreeDraftDeps } from "../draft/freeDeps";
+import { loadVoiceCard, loadVoiceProfile } from "../store/voiceSession";
 import {
 	type DraftRequest,
 	type DraftResult,
@@ -70,7 +71,12 @@ export function useDraftStream(message: OpenMessage | null): DraftStreamHandle {
 			});
 
 			try {
-				const deps = createFreeDraftDeps();
+				// Use the session-trained voice (manual .eml upload) when present;
+				// loadVoiceProfile/Card return null when untrained → cold-start.
+				const deps = createFreeDraftDeps({
+					loadProfile: () => loadVoiceProfile(message.senderEmail),
+					loadCard: (email) => loadVoiceCard(email),
+				});
 				const req: DraftRequest = {
 					message,
 					tweak: opts?.tweak,

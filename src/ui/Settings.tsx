@@ -18,6 +18,7 @@ import {
 	setNavKey,
 } from "../llm/key";
 import { MsGateRow } from "./MsGate";
+import { TrainVoice } from "./TrainVoice";
 
 interface SettingsProps {
 	onKeyCleared: () => void;
@@ -138,11 +139,14 @@ export function Settings({ onKeyCleared }: SettingsProps) {
 				</div>
 			</div>
 
+			{/* ---- Voice (FREE — manual upload, no Graph/UFIT) ---- */}
+			<TrainVoice />
+
 			{/* ---- Intelligence (GRAPH-GATED) ---- */}
 			<div className="settings-group">
 				<span className="micro-label">Intelligence</span>
 				<div className="settings-card">
-					<MsGateRow feature="Voice profile (Refit)" />
+					<MsGateRow feature="Auto-refit voice from full sent history" />
 					<MsGateRow feature="Labels & rules sync" />
 					<MsGateRow feature="Catch-up now" />
 				</div>
