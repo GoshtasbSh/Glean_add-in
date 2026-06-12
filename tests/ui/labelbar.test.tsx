@@ -52,7 +52,7 @@ describe("LabelBar (free Office.js categories)", () => {
 		await userEvent.click(screen.getByRole("button", { name: "To respond" }));
 
 		expect(itemAdd).toHaveBeenCalledWith(
-			["Glean/To respond"],
+			["To respond"],
 			expect.any(Function),
 		);
 		expect(await screen.findByText(/Labeled/)).toBeInTheDocument();
@@ -87,7 +87,7 @@ describe("LabelBar (free Office.js categories)", () => {
 
 		expect(await screen.findByText(/Auto-labeled/)).toBeInTheDocument();
 		expect(itemAdd).toHaveBeenCalledWith(
-			["Glean/To respond"],
+			["To respond"],
 			expect.any(Function),
 		);
 		expect(chat).toHaveBeenCalledTimes(1);

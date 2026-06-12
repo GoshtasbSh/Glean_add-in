@@ -22,25 +22,25 @@ export interface LabelDef {
 // Order matters: action labels first, FYI is the catch-all fallback.
 export const LABEL_DEFS: LabelDef[] = [
 	{
-		name: "Glean/To respond",
+		name: "To respond",
 		short: "To respond",
 		color: "preset0",
 		desc: "needs a reply or an action from me; asks me a question; I owe a response",
 	},
 	{
-		name: "Glean/Waiting",
+		name: "Waiting",
 		short: "Waiting",
 		color: "preset6",
 		desc: "I am waiting on the other person; they owe me a reply or deliverable",
 	},
 	{
-		name: "Glean/Meetings",
+		name: "Meetings",
 		short: "Meetings",
 		color: "preset5",
 		desc: "a meeting invite, scheduling, agenda, or calendar event",
 	},
 	{
-		name: "Glean/FYI",
+		name: "FYI",
 		short: "FYI",
 		color: "preset3",
 		desc: "informational, newsletter, receipt, or notification; no action needed from me",

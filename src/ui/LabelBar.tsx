@@ -31,6 +31,9 @@ export function LabelBar({ message }: LabelBarProps) {
 
 	const detail = (e: unknown) =>
 		e instanceof Error && e.message ? e.message : "unknown error";
+	const applyErr = (label: string) =>
+		`Couldn’t apply “${label}”. Create an Outlook category named “${label}” once ` +
+		`(right-click an email → Categorize → New Category), then try again.`;
 
 	// Auto-classify + auto-apply the moment an email opens. Needs the NaviGator
 	// key; silently does nothing without it (the chips still work as a manual
@@ -52,8 +55,8 @@ export function LabelBar({ message }: LabelBarProps) {
 				}
 				try {
 					await labelOpenItem(label.name);
-				} catch (e) {
-					if (live) setError(`Couldn’t apply the label: ${detail(e)}`);
+				} catch {
+					if (live) setError(applyErr(label.short));
 					return;
 				}
 				if (live) {
@@ -79,8 +82,8 @@ export function LabelBar({ message }: LabelBarProps) {
 			await labelOpenItem(l.name);
 			setApplied(l.short);
 			setAuto(false);
-		} catch (e) {
-			setError(`Couldn’t apply the label: ${detail(e)}`);
+		} catch {
+			setError(applyErr(l.short));
 		} finally {
 			setBusy(null);
 		}
