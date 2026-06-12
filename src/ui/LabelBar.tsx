@@ -27,7 +27,11 @@ export function LabelBar({ message }: LabelBarProps) {
 	const [applied, setApplied] = useState<string | null>(null);
 	const [auto, setAuto] = useState(false);
 	const [busy, setBusy] = useState<string | null>(willAuto ? "auto" : null);
-	const [error, setError] = useState(false);
+	const [error, setError] = useState<string | null>(null);
+
+	const APPLY_ERR = "Couldn’t apply the label in Outlook — try again.";
+	const CLASSIFY_ERR =
+		"Couldn’t classify this email — is your NaviGator key connected?";
 
 	// Auto-classify + auto-apply the moment an email opens. Needs the NaviGator
 	// key; silently does nothing without it (the chips still work as a manual
@@ -47,13 +51,18 @@ export function LabelBar({ message }: LabelBarProps) {
 					setBusy(null);
 					return;
 				}
-				await labelOpenItem(label.name, label.color);
+				try {
+					await labelOpenItem(label.name, label.color);
+				} catch {
+					if (live) setError(APPLY_ERR);
+					return;
+				}
 				if (live) {
 					setApplied(label.short);
 					setAuto(true);
 				}
 			} catch {
-				if (live) setError(true);
+				if (live) setError(CLASSIFY_ERR);
 			} finally {
 				if (live) setBusy(null);
 			}
@@ -66,13 +75,13 @@ export function LabelBar({ message }: LabelBarProps) {
 
 	async function applyManual(l: LabelDef) {
 		setBusy(l.short);
-		setError(false);
+		setError(null);
 		try {
 			await labelOpenItem(l.name, l.color);
 			setApplied(l.short);
 			setAuto(false);
 		} catch {
-			setError(true);
+			setError(APPLY_ERR);
 		} finally {
 			setBusy(null);
 		}
@@ -122,7 +131,7 @@ export function LabelBar({ message }: LabelBarProps) {
 					style={{ fontSize: 11, color: "var(--amber)", marginTop: 6 }}
 					role="alert"
 				>
-					Couldn’t label — try again.
+					{error}
 				</p>
 			)}
 		</div>
