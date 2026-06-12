@@ -15,7 +15,8 @@ function voidPromise(
 	return new Promise((resolve, reject) => {
 		run((res) => {
 			if (res.status === Office.AsyncResultStatus.Succeeded) resolve();
-			else reject(new Error("Office.js category operation failed"));
+			// Surface the REAL Outlook error so failures are diagnosable.
+			else reject(new Error(res.error?.message ?? "category operation failed"));
 		});
 	});
 }
@@ -31,7 +32,7 @@ export function listMasterCategories(): Promise<NativeCategory[]> {
 					})),
 				);
 			} else {
-				reject(new Error("Failed to list master categories"));
+				reject(new Error(res.error?.message ?? "failed to list categories"));
 			}
 		});
 	});
