@@ -78,11 +78,13 @@ export function addCategoryToOpenItem(name: string): Promise<void> {
 	);
 }
 
-/** Ensure the category exists in the master list, then apply it to the open item. */
-export async function labelOpenItem(
-	name: string,
-	color: string,
-): Promise<void> {
-	await ensureMasterCategory(name, color);
+/**
+ * Apply a label to the OPEN item. The FREE permission (ReadWriteItem) can apply
+ * a category to the current item, but it CANNOT manage the master category list
+ * (create/color categories) — that needs ReadWriteMailbox = admin install. So we
+ * apply DIRECTLY; the category must already exist in the user's Outlook category
+ * list (creating it is the post-UFIT path via ensureMasterCategory).
+ */
+export async function labelOpenItem(name: string): Promise<void> {
 	await addCategoryToOpenItem(name);
 }

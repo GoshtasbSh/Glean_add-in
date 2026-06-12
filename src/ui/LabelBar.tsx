@@ -51,7 +51,7 @@ export function LabelBar({ message }: LabelBarProps) {
 					return;
 				}
 				try {
-					await labelOpenItem(label.name, label.color);
+					await labelOpenItem(label.name);
 				} catch (e) {
 					if (live) setError(`Couldn’t apply the label: ${detail(e)}`);
 					return;
@@ -76,7 +76,7 @@ export function LabelBar({ message }: LabelBarProps) {
 		setBusy(l.short);
 		setError(null);
 		try {
-			await labelOpenItem(l.name, l.color);
+			await labelOpenItem(l.name);
 			setApplied(l.short);
 			setAuto(false);
 		} catch (e) {

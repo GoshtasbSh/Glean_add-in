@@ -63,10 +63,11 @@ describe("office categories (native, no Graph)", () => {
 		expect(itemAdd.mock.calls[0][0]).toEqual(["Glean/To respond"]);
 	});
 
-	it("labelOpenItem ensures the master category then applies it to the item", async () => {
+	it("labelOpenItem applies the category directly (free permission — no master-list call)", async () => {
 		const { masterAdd, itemAdd } = stubOffice([]);
-		await labelOpenItem("Glean/Meetings", "preset5");
-		expect(masterAdd).toHaveBeenCalledTimes(1);
+		await labelOpenItem("Glean/Meetings");
+		// masterCategories needs ReadWriteMailbox (admin) — the free path must not call it.
+		expect(masterAdd).not.toHaveBeenCalled();
 		expect(itemAdd.mock.calls[0][0]).toEqual(["Glean/Meetings"]);
 	});
 

@@ -97,8 +97,11 @@ describe("LabelBar (free Office.js categories)", () => {
 		vi.stubGlobal("Office", {
 			context: {
 				mailbox: {
-					masterCategories: { getAsync: (cb: Cb) => cb({ status: "failed" }) },
-					item: { categories: { addAsync: vi.fn() } },
+					item: {
+						categories: {
+							addAsync: (_c: unknown, cb: Cb) => cb({ status: "failed" }),
+						},
+					},
 				},
 			},
 			AsyncResultStatus: { Succeeded: "succeeded" },

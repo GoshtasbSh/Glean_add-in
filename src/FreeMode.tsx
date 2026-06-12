@@ -152,10 +152,10 @@ export default function FreeMode() {
     }
   }
 
-  async function handleLabel(name: string, color: string) {
+  async function handleLabel(name: string) {
     setError("");
     try {
-      await labelOpenItem(name, color);
+      await labelOpenItem(name);
       setStatus(`Labeled "${name}".`);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Label failed");
@@ -271,7 +271,7 @@ export default function FreeMode() {
               key={l.name}
               type="button"
               style={{ ...btn, background: "#345", border: "1px solid #345" }}
-              onClick={() => handleLabel(l.name, l.color)}
+              onClick={() => handleLabel(l.name)}
               disabled={!msg}
             >
               {l.name.replace("Glean/", "")}
