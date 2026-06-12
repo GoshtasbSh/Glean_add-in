@@ -13,7 +13,7 @@
        WebApplicationInfo + Graph scopes; the free build needs none of that. -->
   <Id>5fc5aef8-f083-44bf-8c90-86331a609273</Id>
   <Version>1.0.0.0</Version>
-  <ProviderName>UF DTSC Lab</ProviderName>
+  <ProviderName>Local Glean</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="Local Glean"/>
   <Description DefaultValue="FERPA-safe email assistant for the UF community. All data stays in your own UF M365 account."/>

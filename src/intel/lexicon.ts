@@ -2,7 +2,7 @@
  * Deterministic greeting/closing extraction — SESSION A3 §3.2b
  * (design doc §3.1). Regex over the user's OWN sent mail; this is the
  * MICRO-voice ground truth, so the extracted text is kept EXACTLY as written
- * (punctuation included — "Dear Dr Von Meding," must round-trip verbatim).
+ * (punctuation included — "Dear Dr Lee," must round-trip verbatim).
  */
 
 export interface ExtractedGreeting {
@@ -10,14 +10,14 @@ export interface ExtractedGreeting {
 	text: string;
 	/** Greeting keyword, lowercased; "bare" for a bare-name greeting. */
 	word: string;
-	/** Captured name form ("Dr Von Meding"), null when none. */
+	/** Captured name form ("Dr Lee"), null when none. */
 	nameForm: string | null;
 }
 
 const GREETING_WORD_RE =
 	/^(Good morning|Good afternoon|Hello|Dear|Hi|Hey)\b[ ,]*(.*?)[,;:]?\s*$/i;
 
-// Bare-name greeting: 1-3 capitalized words ending with a comma ("Jason,").
+// Bare-name greeting: 1-3 capitalized words ending with a comma ("Alex,").
 const BARE_NAME_RE = /^([A-Z][\w.'’-]*(?: [A-Z][\w.'’-]*){0,2}),$/u;
 
 function firstNonEmptyLine(body: string): string | null {
