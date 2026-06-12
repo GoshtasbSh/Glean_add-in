@@ -15,7 +15,11 @@ import { createFreeFitDeps } from "../intel/freeFitDeps";
 import { fitVoice, type FitProgress } from "../intel/onboarding";
 import { getNavKey } from "../llm/key";
 import { NeedsKeyError } from "../llm/navigator";
-import { getVoiceStore, voiceClusterNames } from "../store/voiceSession";
+import {
+  getVoiceStore,
+  resetVoiceStore,
+  voiceClusterNames,
+} from "../store/voiceSession";
 
 interface TrainVoiceProps {
   /** Called after a successful train so the pane can reflect the new voice. */
@@ -28,7 +32,10 @@ export function TrainVoice({ onTrained }: TrainVoiceProps) {
   const [done, setDone] = useState<{ emails: number; clusters: string[] } | null>(null);
   const [error, setError] = useState("");
 
-  const userFullName = Office?.context?.mailbox?.userProfile?.displayName ?? "";
+  const userFullName =
+    typeof Office !== "undefined"
+      ? (Office.context?.mailbox?.userProfile?.displayName ?? "")
+      : "";
 
   async function handleFiles(files: FileList | null) {
     if (!files || files.length === 0) return;
@@ -44,6 +51,10 @@ export function TrainVoice({ onTrained }: TrainVoiceProps) {
       const texts = await Promise.all(Array.from(files).map((f) => f.text()));
       const messages = texts.map(parseEml).filter((m) => (m.body?.content ?? "").trim().length > 0);
       if (messages.length === 0) throw new Error("No readable emails found in those files.");
+      // Fresh upload = fresh training: drop any prior session store so a second
+      // upload REPLACES the voice instead of resuming/merging the earlier corpus
+      // via profile.partial.json (review finding).
+      resetVoiceStore();
       const deps = createFreeFitDeps({ messages, store: getVoiceStore(), userFullName });
       await fitVoice(deps, (p) => setProg(p));
       setDone({ emails: messages.length, clusters: await voiceClusterNames() });

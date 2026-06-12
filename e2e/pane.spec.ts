@@ -64,7 +64,9 @@ test.describe("Pane UI — onboarding (no key)", () => {
 		await expect(
 			page.getByText(/Reads the open email only/),
 		).toBeVisible();
-		await expect(page.getByText(/UF NaviGator/)).toBeVisible();
+		// "UF NaviGator" appears in both the subtitle and a consent bullet —
+		// .first() avoids a strict-mode multi-match.
+		await expect(page.getByText(/UF NaviGator/).first()).toBeVisible();
 		await expect(
 			page.getByText(/Prefills Outlook.s reply form/),
 		).toBeVisible();
@@ -81,9 +83,11 @@ test.describe("Pane UI — onboarding (no key)", () => {
 test.describe("Pane UI — main shell (key set)", () => {
 	test.beforeEach(async ({ page }) => {
 		await page.addInitScript(OFFICE_STUB_WITH_ITEM);
-		// Inject key into sessionStorage before React renders
+		// Inject key into sessionStorage before React renders. Must match the
+		// real storage key in src/llm/key.ts (NAV_KEY_STORAGE_KEY), otherwise the
+		// app still shows onboarding and the main-shell assertions never run.
 		await page.addInitScript(() => {
-			sessionStorage.setItem("nav_key", "test-key-abc123");
+			sessionStorage.setItem("glean.navigator.key", "test-key-abc123");
 		});
 		await page.goto("/");
 	});
@@ -97,8 +101,10 @@ test.describe("Pane UI — main shell (key set)", () => {
 
 	test("Triage tab shows MsGate locked placeholder", async ({ page }) => {
 		await page.getByRole("tab", { name: "Triage" }).click();
+		// The Triage placeholder shows "pending UFIT approval" in both the lock
+		// line and the milestone caption — .first() avoids a multi-match.
 		await expect(
-			page.getByText(/pending UFIT approval/i),
+			page.getByText(/pending UFIT approval/i).first(),
 		).toBeVisible();
 	});
 
@@ -113,9 +119,11 @@ test.describe("Pane UI — main shell (key set)", () => {
 		page,
 	}) => {
 		await page.getByRole("tab", { name: "Settings" }).click();
-		await expect(page.getByText(/NaviGator API key/i)).toBeVisible();
-		await expect(page.getByText(/Voice profile/i)).toBeVisible();
-		await expect(page.getByText(/Needs Microsoft 365/i)).toBeVisible();
+		await expect(page.getByText(/NaviGator API key/i).first()).toBeVisible();
+		// Free voice-training row + the gated Microsoft 365 rows (current copy).
+		await expect(page.getByText(/Train my voice/i)).toBeVisible();
+		await expect(page.getByText(/Microsoft 365 features/i)).toBeVisible();
+		await expect(page.getByText(/Pending UFIT/i).first()).toBeVisible();
 	});
 
 	test("privacy footer is always visible", async ({ page }) => {

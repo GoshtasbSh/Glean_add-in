@@ -42,11 +42,15 @@ export function DraftPanel({ message }: DraftPanelProps) {
 	// names as chips. Re-runs when the Draft tab re-mounts (after training).
 	useEffect(() => {
 		let live = true;
-		voiceClusterNames().then((names) => {
-			if (!live || names.length === 0) return;
-			setChips([{ id: "voice", label: "My voice" }, ...names.map((n) => ({ id: n, label: n }))]);
-			setLearnedCount(names.length);
-		});
+		voiceClusterNames()
+			.then((names) => {
+				if (!live || names.length === 0) return;
+				setChips([{ id: "voice", label: "My voice" }, ...names.map((n) => ({ id: n, label: n }))]);
+				setLearnedCount(names.length);
+			})
+			.catch(() => {
+				/* no trained voice yet — keep the default chips */
+			});
 		return () => {
 			live = false;
 		};

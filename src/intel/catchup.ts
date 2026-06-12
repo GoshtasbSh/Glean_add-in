@@ -140,7 +140,11 @@ function prepMail(msg: GraphMessage): PreppedMail | null {
 	const raw = msg.body?.content ?? "";
 	const text =
 		msg.body?.contentType?.toLowerCase() === "text" ? raw : htmlToText(raw);
-	const bodyClean = cleanBody(text);
+	// Sanitize BEFORE storage (security review): bodyClean is persisted into
+	// project chunks (OneDrive) and used as the project-match haystack — both
+	// feed future LLM prompts, so injection markers must not survive the corpus.
+	// Mirrors onboarding.prep(); pipeline.retrieveChunks re-sanitizes as defence.
+	const bodyClean = sanitizeForLlm(cleanBody(text), 8000);
 	if (bodyClean.length === 0) return null;
 	return { msg, bodyClean, at: msg.receivedDateTime ?? msg.sentDateTime ?? "" };
 }

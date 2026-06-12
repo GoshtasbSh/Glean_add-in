@@ -14,12 +14,18 @@ export class ErrorBoundary extends Component<EBProps, EBState> {
 	static getDerivedStateFromError(error: Error): EBState {
 		return { error };
 	}
+	componentDidCatch(error: Error) {
+		// Surface details to the developer console in dev only. The rendered UI
+		// never echoes error.message — it can embed endpoint URLs or other
+		// internals (security review).
+		if (import.meta.env.DEV) console.error("[Glean] uncaught error:", error);
+	}
 	render() {
 		if (this.state.error) {
 			return (
 				<div className="error-boundary" role="alert">
 					<h3>Something went wrong</h3>
-					<p>{this.state.error.message}</p>
+					<p>An unexpected error occurred. Please reload the pane and try again.</p>
 					<button
 						type="button"
 						className="btn-sm-ghost"

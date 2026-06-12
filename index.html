@@ -2,14 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- CSP: connect-src locked to Graph, Entra, NaviGator, plus *-my.sharepoint.com —
-         Graph file-content GETs 302 to the user's OWN OneDrive download domain
-         (same custody boundary the architecture mandates; tighten to the exact
-         UF tenant host after live verification). Office.js CDN is the sole SRI
-         exception (OVERVIEW §6). -->
+    <!-- CSP (FREE build): connect-src is locked to UF NaviGator ONLY. The free
+         build contacts no Microsoft Graph / login / SharePoint host at all — the
+         Graph/MSAL code is DEV-gated and code-split out of this bundle (App.tsx).
+         The POST-UFIT upgrade build re-adds, to connect-src, exactly:
+           https://graph.microsoft.com https://login.microsoftonline.com https://*-my.sharepoint.com
+         Office.js CDN is the sole SRI exception (OVERVIEW §6). base-uri/form-action
+         added per security review. -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; connect-src 'self' https://graph.microsoft.com https://login.microsoftonline.com https://api.ai.it.ufl.edu https://*-my.sharepoint.com; script-src 'self' https://appsforoffice.microsoft.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; font-src 'self';"
+      content="default-src 'self'; connect-src 'self' https://api.ai.it.ufl.edu; script-src 'self' https://appsforoffice.microsoft.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none';"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Local Glean</title>

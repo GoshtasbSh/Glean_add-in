@@ -6,17 +6,22 @@
   xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
   xsi:type="MessageReadApp">
 
-  <Id>9c5b1386-a13a-4b74-ba14-465bca333a28</Id>
+  <!-- PRODUCTION manifest (FREE build). New GUID so dev + prod can be sideloaded
+       side by side. SourceLocation points at the GitHub Pages PROJECT site for
+       the Glean_add-in repo. Build/deploy: .github/workflows/deploy-addin.yml.
+       The post-UFIT upgrade is a SEPARATE manifest variant that adds the Entra
+       WebApplicationInfo + Graph scopes; the free build needs none of that. -->
+  <Id>5fc5aef8-f083-44bf-8c90-86331a609273</Id>
   <Version>1.0.0.0</Version>
   <ProviderName>UF DTSC Lab</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="Local Glean (dev)"/>
+  <DisplayName DefaultValue="Local Glean"/>
   <Description DefaultValue="FERPA-safe email assistant for the UF community. All data stays in your own UF M365 account."/>
-  <IconUrl DefaultValue="https://localhost:3000/assets/icon-80.png"/>
-  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-80.png"/>
-  <SupportUrl DefaultValue="https://localhost:3000"/>
+  <IconUrl DefaultValue="https://goshtasbsh.github.io/Glean_add-in/assets/icon-80.png"/>
+  <HighResolutionIconUrl DefaultValue="https://goshtasbsh.github.io/Glean_add-in/assets/icon-80.png"/>
+  <SupportUrl DefaultValue="https://goshtasbsh.github.io/Glean_add-in/"/>
   <AppDomains>
-    <AppDomain>https://localhost:3000</AppDomain>
+    <AppDomain>https://goshtasbsh.github.io</AppDomain>
   </AppDomains>
 
   <Hosts>
@@ -32,7 +37,7 @@
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://localhost:3000/index.html"/>
+        <SourceLocation DefaultValue="https://goshtasbsh.github.io/Glean_add-in/index.html"/>
         <RequestedHeight>450</RequestedHeight>
       </DesktopSettings>
     </Form>
@@ -85,13 +90,13 @@
 
       <Resources>
         <bt:Images>
-          <bt:Image id="Icon.16x16" DefaultValue="https://localhost:3000/assets/icon-16.png"/>
-          <bt:Image id="Icon.32x32" DefaultValue="https://localhost:3000/assets/icon-32.png"/>
-          <bt:Image id="Icon.80x80" DefaultValue="https://localhost:3000/assets/icon-80.png"/>
+          <bt:Image id="Icon.16x16" DefaultValue="https://goshtasbsh.github.io/Glean_add-in/assets/icon-16.png"/>
+          <bt:Image id="Icon.32x32" DefaultValue="https://goshtasbsh.github.io/Glean_add-in/assets/icon-32.png"/>
+          <bt:Image id="Icon.80x80" DefaultValue="https://goshtasbsh.github.io/Glean_add-in/assets/icon-80.png"/>
         </bt:Images>
         <bt:Urls>
-          <bt:Url id="Commands.Url" DefaultValue="https://localhost:3000/index.html"/>
-          <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/index.html"/>
+          <bt:Url id="Commands.Url" DefaultValue="https://goshtasbsh.github.io/Glean_add-in/index.html"/>
+          <bt:Url id="Taskpane.Url" DefaultValue="https://goshtasbsh.github.io/Glean_add-in/index.html"/>
         </bt:Urls>
         <bt:ShortStrings>
           <bt:String id="GroupLabel" DefaultValue="Local Glean"/>

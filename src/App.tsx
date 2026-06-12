@@ -14,10 +14,9 @@
  * The ?graph query param still routes to GraphDemo for testing the Graph path
  * once UFIT approval lands (retained per A1 convention).
  */
-import { useState } from "react";
-import GraphDemo from "./GraphDemo";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { getNavKey } from "./llm/key";
-import { getOpenMessage } from "./office/context";
+import { getOpenMessage, type OpenMessage } from "./office/context";
 import { AppShell, ErrorBoundary, Panel, type TabId } from "./ui/AppShell";
 import { DraftPanel } from "./ui/DraftPanel";
 import { KeyScreen } from "./ui/KeyScreen";
@@ -25,10 +24,22 @@ import { Onboarding } from "./ui/Onboarding";
 import { Placeholder } from "./ui/Placeholder";
 import { Settings } from "./ui/Settings";
 
+// The Graph/MSAL pane is DEV-only and code-split into its own chunk: the
+// production FREE build never loads it, so no Microsoft Graph or login code
+// runs or is fetched on the shipped runtime path (custody — security review).
+// The post-UFIT upgrade build re-enables it behind its own manifest + CSP.
+const GraphDemo = lazy(() => import("./GraphDemo"));
+
 export default function App() {
-	const useGraph =
+	const wantGraph =
 		typeof window !== "undefined" && window.location.search.includes("graph");
-	if (useGraph) return <GraphDemo />;
+	if (import.meta.env.DEV && wantGraph) {
+		return (
+			<Suspense fallback={<div className="pane" />}>
+				<GraphDemo />
+			</Suspense>
+		);
+	}
 
 	return <GleanPane />;
 }
@@ -39,7 +50,21 @@ function GleanPane() {
 		() => getNavKey() !== null,
 	);
 	const [activeTab, setActiveTab] = useState<TabId>("draft");
-	const message = getOpenMessage();
+	const [message, setMessage] = useState<OpenMessage | null>(getOpenMessage);
+
+	// When the pane is pinned, Outlook fires ItemChanged as the user moves
+	// between emails WITHOUT remounting us. Re-read the open item so the Draft
+	// tab never drafts against a stale message (correctness — review finding).
+	useEffect(() => {
+		if (typeof Office === "undefined") return;
+		const mailbox = Office.context?.mailbox;
+		if (!mailbox?.addHandlerAsync) return;
+		const handler = () => setMessage(getOpenMessage());
+		mailbox.addHandlerAsync(Office.EventType.ItemChanged, handler);
+		return () => {
+			mailbox.removeHandlerAsync?.(Office.EventType.ItemChanged, handler);
+		};
+	}, []);
 
 	// First run: no key → show onboarding
 	if (!onboardingDone) {
@@ -72,7 +97,12 @@ function GleanPane() {
 				onOpenSettings={() => setActiveTab("settings")}
 			>
 				<Panel id="draft" activeTab={activeTab}>
-					<DraftPanel message={message} />
+					{/* keyed on the open message: switching emails resets draft state
+					    instead of carrying the previous email's draft over */}
+					<DraftPanel
+						key={message?.internetMessageId || "none"}
+						message={message}
+					/>
 				</Panel>
 
 				<Panel id="triage" activeTab={activeTab}>

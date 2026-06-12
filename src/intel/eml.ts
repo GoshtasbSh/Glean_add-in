@@ -11,6 +11,11 @@ import type { GraphMessage } from "../graph/mail";
 
 const utf8 = new TextDecoder("utf-8");
 
+// DoS guard (security review): a crafted .eml with a hugely inflated body
+// could force a large in-browser allocation during training. Cap the raw input
+// before any decode — well above any real Outlook-exported message.
+export const EML_MAX_CHARS = 5_000_000;
+
 function qpToBytes(s: string): number[] {
   const bytes: number[] = [];
   for (let i = 0; i < s.length; i++) {
@@ -123,7 +128,8 @@ function pickBody(headers: Headers, body: string): { contentType: "text" | "html
 }
 
 export function parseEml(raw: string): GraphMessage {
-  const { headerBlock, body } = splitHeaderBody(raw);
+  const capped = raw.length > EML_MAX_CHARS ? raw.slice(0, EML_MAX_CHARS) : raw;
+  const { headerBlock, body } = splitHeaderBody(capped);
   const headers = parseHeaders(headerBlock);
 
   const fromRaw = headers.get("from");

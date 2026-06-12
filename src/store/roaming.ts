@@ -33,9 +33,27 @@ export function roamingSave(): Promise<void> {
 	});
 }
 
+/**
+ * Shape-check a value read from roaming settings before trusting it as a
+ * DraftProfile. roamingSettings is the user's own mailbox data, but it may be
+ * stale (an older app version) or hand-edited — validate the required fields
+ * rather than casting blindly (security review).
+ */
+function isDraftProfile(v: unknown): v is DraftProfile {
+	if (v === null || typeof v !== "object") return false;
+	const p = v as Record<string, unknown>;
+	return (
+		typeof p.summary === "string" &&
+		Array.isArray(p.bannedPhrases) &&
+		Array.isArray(p.userSignoffs) &&
+		typeof p.userFullName === "string"
+	);
+}
+
 /** The compact, free-mode voice profile (no exemplar embeddings — too large). */
 export async function loadFreeProfile(): Promise<DraftProfile | null> {
-	return roamingGet<DraftProfile>(PROFILE_KEY);
+	const raw = roamingGet<unknown>(PROFILE_KEY);
+	return isDraftProfile(raw) ? raw : null;
 }
 
 export async function saveFreeProfile(profile: DraftProfile): Promise<void> {
