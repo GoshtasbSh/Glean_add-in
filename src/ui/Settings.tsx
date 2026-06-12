@@ -17,6 +17,7 @@ import {
 	KeyValidationError,
 	setNavKey,
 } from "../llm/key";
+import { LabelSettings } from "./LabelSettings";
 import { MsGateRow } from "./MsGate";
 import { TrainVoice } from "./TrainVoice";
 
@@ -141,6 +142,9 @@ export function Settings({ onKeyCleared }: SettingsProps) {
 
 			{/* ---- Voice (FREE — manual upload, no Graph/UFIT) ---- */}
 			<TrainVoice />
+
+			{/* ---- Labels (FREE — user-editable taxonomy) ---- */}
+			<LabelSettings />
 
 			{/* ---- Intelligence (GRAPH-GATED) ---- */}
 			<div className="settings-group">
