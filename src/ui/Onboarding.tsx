@@ -183,8 +183,8 @@ export function Onboarding({ onComplete }: OnboardingProps) {
 						<polyline points="20 6 9 17 4 12" />
 					</svg>
 					<span>
-						Stores only your <strong>NaviGator key in this session</strong> —
-						cleared on close, never on disk
+						Saves your <strong>NaviGator key in your own UF mailbox</strong> —
+						never on a developer server; clear it anytime in Settings
 					</span>
 				</div>
 				<div className="consent-item">

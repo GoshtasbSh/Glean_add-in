@@ -91,3 +91,56 @@ describe("getNavKey / clearNavKey", () => {
 		expect(sessionStorage.length).toBe(0);
 	});
 });
+
+describe("roaming (mailbox) persistence — survives Outlook restarts", () => {
+	function stubRoaming() {
+		const store = new Map<string, unknown>();
+		const saveAsync = vi.fn((cb: (r: { status: string }) => void) =>
+			cb({ status: "succeeded" }),
+		);
+		vi.stubGlobal("Office", {
+			context: {
+				roamingSettings: {
+					get: (k: string) => store.get(k),
+					set: (k: string, v: unknown) => store.set(k, v),
+					remove: (k: string) => store.delete(k),
+					saveAsync,
+				},
+			},
+			AsyncResultStatus: { Succeeded: "succeeded" },
+		});
+		return { store, saveAsync };
+	}
+
+	it("setNavKey persists the key to the user's own mailbox and saves it", async () => {
+		const { store, saveAsync } = stubRoaming();
+		mockModels(200, ["m"]);
+		await setNavKey(SECRET);
+		expect(store.get(NAV_KEY_STORAGE_KEY)).toBe(SECRET);
+		expect(saveAsync).toHaveBeenCalled();
+	});
+
+	it("getNavKey rehydrates from the mailbox when the session is empty (fresh start)", () => {
+		const { store } = stubRoaming();
+		store.set(NAV_KEY_STORAGE_KEY, SECRET);
+		sessionStorage.clear();
+		expect(getNavKey()).toBe(SECRET);
+	});
+
+	it("getNavKey prefers the in-session copy over the mailbox copy", () => {
+		const { store } = stubRoaming();
+		store.set(NAV_KEY_STORAGE_KEY, "stale-old-key");
+		sessionStorage.setItem(NAV_KEY_STORAGE_KEY, SECRET);
+		expect(getNavKey()).toBe(SECRET);
+	});
+
+	it("clearNavKey forgets the key in BOTH the session and the mailbox", async () => {
+		const { store } = stubRoaming();
+		mockModels(200, ["m"]);
+		await setNavKey(SECRET);
+		expect(store.get(NAV_KEY_STORAGE_KEY)).toBe(SECRET);
+		clearNavKey();
+		expect(getNavKey()).toBeNull();
+		expect(store.has(NAV_KEY_STORAGE_KEY)).toBe(false);
+	});
+});

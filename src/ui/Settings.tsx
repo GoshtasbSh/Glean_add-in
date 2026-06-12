@@ -132,8 +132,8 @@ export function Settings({ onKeyCleared }: SettingsProps) {
 							</button>
 						)}
 						<p className="key-session-note">
-							Your key stays in this browser session only — never stored on disk
-							or any server.
+							Your key is saved in your own UF mailbox so you don't re-enter it —
+							never on any developer server. Clear it with "Sign out / clear key".
 						</p>
 					</div>
 				</div>

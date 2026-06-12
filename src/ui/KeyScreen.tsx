@@ -1,6 +1,7 @@
 /**
  * KeyScreen — NaviGator API key entry/validation. Fully FREE (no Graph).
- * Key stays in sessionStorage only — never on disk, never sent to any server.
+ * Key saved in the user's OWN UF mailbox (roaming settings) + session — never
+ * localStorage, never any developer server; clearable anytime in Settings.
  * Shown on first-run and in Settings; also surfaced when NeedsKeyError fires mid-draft.
  */
 import { useState } from "react";
@@ -49,9 +50,9 @@ export function KeyScreen({ onConnected, inline = false }: KeyScreenProps) {
 			<h3>Connect NaviGator</h3>
 			<p>
 				Paste your UF NaviGator API key below. Glean will call NaviGator
-				directly from your browser — your key stays in this session only and is
-				cleared when you close Outlook or sign out. It is never stored on disk
-				or sent to any server.
+				directly from your browser. Your key is saved in your own UF mailbox so you
+				don't re-enter it next time — it never touches any developer server,
+				and you can clear it anytime in Settings.
 			</p>
 			<div className="key-input-row">
 				<input
@@ -85,8 +86,8 @@ export function KeyScreen({ onConnected, inline = false }: KeyScreenProps) {
 				</p>
 			)}
 			<div className="key-session-note" role="note">
-				🔒 Your key stays in this browser session only — it is never stored on
-				disk or any server, and is cleared when you close Outlook or sign out.
+				🔒 Your key is saved in your own UF mailbox (never on any developer
+				server) so you don't re-enter it. Clear it anytime with "Sign out / clear key".
 			</div>
 		</div>
 	);
